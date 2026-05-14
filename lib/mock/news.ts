@@ -311,4 +311,158 @@ The piece contextualizes his journey within Vietnam's record on religious freedo
     tags: ['nhân quyền', 'tự do tôn giáo', 'phân tích', '2025'],
     sourceUrl: 'https://thevietnamese.org/2025/10/monk-thich-minh-tue-and-the-boundaries-between-faith-and-control/',
   },
+  {
+    _id: 'n21',
+    slug: 'buddhistdoor-ends-travels-followers-death-june-2024',
+    title: 'Buddhistdoor Global: Thich Minh Tue, Buddhist Ascetic in Vietnam, Ends Travels after Follower\'s Death',
+    excerpt: 'Thích Minh Tuệ dừng cuộc hành hương thứ tư sau khi một người theo dõi tử vong vì say nắng, trong bối cảnh chính quyền can thiệp và các tổ chức nhân quyền quốc tế lên tiếng.',
+    body_vi: `Ngày 13 tháng 6 năm 2024, Buddhistdoor Global đưa tin Thích Minh Tuệ đã kết thúc cuộc hành hương thứ tư qua Việt Nam sau khi xảy ra các trường hợp khẩn cấp về sức khỏe trong nhóm người đồng hành. Ngày 30 tháng 5, người theo dõi Lương Thanh Sơn đã tử vong vì biến chứng liên quan đến nắng nóng.
+
+Ủy ban Nhà nước về Tôn giáo thông báo Thầy tự nguyện dừng hoạt động vào ngày 3 tháng 6. Thầy xuất hiện trên truyền hình nhà nước ngày 8 tháng 6, xác nhận sức khỏe bình thường và cam kết với giáo lý Phật giáo — nhưng các cuộc phỏng vấn này gây tranh luận sôi nổi về tính xác thực.
+
+Nhiều tổ chức nhân quyền lên tiếng lo ngại. Giáo hội Phật giáo Việt Nam Thống nhất ủng hộ quyền "tự tu tập không bị can thiệp" của ông. Nghị sĩ Ta Duc Tri của California kêu gọi Hoa Kỳ can thiệp vào vụ việc.`,
+    body_en: `On June 13, 2024, Buddhistdoor Global reported that Thích Minh Tuệ had concluded his fourth pilgrimage across Vietnam following health emergencies among followers. On May 30, follower Luong Thanh Son died from heat-related complications, prompting government intervention.
+
+The Government Committee for Religious Affairs announced his voluntary cessation of activities on June 3. He appeared on state television on June 8, confirming his well-being and commitment to Buddhist teachings — but the interviews sparked significant online debate about their authenticity and the government's role.
+
+Multiple human rights organizations raised concerns. The Unified Buddhist Church of Vietnam supported his right to "self-cultivation without interference." California lawmaker Ta Duc Tri called for U.S. intervention, and critics widely questioned whether his cessation was truly voluntary.`,
+    date: '2024-06-13',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/06/vtvs-coverage-of-thich-minh-tue-raises-public-interest-and-controversy-b68f70342f914a4c8474a342344ec739-85-From-vietnamnet-vn.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 6,
+    tags: ['Buddhistdoor', 'nhân quyền', 'chính quyền', '2024'],
+    sourceUrl: 'https://www.buddhistdoor.net/news/thich-minh-tue-buddhist-ascetic-in-vietnam-ends-travels-after-followers-death/',
+  },
+  {
+    _id: 'n22',
+    slug: 'buddhistdoor-therapist-wounded-society-september-2024',
+    title: 'Buddhistdoor Global: Thich Minh Tue — A Therapist for a Wounded Society',
+    excerpt: 'Thích Minh Tuệ không chỉ là nhà tu khổ hạnh — ông trở thành người chữa lành vết thương tinh thần cho xã hội Việt Nam, truyền cảm hứng cho hàng triệu người từ các học giả đến người bình dân.',
+    body_vi: `Tháng 9 năm 2024, Buddhistdoor Global đăng bài phân tích của tác giả Ted Nguyen về tác động xã hội sâu rộng của hiện tượng Thích Minh Tuệ trong bối cảnh Việt Nam đang trải qua khủng hoảng giá trị.
+
+Ông đã đi bộ chân trần qua Việt Nam trong sáu năm, thực hành pháp khổ hạnh dhutaguna — chỉ ăn một bữa mỗi ngày, từ bỏ mọi tài sản. Hành trình thứ tư trở thành hiện tượng viral chưa từng có, với các nhà sáng tạo nội dung phát trực tiếp đến hàng triệu người xem. Giáo sư toán học Ngô Bảo Châu, nhà văn, nhà thơ và tu sĩ đều công khai ca ngợi ông.
+
+"Không cần nói nhiều, vị sư áo vá này đã chữa lành chấn thương tâm lý của hàng triệu người." Tấm áo vá từ vải vụn và chiếc nồi cơm điện khất thực trở thành biểu tượng tâm linh vượt ranh giới tôn giáo, truyền cảm hứng cho thơ, nhạc, điêu khắc và thời trang.`,
+    body_en: `In September 2024, Buddhistdoor Global published Ted Nguyen's analysis of the profound social impact of the Thích Minh Tuệ phenomenon amid Vietnam's crisis of values brought about by materialism and corruption.
+
+He has walked barefoot across Vietnam for six years, practicing dhutaguna austerities — eating one meal daily, renouncing all possessions. His fourth circuit became an unprecedented viral phenomenon, with content creators streaming live to millions. Prominent mathematician Ngo Bao Chau, writers, poets, and clergy publicly praised his authenticity.
+
+"Without saying much at all, this patch-robed monk has been instrumental in healing the traumas of millions." His patchwork robe fashioned from scraps and rice-cooker alms bowl became spiritual symbols transcending religious boundaries, sparking artistic expression in poetry, music, sculpture, and fashion while restoring faith in authentic Buddhist practice.`,
+    date: '2024-09-09',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/09/002-1024x1024.jpeg',
+    author: 'Buddhistdoor Global',
+    readingTime: 7,
+    tags: ['Buddhistdoor', 'xã hội', 'tâm linh', '2024'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/thich-minh-tue-a-therapist-for-a-wounded-society/',
+  },
+  {
+    _id: 'n23',
+    slug: 'buddhistdoor-living-dharma-under-threat-india-may-2025',
+    title: 'Buddhistdoor Global: Thich Minh Tue — A Living Dharma Under Threat: Will India Uphold the Buddha\'s Legacy?',
+    excerpt: 'Khi Thích Minh Tuệ đến Bodh Gaya để thiền định 49 ngày, bài viết đặt câu hỏi liệu Ấn Độ — nơi Đức Phật giác ngộ — có bảo vệ một hành giả chân chính đang bị bách hại hay không.',
+    body_vi: `Ngày 30 tháng 5 năm 2025, Buddhistdoor Global đăng bài của Tayson DeLengocky, phân tích hành trình của Thích Minh Tuệ — người sinh năm 1981, từ bỏ mọi liên kết thể chế năm 2018 để thực hành dhutanga: sống không nhà, không tiền, không tài sản, đi chân trần và khất thực.
+
+Cuộc hành hương tháng 5 năm 2024 qua Việt Nam thu hút 90 triệu lượt tìm kiếm trên Google. Nhưng kể từ đó ông bị đối mặt với sự ngăn cản có hệ thống: Phật giáo nhà nước Việt Nam tuyên bố ông không được công nhận, chính quyền trục xuất ông vào tháng 12 năm 2024. Các chuyến đi qua Lào, Thái Lan, Malaysia, Indonesia và Sri Lanka đều gặp phải sự hủy visa, chiến dịch bôi nhọ và đe dọa có tổ chức.
+
+Bài viết đặt sự đến Bodh Gaya của ông như một bài kiểm tra: liệu cộng đồng Phật giáo thế giới có bảo vệ những hành giả chân thành khỏi sự bức hại của các thể chế hay không?`,
+    body_en: `On May 30, 2025, Buddhistdoor Global published Tayson DeLengocky's analysis of Thích Minh Tuệ's arrival in Bodh Gaya for 49 days of meditation. Born in 1981, he renounced all institutional affiliations in 2018 to practice dhutanga — living without shelter, money, or possessions, walking barefoot and accepting only alms.
+
+His May 2024 pilgrimage across Vietnam generated 90 million Google searches. But since then he has faced systematic obstruction: Vietnamese Buddhist authorities declared him unrecognized; state officials forcibly exiled him in December 2024. Subsequent travels through Laos, Thailand, Malaysia, Indonesia, and Sri Lanka involved visa revocations, defamation campaigns, food tampering, and coordinated intimidation.
+
+The article frames his arrival in India as a test: will the world's Buddhist community protect sincere practitioners from persecution by institutional and state authorities? India — where the Buddha achieved enlightenment — is positioned as the ultimate arbiter.`,
+    date: '2025-05-30',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/05/000-1-1024x576.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 8,
+    tags: ['Buddhistdoor', 'Ấn Độ', 'Bodh Gaya', '2025'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/thich-minh-tue-a-living-dharma-under-threat-will-india-uphold-the-buddhas-legacy/',
+  },
+  {
+    _id: 'n24',
+    slug: 'buddhistdoor-bow-shook-sangha-september-2025',
+    title: "Buddhistdoor Global: The Bow That Shook the Sangha — How Thích Minh Tuệ Stirred a Global Reckoning",
+    excerpt: 'Ngày 3/7/2025 tại Bodh Gaya, diễn viên Ấn Độ Gagan Malik cúi đầu trước Thích Minh Tuệ trên livestream. Khoảnh khắc đó tạo ra 400 triệu lượt tìm kiếm và châm ngòi tranh luận toàn cầu về tính xác thực tâm linh.',
+    body_vi: `Ngày 3 tháng 9 năm 2025, Buddhistdoor Global đăng bài phân tích của Tayson DeLengocky về khoảnh khắc viral chưa từng có: diễn viên Bollywood Gagan Malik cúi đầu trước Thích Minh Tuệ tại Bodh Gaya vào ngày 3 tháng 7 năm 2025. Hành động này được phát trực tiếp, tạo ra hơn 400 triệu lượt tìm kiếm chỉ trong vài ngày.
+
+Sau đó Malik thu hồi cử chỉ của mình khi nhận được phản ứng từ giới tu sĩ về việc ông không có thụ phong chính thức — phản ánh căng thẳng giữa thực hành sống động và giấy tờ thể chế. Tác giả so sánh với các nhân vật lịch sử như Chúa Giê-su, Francis thành Assisi, Huệ Năng và Milarepa — những người đều bị thể chế từ chối nhưng được hậu thế công nhận.
+
+Bài viết lập luận rằng các nỗ lực có phối hợp của các cơ quan Phật giáo Việt Nam nhằm ngăn chặn hành hương của ông phản ánh sự lo lắng của thể chế trước tính xác thực không được kiểm soát đang thách thức các cơ cấu quyền lực đã thiết lập.`,
+    body_en: `On September 3, 2025, Buddhistdoor Global published Tayson DeLengocky's analysis of an unprecedented viral moment: Bollywood actor Gagan Malik bowed before Thích Minh Tuệ at Bodh Gaya on July 3, 2025. Captured on livestream, the gesture generated over 400 million searches within days, sparking global debate about authenticity versus institutional authority.
+
+Malik subsequently retracted his bow after receiving pushback from monastic circles citing the monk's lack of formal ordination — illustrating the tension between lived practice and institutional credentials. The author draws parallels to historical figures: Jesus, Francis of Assisi, Huineng, Milarepa — each rejected by institutions, each later recognized as authentic.
+
+The piece argues that coordinated efforts by Vietnamese Buddhist authorities to suppress his pilgrimage reflect institutional anxiety about uncontrolled authenticity challenging established hierarchies. The monk's response to all hostility — equanimity, silence, continued walking — is framed as itself the deepest teaching.`,
+    date: '2025-09-03',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/09/000-1.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 8,
+    tags: ['Buddhistdoor', 'Bodh Gaya', 'toàn cầu', '2025'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/the-bow-that-shook-the-sangha-how-thich-minh-tue-stirred-a-global-reckoning-on-authenticity-authority-and-the-dharma/',
+  },
+  {
+    _id: 'n25',
+    slug: 'buddhistdoor-monk-dhamma-decided-october-2025',
+    title: 'Buddhistdoor Global: Thích Minh Tuệ Is a Monk — The Dhamma Has Already Decided',
+    excerpt: 'Dù không được thể chế nhà nước công nhận, Giáo hội Phật giáo Việt Nam Thống nhất đã chính thức công nhận tư cách tu sĩ của Thích Minh Tuệ — và bài viết lập luận rằng chính pháp hành mới là thước đo thật sự.',
+    body_vi: `Ngày 15 tháng 10 năm 2025, Buddhistdoor Global đăng bài của Tayson DeLengocky, truy nguyên hành trình tâm linh của Thích Minh Tuệ từ khi thọ giới sa di năm 2015 đến khi từ bỏ hoàn toàn các dấu hiệu thể chế.
+
+Trước khi thọ giới chính thức, ông đã sống khổ hạnh sáu tháng — ăn một bữa mỗi ngày, giữ im lặng, ngủ ngoài trời. Sau một lần sét đánh trong khi thiền định, ông từ bỏ chứng chỉ thọ giới, giấy tờ tùy thân và y phục tu sĩ để theo đuổi sự tách rời hoàn toàn khỏi bản sắc thế gian — đi bộ chân trần khắp Việt Nam hơn 6.000 km trong im lặng, không nhận quyên góp, không tụ tập người theo.
+
+Giáo hội Phật giáo Việt Nam Thống nhất đã chính thức công nhận tư cách tu sĩ của ông qua thủ tục nghi lễ năm 2024. Bài viết đặt con đường cô đơn của ông trong các truyền thống tâm linh rộng lớn hơn, so sánh với Thánh Francis và chính Đức Phật, gợi ý rằng sự từ chối của thể chế có thể nghịch lý lại xác nhận tính xác thực của ông.`,
+    body_en: `On October 15, 2025, Buddhistdoor Global published Tayson DeLengocky's account tracing Thích Minh Tuệ's spiritual journey from his 2015 novice ordination to his radical renunciation of all institutional markers.
+
+Before taking formal vows, he lived ascetically for six months — eating one meal daily, remaining silent, sleeping outdoors. Following a transformative lightning strike during meditation, he abandoned his ordination certificate, identification documents, and monastic robes to pursue complete detachment from worldly identity — walking barefoot across Vietnam for over 6,000 kilometers in silence, accepting no donations, gathering no followers.
+
+The Unified Buddhist Church of Vietnam formally recognized his monastic status through ritual procedure in 2024, affirming his legitimacy despite state-controlled Buddhist institutions' dismissal. The essay positions his solitary path alongside Saint Francis and the Buddha himself, suggesting that institutional rejection paradoxically validates authenticity.`,
+    date: '2025-10-15',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/10/Master-Minh-Tue-in-March-2025-Malaysia-682x1024.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 7,
+    tags: ['Buddhistdoor', 'phân tích', 'tính xác thực', '2025'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/thich-minh-tue-is-a-monk-the-dhamma-has-already-decided/',
+  },
+  {
+    _id: 'n26',
+    slug: 'buddhistdoor-walks-like-christ-december-2025',
+    title: 'Buddhistdoor Global: He Walks Like Christ, He Walks with the Buddha — A Tribute to Thích Minh Tuệ',
+    excerpt: 'Từ Phật giáo đến Công giáo, từ Ấn Độ giáo đến Hồi giáo — các tu sĩ của nhiều truyền thống tôn giáo đều nhận ra điều gì đó thần thánh trong bước chân của Thích Minh Tuệ.',
+    body_vi: `Ngày 12 tháng 12 năm 2025, Buddhistdoor Global đăng bài tri ân của Tayson DeLengocky, ghi lại cách Thích Minh Tuệ trở thành hiện tượng toàn cầu kể từ đầu năm 2024, khi các video về một người ẩn sĩ cô đơn lan truyền trên nhiều châu lục.
+
+Các trưởng lão Phật giáo Việt Nam công nhận ông đang thực hành dhutaṅga — 13 pháp khổ hạnh tùy ý được Đức Phật tán dương. Điều đáng chú ý là các linh mục Công giáo, tu sĩ Ấn Độ giáo và giáo sĩ Hồi giáo đều nhận ra sự song song giữa "suññatā" (tánh không Phật giáo) và "kenosis" (tự rỗng Kitô giáo) — thấy bóng dáng truyền thống chiêm niệm của chính mình trong bước chân của ông.
+
+Sự từ bi nhất quán của ông — đáp lại mọi thù địch bằng tâm bình, gọi tất cả mọi người là "Cha" và "Mẹ" — thể hiện điều mà các hành giả nhận ra là trí tuệ và giải thoát được biểu đạt qua ví dụ sống thực, chứ không phải giáo lý.`,
+    body_en: `On December 12, 2025, Buddhistdoor Global published Tayson DeLengocky's tribute chronicling how Thích Minh Tuệ became an international phenomenon beginning in early 2024, when viral videos of a solitary wandering mendicant sparked millions of searches and devoted followers across multiple continents.
+
+Senior Vietnamese monastics recognized him as embodying the dhutaṅga austerities — thirteen optional monastic practices praised by the Buddha — through his rag robes, alms-only diet, outdoor sleeping, and continuous pilgrimage spanning over 6,000 kilometers. Beyond Buddhist circles, Catholic priests, Hindu swamis, and Muslim clerics acknowledged his embodiment of their own contemplative traditions, seeing parallels between Buddhist emptiness (suññatā) and Christian self-emptying (kenosis).
+
+His consistent compassion — responding to hostility with equanimity, addressing all beings as "Father" and "Mother" — demonstrates what practitioners across traditions recognize as wisdom and liberation expressed through lived example rather than doctrine.`,
+    date: '2025-12-12',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/12/001TMT.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 7,
+    tags: ['Buddhistdoor', 'đa tôn giáo', 'toàn cầu', '2025'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/he-walks-like-christ-he-walks-with-the-buddha-a-tribute-to-thich-minh-tue/',
+  },
+  {
+    _id: 'n27',
+    slug: 'buddhistdoor-dharma-unadorned-january-2026',
+    title: 'Buddhistdoor Global: Thích Minh Tuệ — The Dharma Unadorned',
+    excerpt: 'Trong cuộc phỏng vấn hiếm có, Thích Minh Tuệ chia sẻ về thực hành tâm linh của mình — đi bộ như một phương pháp thiền định, im lặng như con đường đến trí tuệ, và buông bỏ hoàn toàn như nền tảng của giải thoát.',
+    body_vi: `Tháng 1 năm 2026, Buddhistdoor Global đăng cuộc phỏng vấn của Craig Lewis với Thích Minh Tuệ — một trong những cuộc phỏng vấn hiếm hoi nhất về người đàn ông thường giữ im lặng. Thay vì tiểu sử, bài viết tập trung vào thực hành tâm linh sống động của ông.
+
+Thầy giải thích rằng niềm tin vào giáo lý Phật giáo đã giảm khổ đau trong cuộc đời ông, và thực hành chính yếu là rèn luyện tâm để vượt qua tham, sân, si thông qua lối sống đức hạnh. Đi bộ cung cấp khuôn khổ lý tưởng cho việc thực hành Pháp cô đơn mà không phụ thuộc bên ngoài; im lặng nuôi dưỡng trí tuệ và sự rõ ràng của tâm.
+
+Ông nhấn mạnh sự phân biệt giữa sự từ bỏ thật sự và cử chỉ bề ngoài: buông bỏ thật sự đòi hỏi sự đầu hàng hoàn toàn, không giữ lại bất cứ điều gì. Đối với người tại gia đang chịu đựng đau khổ, ông xác định tham ái và chấp thủ là nguyên nhân chính và khuyến nghị nghiên cứu kinh điển Phật giáo như nền tảng cho sự tham gia tâm linh sâu hơn.`,
+    body_en: `In January 2026, Buddhistdoor Global published Craig Lewis's interview with Thích Minh Tuệ — one of the rarest conversations with a man who habitually keeps silent. Rather than biography, the piece focuses on his lived spiritual practice.
+
+Thầy explains that faith in Buddhist teachings has reduced suffering in his life, and his primary practice involves disciplining the mind to overcome greed, anger, and delusion through virtuous living. Walking provides an ideal framework for solitary Dharma practice without external dependencies, while silence cultivates wisdom and mental clarity.
+
+He emphasizes the distinction between genuine renunciation and superficial gestures: true letting go requires complete surrender, without hidden reserves. For lay practitioners struggling with suffering, he identifies lust and attachment as primary causes and recommends studying Buddhist scriptures as foundational preparation for deeper spiritual engagement.`,
+    date: '2026-01-29',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2026/01/002-smp-1.jpg',
+    author: 'Buddhistdoor Global',
+    readingTime: 6,
+    tags: ['Buddhistdoor', 'phỏng vấn', 'thực hành', '2026'],
+    sourceUrl: 'https://www.buddhistdoor.net/features/thich-minh-tue-the-dharma-unadorned/',
+  },
 ]
