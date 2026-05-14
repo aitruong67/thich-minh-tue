@@ -40,12 +40,12 @@ function NewsPage() {
           <FadeIn>
             <ArticleWrapper article={mockNews[0]}>
               <article className="grid lg:grid-cols-2 gap-0 border border-bark mb-8 group">
-                <div className="relative aspect-video lg:aspect-auto overflow-hidden">
+                <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
                   <Image
                     src={mockNews[0].coverImage}
                     alt={mockNews[0].title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
@@ -91,12 +91,12 @@ function NewsPage() {
               <FadeIn key={article._id} delay={i * 0.06} as="article">
                 <ArticleWrapper article={article}>
                   <div className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
-                    <div className="relative aspect-video overflow-hidden">
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={article.coverImage}
                         alt={article.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
