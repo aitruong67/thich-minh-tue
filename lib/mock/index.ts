@@ -1,0 +1,6 @@
+export { mockVideos } from './videos'
+export { mockPhotos } from './photos'
+export { mockQuotes } from './quotes'
+export { mockNews } from './news'
+export { mockBiographyChapters } from './biography'
+export { mockWaypoints } from './waypoints'

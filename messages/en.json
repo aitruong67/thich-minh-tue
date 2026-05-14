@@ -1,0 +1,142 @@
+{
+  "nav": {
+    "ariaLabel": "Main navigation",
+    "home": "Home",
+    "biography": "Biography",
+    "gallery": "Gallery",
+    "videos": "Videos",
+    "quotes": "Teachings",
+    "journey": "Journey",
+    "news": "News",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "eyebrow": "Spiritual journey archive",
+    "titleLine1": "Thích Minh Tuệ",
+    "titleLine2": "Walking the Path of Truth",
+    "description": "Born Lê Anh Tú in 1981 in Hà Tĩnh, he left a career as a land surveyor in 2015 to practice Theravāda Dhutanga asceticism. After three silent pilgrimages, his 2024 walk across Vietnam became an unprecedented phenomenon — followed by millions.",
+    "ctaPrimary": "Read biography",
+    "ctaSecondary": "View the journey",
+    "stat1": "km walked across Vietnam",
+    "stat2": "people inspired",
+    "stat3": "year practice began"
+  },
+  "biography": {
+    "eyebrow": "The person & the path",
+    "heading": "From land surveyor to barefoot pilgrim",
+    "intro": "Lê Anh Tú was born in Hà Tĩnh in 1981, served in the military, and graduated from the Tây Nguyên College of Forestry. In 2015, he left his career and secular life to take the dharma name Thích Minh Tuệ and begin practicing the strictest form of Theravāda asceticism.",
+    "cta": "Read the full biography"
+  },
+  "bio": {
+    "t1": {
+      "title": "Born in Hà Tĩnh, raised in Gia Lai",
+      "desc": "Born 1981 in Kỳ Văn commune, Hà Tĩnh. Moved to Gia Lai in 1994. Completed military service and graduated from Tây Nguyên College of Forestry. Worked as a land surveyor."
+    },
+    "t2": {
+      "title": "Renunciation & dharma name",
+      "desc": "In 2015, he left secular life and took the dharma name Thích Minh Tuệ. He retreated to a mountain cave, begging daily for food and living by the strictest Dhutanga ascetic rules — no money, no possessions, no fixed abode."
+    },
+    "t3": {
+      "title": "Three silent pilgrimages",
+      "desc": "From 2018 to 2023, he completed three walking pilgrimages across Vietnam in near-total obscurity, practicing Dhutanga with unwavering discipline and attracting almost no public attention."
+    },
+    "t4": {
+      "title": "A nation watches — 2024",
+      "desc": "His fourth pilgrimage in 2024 became an unprecedented phenomenon. Thousands followed him on the road. Vietnamese authorities forcibly dispersed the crowd in June 2024, sparking international debate on religious freedom."
+    },
+    "t5": {
+      "title": "International pilgrimage — Dec 2024",
+      "desc": "On December 12, 2024, he began an international pilgrimage walking through Laos, Thailand, Malaysia, Sri Lanka, India, and Nepal — retracing the path of the Buddha himself."
+    }
+  },
+  "media": {
+    "eyebrow": "The archive",
+    "heading": "Preserving every moment",
+    "videos": "Documentary videos",
+    "photos": "Photographs",
+    "quotes": "Teachings",
+    "articles": "Articles"
+  },
+  "international": {
+    "eyebrow": "Beyond Vietnam — December 2024",
+    "heading": "The International Pilgrimage",
+    "description": "On December 12, 2024, Thích Minh Tuệ began walking beyond Vietnam's borders, tracing a path through six countries toward the birthplace of Buddhism. Accompanied only by a retired police officer who volunteered as his companion, he continues the same practice — no money, no possessions, walking on.",
+    "route": "The route",
+    "cta": "Follow the journey"
+  },
+  "map": {
+    "eyebrow": "The walk across Vietnam",
+    "heading": "2,100 km on bare feet",
+    "description": "Starting from Kiên Giang in the southwest, Thích Minh Tuệ walked the length of Vietnam northward through more than 30 provinces to Hà Nội — a journey that captured the attention of millions.",
+    "distance": "Over 2,100 km · 30+ provinces",
+    "cta": "Explore the journey",
+    "routeLabel": "Key waypoints — south to north",
+    "waypoints": "waypoints",
+    "waypointsList": "List of waypoints on the Vietnam pilgrimage"
+  },
+  "page": {
+    "biography": {
+      "eyebrow": "Full biography",
+      "heading": "The Life and Journey of Thầy Thích Minh Tuệ",
+      "pullQuote": "In his own words"
+    },
+    "gallery": {
+      "eyebrow": "Photo archive",
+      "heading": "Moments Along the Road",
+      "filterAll": "All",
+      "theme": {
+        "pilgrimage": "Pilgrimage",
+        "community": "Community",
+        "simplicity": "Simplicity",
+        "spirituality": "Spirituality",
+        "nature": "Nature",
+        "teaching": "Teaching"
+      }
+    },
+    "videos": {
+      "eyebrow": "Documentary video archive",
+      "heading": "Every Moment Recorded",
+      "all": "All",
+      "pilgrimage": "Pilgrimage",
+      "teaching": "Teaching",
+      "interview": "Interview",
+      "news": "News",
+      "watch": "Watch video",
+      "transcript": "Transcript available"
+    },
+    "quotes": {
+      "eyebrow": "Teachings & quotes",
+      "heading": "Words of Wisdom from the Journey",
+      "all": "All",
+      "compassion": "Compassion",
+      "simplicity": "Simplicity",
+      "impermanence": "Impermanence",
+      "walking": "Walking",
+      "freedom": "Freedom"
+    },
+    "journey": {
+      "eyebrow": "The walk across Vietnam",
+      "heading": "Every Step on Mother Earth",
+      "totalDistance": "Total distance",
+      "waypoints": "Waypoints",
+      "months": "Months walking",
+      "kmFromStart": "km from starting point",
+      "departure": "Starting point",
+      "arrival": "Final destination"
+    },
+    "news": {
+      "eyebrow": "News & articles",
+      "heading": "The Media on the Journey",
+      "readMore": "Read more",
+      "minRead": "min read",
+      "by": "By"
+    }
+  },
+  "footer": {
+    "description": "A non-profit documentary archive of Thầy Thích Minh Tuệ's spiritual journey — preserved to inspire generations to come.",
+    "navAriaLabel": "Footer navigation",
+    "copyright": "Thích Minh Tuệ Archive. All rights reserved.",
+    "location": "Vietnam"
+  }
+}
