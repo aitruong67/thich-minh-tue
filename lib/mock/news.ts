@@ -9,7 +9,7 @@ export const mockNews: NewsArticle[] = [
     body_vi: '',
     body_en: '',
     date: '2025-05-14',
-    coverImage: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
     author: 'BBC Vietnamese',
     readingTime: 5,
     tags: ['BBC', 'quốc tế', 'truyền thông', '2025'],
@@ -33,7 +33,7 @@ Buddhist scholar Thanh Do explained his appeal: "The core of Buddhism for a cler
 
 State-backed institutions responded negatively. A government religious agency issued warnings about Tue, claiming he disrupts social order, while one official publicly called him "a thug who wears ragged attire" — a statement that itself provoked widespread public backlash.`,
     date: '2024-05-17',
-    coverImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/05/22759fff-0601-4d74-8af9-9dc42c066f14-From-rfa-org.jpg',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'tự do tôn giáo', 'viral', '2024'],
@@ -57,7 +57,7 @@ His elderly father expressed support for his spiritual path. Buddhist scholar Th
 
 His clarification that he is not formally an ordained monk — and not affiliated with Vietnam's official Buddhist Sangha — only added to public fascination. He had visited nearly all of Vietnam during his ongoing pilgrimage, describing it as "a lifelong walk."`,
     date: '2024-05-28',
-    coverImage: 'https://images.unsplash.com/photo-1473181488821-2d23949a045a?w=1200',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/05/22759fff-0601-4d74-8af9-9dc42c066f14-From-rfa-org.jpg',
     author: 'Buddhistdoor Global',
     readingTime: 6,
     tags: ['Buddhistdoor', 'khổ hạnh', 'hành hương', '2024'],
@@ -79,7 +79,7 @@ Authorities justified the end of the pilgrimage by citing concerns about social 
 
 The incident exposed the ongoing tensions between independent religious practice and state oversight in Vietnam. Authorities fined a YouTuber who had documented the journey and announced plans for a new surveillance application to monitor Buddhist practitioners nationwide. The government's official statement — that he had "voluntarily retired" — was widely questioned by supporters and human rights observers alike.`,
     date: '2024-06-03',
-    coverImage: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'chính quyền', 'tự do tôn giáo', '2024'],
@@ -103,7 +103,7 @@ Phil Robertson of Asia Human Rights and Labor called the "voluntary cessation" c
 
 Senior Buddhist leader Thích Không Tánh suggested Tuệ faced restrictions possibly involving solitary confinement, though he anticipated no physical harm. The case drew international scrutiny, highlighting the persistent tensions between Vietnam's communist government and independent religious communities.`,
     date: '2024-06-06',
-    coverImage: 'https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=1200',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
     author: 'AsiaNews',
     readingTime: 6,
     tags: ['AsiaNews', 'nhân quyền', 'tự do tôn giáo', '2024'],
@@ -125,7 +125,7 @@ The departure came months after his cross-country pilgrimage was forcibly disper
 
 Analysts suggested the authorities' decision to allow his departure reflected a strategic calculation: removing a domestic "thorn in the side" while generating positive international optics regarding religious freedom. A Buddhist observer noted that his popularity had stemmed from appearing more authentic than state-sanctioned monks, thereby exposing moral failings in Vietnam's official Buddhist establishment.`,
     date: '2024-12-13',
-    coverImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200',
+    coverImage: 'https://www.rfa.org/resizer/v2/ISDTNOXFHRBDNDAP5RV6WKB3GU.JPG?auth=8d253aa3a0413c49f285694cfbc8fa8d4f4d0fabf8849e94dbd39972cf992193&width=800&height=533',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'hành hương', 'Lào', '2024'],
@@ -147,7 +147,7 @@ The journey came after local Gia Lai Province authorities had restricted his pub
 
 The article highlighted the positive influence Thích Minh Tuệ has had on Vietnamese Buddhism — encouraging practitioners to study canonical texts rather than merely making temple visits, standing as a counterpoint to recent scandals including the Ba Vang Pagoda fake hair relic controversy and monks with fabricated credentials. His departure marked the beginning of an extraordinary transnational pilgrimage across Laos, Thailand, Myanmar, Nepal, and beyond.`,
     date: '2024-12-16',
-    coverImage: 'https://images.unsplash.com/photo-1544894079-e81a9eb97f48?w=1200',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/12/Thich-Minh-Tue-and-his-companions-at-the-Bo-Y-International-Border-Gate-Vietnam-Laos-12-December.-From-danviet.vn_.jpeg',
     author: 'Buddhistdoor Global',
     readingTime: 6,
     tags: ['Buddhistdoor', 'Ấn Độ', 'hành hương quốc tế', '2024'],
@@ -169,7 +169,7 @@ The piece examined the contested June 2024 events when authorities raided his ca
 
 A notable detail: his companion on the journey is Doan Van Bau, a former Vietnamese government security official specializing in psychological operations, raising questions about possible state orchestration of his departure. Despite these murky circumstances, his pilgrimage continued to draw massive public attention, with Vietnamese social media still following his every step across international borders.`,
     date: '2025-01-03',
-    coverImage: 'https://images.unsplash.com/photo-1519721086993-5e3c0d10c6f6?w=1200',
+    coverImage: 'https://www.rfa.org/resizer/v2/I6MBEKGN7NC33LJHA3ZY6ARLSI.JPG?auth=3ef4a0130145c938112897dad867ea9d945420b2501c951ee8e856065125a2c2&width=800&height=533',
     author: 'Radio Free Asia',
     readingTime: 7,
     tags: ['RFA', 'Ấn Độ', 'phân tích', '2025'],
@@ -191,7 +191,7 @@ The ascetic and companions averaged 20 kilometers daily. His Thai visa was expir
 
 Describing his journey as "an act of gratitude to the Buddha," Thích Minh Tuệ stated: "I want to walk there to repay his gratitude and hope that all people in the world will be happy." Alternative routes were being considered, including flying to Sri Lanka or Bangladesh. Despite everything, his response to the obstacles was serene: "Whichever side is favorable, I'll walk there."`,
     date: '2025-02-25',
-    coverImage: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/02/JUI5UNEPXJHBXP5JGTKYQCE22M-From-rfa-org.jpg',
     author: 'Buddhistdoor Global',
     readingTime: 6,
     tags: ['Buddhistdoor', 'Thái Lan', 'thử thách', '2025'],
@@ -215,7 +215,7 @@ The article draws comparisons to historical Buddhist resistance figures: Thich N
 
 The piece concludes with Buddhist symbolism — the lotus flower and the "middle path" — suggesting that Thích Minh Tuệ's journey embodies Vietnam's ongoing search for meaning between material necessity and spiritual fulfillment.`,
     date: '2025-03-06',
-    coverImage: 'https://images.unsplash.com/photo-1570213489059-0aac6626cade?w=1200',
+    coverImage: 'https://www.lionsroar.com/wp-content/uploads/2025/03/thich-minh-tue-nghe-an-vietnam-1.jpg',
     author: "Lion's Roar",
     readingTime: 8,
     tags: ["Lion's Roar", 'phân tích', 'tâm linh', '2025'],
@@ -237,7 +237,7 @@ The pilgrims departed northern Thailand by bus on March 5, crossing the border i
 
 Their subsequent route remained uncertain — possibly involving sea passage to India or Sri Lanka, though irregular ferry services complicated this option. The journey continued to go viral on Vietnamese social media, even as the Vietnamese state media had previously criticized coverage of him and officials had claimed he "voluntarily retired" from monastic life.`,
     date: '2025-03-13',
-    coverImage: 'https://images.unsplash.com/photo-1557939574-a2f28f4e3aa3?w=1200',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/03/From-ucanews-com.webp',
     author: 'Buddhistdoor Global',
     readingTime: 5,
     tags: ['Buddhistdoor', 'Malaysia', 'lộ trình', '2025'],
@@ -261,7 +261,7 @@ Complications emerged around tourist visa regulations for walking on public road
 
 Thích Minh Tuệ remained focused on his spiritual journey. "My journey is a lifelong walk," he stated — emphasizing practice over preaching, as he had done throughout his years of walking across Vietnam and beyond.`,
     date: '2025-04-18',
-    coverImage: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=1200',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg/800px-MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
     author: 'EconomyNext',
     readingTime: 5,
     tags: ['Sri Lanka', 'hành hương', 'thử thách', '2025'],
@@ -283,7 +283,7 @@ The group received temporary shelter at a temple northeast of Colombo but faced 
 
 Rather than wait, the group decided to proceed immediately to India. Thích Minh Tuệ was expected to arrive in New Delhi within days and subsequently travel to Bodh Gaya — the site where the Buddha achieved enlightenment — to resume his barefoot walk. The Vietnamese Buddhist sangha's decision to intervene against him internationally sparked a fresh wave of criticism on social media.`,
     date: '2025-04-24',
-    coverImage: 'https://images.unsplash.com/photo-1544894079-e81a9eb97f48?w=1200',
+    coverImage: 'https://www.rfa.org/resizer/v2/IPDNG4JZ7BAM7FJMHABYS62QLU.jpg?auth=02f6373166f95aefd5b30ed019e698fe6e56fa1217ff109059a20f00d4404746&width=800&height=533',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'Sri Lanka', 'Ấn Độ', 'Bodh Gaya', '2025'],
@@ -305,7 +305,7 @@ The article describes him as a rigorous practitioner of the thirteen dhuta disci
 
 The piece contextualizes his journey within Vietnam's record on religious freedom and human rights — highlighting the constraints authorities place on independent religious activity, even when the practitioner has no political intentions. The story of Thích Minh Tuệ, the article argues, reveals the fundamental tension at the heart of religious life in contemporary Vietnam.`,
     date: '2025-10-21',
-    coverImage: 'https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=1200',
+    coverImage: 'https://i0.wp.com/thevietnamese.org/wp-content/uploads/2025/12/Monk-Minh-Tue-_-The-limitation-between-religious-freedom-and-social-order.png?fit=1500%2C843&ssl=1',
     author: 'The Vietnamese Magazine',
     readingTime: 7,
     tags: ['nhân quyền', 'tự do tôn giáo', 'phân tích', '2025'],
