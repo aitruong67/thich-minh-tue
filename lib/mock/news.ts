@@ -57,7 +57,7 @@ His elderly father expressed support for his spiritual path. Buddhist scholar Th
 
 His clarification that he is not formally an ordained monk — and not affiliated with Vietnam's official Buddhist Sangha — only added to public fascination. He had visited nearly all of Vietnam during his ongoing pilgrimage, describing it as "a lifelong walk."`,
     date: '2024-05-28',
-    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/05/22759fff-0601-4d74-8af9-9dc42c066f14-From-rfa-org.jpg',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/05/thichminhtue241731715936258-17-1325-2936-1716034039-From-vnexpress.net_.jpg',
     author: 'Buddhistdoor Global',
     readingTime: 6,
     tags: ['Buddhistdoor', 'khổ hạnh', 'hành hương', '2024'],
@@ -79,7 +79,7 @@ Authorities justified the end of the pilgrimage by citing concerns about social 
 
 The incident exposed the ongoing tensions between independent religious practice and state oversight in Vietnam. Authorities fined a YouTuber who had documented the journey and announced plans for a new surveillance application to monitor Buddhist practitioners nationwide. The government's official statement — that he had "voluntarily retired" — was widely questioned by supporters and human rights observers alike.`,
     date: '2024-06-03',
-    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
+    coverImage: 'https://teahouse.buddhistdoor.net/wp-content/uploads/2024/07/Pic-2-936x650.png',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'chính quyền', 'tự do tôn giáo', '2024'],
@@ -103,7 +103,7 @@ Phil Robertson of Asia Human Rights and Labor called the "voluntary cessation" c
 
 Senior Buddhist leader Thích Không Tánh suggested Tuệ faced restrictions possibly involving solitary confinement, though he anticipated no physical harm. The case drew international scrutiny, highlighting the persistent tensions between Vietnam's communist government and independent religious communities.`,
     date: '2024-06-06',
-    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2024/05/From-atorinpoche.com_.jpeg',
     author: 'AsiaNews',
     readingTime: 6,
     tags: ['AsiaNews', 'nhân quyền', 'tự do tôn giáo', '2024'],
@@ -215,7 +215,7 @@ The article draws comparisons to historical Buddhist resistance figures: Thich N
 
 The piece concludes with Buddhist symbolism — the lotus flower and the "middle path" — suggesting that Thích Minh Tuệ's journey embodies Vietnam's ongoing search for meaning between material necessity and spiritual fulfillment.`,
     date: '2025-03-06',
-    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
+    coverImage: 'https://www.buddhistdoor.net/content/uploads/2025/02/3153778-From-the-star.webp',
     author: "Lion's Roar",
     readingTime: 8,
     tags: ["Lion's Roar", 'phân tích', 'tâm linh', '2025'],
@@ -261,7 +261,7 @@ Complications emerged around tourist visa regulations for walking on public road
 
 Thích Minh Tuệ remained focused on his spiritual journey. "My journey is a lifelong walk," he stated — emphasizing practice over preaching, as he had done throughout his years of walking across Vietnam and beyond.`,
     date: '2025-04-18',
-    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg/800px-MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
+    coverImage: 'https://srilankabrief.org/wp-content/uploads/2025/04/image_3f930f9c6d.jpg',
     author: 'EconomyNext',
     readingTime: 5,
     tags: ['Sri Lanka', 'hành hương', 'thử thách', '2025'],
@@ -283,7 +283,7 @@ The group received temporary shelter at a temple northeast of Colombo but faced 
 
 Rather than wait, the group decided to proceed immediately to India. Thích Minh Tuệ was expected to arrive in New Delhi within days and subsequently travel to Bodh Gaya — the site where the Buddha achieved enlightenment — to resume his barefoot walk. The Vietnamese Buddhist sangha's decision to intervene against him internationally sparked a fresh wave of criticism on social media.`,
     date: '2025-04-24',
-    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Minhtue.jpg',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Th%C3%ADch_Minh_Tu%E1%BB%87.png',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'Sri Lanka', 'Ấn Độ', 'Bodh Gaya', '2025'],
