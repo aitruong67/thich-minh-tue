@@ -125,7 +125,7 @@ The departure came months after his cross-country pilgrimage was forcibly disper
 
 Analysts suggested the authorities' decision to allow his departure reflected a strategic calculation: removing a domestic "thorn in the side" while generating positive international optics regarding religious freedom. A Buddhist observer noted that his popularity had stemmed from appearing more authentic than state-sanctioned monks, thereby exposing moral failings in Vietnam's official Buddhist establishment.`,
     date: '2024-12-13',
-    coverImage: 'https://www.rfa.org/resizer/v2/ISDTNOXFHRBDNDAP5RV6WKB3GU.JPG?auth=8d253aa3a0413c49f285694cfbc8fa8d4f4d0fabf8849e94dbd39972cf992193&width=800&height=533',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Minhtue.jpg',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'hành hương', 'Lào', '2024'],
@@ -169,7 +169,7 @@ The piece examined the contested June 2024 events when authorities raided his ca
 
 A notable detail: his companion on the journey is Doan Van Bau, a former Vietnamese government security official specializing in psychological operations, raising questions about possible state orchestration of his departure. Despite these murky circumstances, his pilgrimage continued to draw massive public attention, with Vietnamese social media still following his every step across international borders.`,
     date: '2025-01-03',
-    coverImage: 'https://www.rfa.org/resizer/v2/I6MBEKGN7NC33LJHA3ZY6ARLSI.JPG?auth=3ef4a0130145c938112897dad867ea9d945420b2501c951ee8e856065125a2c2&width=800&height=533',
+    coverImage: 'https://i0.wp.com/fulcrum.sg/wp-content/uploads/VN-Bao-chi-Thich-Minh-Tue-3-e1717039304360.jpg?fit=1248%2C559&ssl=1',
     author: 'Radio Free Asia',
     readingTime: 7,
     tags: ['RFA', 'Ấn Độ', 'phân tích', '2025'],
@@ -215,7 +215,7 @@ The article draws comparisons to historical Buddhist resistance figures: Thich N
 
 The piece concludes with Buddhist symbolism — the lotus flower and the "middle path" — suggesting that Thích Minh Tuệ's journey embodies Vietnam's ongoing search for meaning between material necessity and spiritual fulfillment.`,
     date: '2025-03-06',
-    coverImage: 'https://www.lionsroar.com/wp-content/uploads/2025/03/thich-minh-tue-nghe-an-vietnam-1.jpg',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/2/28/MasterMinhTue-2025March09-CuongPhamFilmmaker.jpg',
     author: "Lion's Roar",
     readingTime: 8,
     tags: ["Lion's Roar", 'phân tích', 'tâm linh', '2025'],
@@ -283,7 +283,7 @@ The group received temporary shelter at a temple northeast of Colombo but faced 
 
 Rather than wait, the group decided to proceed immediately to India. Thích Minh Tuệ was expected to arrive in New Delhi within days and subsequently travel to Bodh Gaya — the site where the Buddha achieved enlightenment — to resume his barefoot walk. The Vietnamese Buddhist sangha's decision to intervene against him internationally sparked a fresh wave of criticism on social media.`,
     date: '2025-04-24',
-    coverImage: 'https://www.rfa.org/resizer/v2/IPDNG4JZ7BAM7FJMHABYS62QLU.jpg?auth=02f6373166f95aefd5b30ed019e698fe6e56fa1217ff109059a20f00d4404746&width=800&height=533',
+    coverImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Minhtue.jpg',
     author: 'Radio Free Asia',
     readingTime: 5,
     tags: ['RFA', 'Sri Lanka', 'Ấn Độ', 'Bodh Gaya', '2025'],
