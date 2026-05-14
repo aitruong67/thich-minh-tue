@@ -60,6 +60,7 @@ export interface NewsArticle {
   author: string
   readingTime: number
   tags: string[]
+  sourceUrl?: string
 }
 
 export interface BiographyChapter {
