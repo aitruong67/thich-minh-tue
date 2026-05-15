@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { useTranslations, useLocale } from 'next-intl'
+import { useLocale } from 'next-intl'
 import Lightbox from 'yet-another-react-lightbox'
 import Captions from 'yet-another-react-lightbox/plugins/captions'
 import 'yet-another-react-lightbox/styles.css'
@@ -21,10 +21,22 @@ const FILTER_LABELS: Record<Filter, { en: string; vi: string }> = {
   media:         { en: 'Press & Media', vi: 'Báo chí' },
 }
 
-const THEME_COLOR: Record<string, string> = {
-  pilgrimage: 'text-saffron', community: 'text-green-400',
-  portrait: 'text-ember', international: 'text-blue-400', media: 'text-purple-400',
+const THEME_ACCENT: Record<string, string> = {
+  pilgrimage:    'bg-amber-500',
+  community:     'bg-green-600',
+  portrait:      'bg-orange-600',
+  international: 'bg-blue-600',
+  media:         'bg-purple-600',
 }
+
+const THEME_TEXT: Record<string, string> = {
+  pilgrimage:    'text-amber-700',
+  community:     'text-green-700',
+  portrait:      'text-orange-700',
+  international: 'text-blue-700',
+  media:         'text-purple-700',
+}
+
 const THEME_LABEL: Record<string, { en: string; vi: string }> = {
   pilgrimage:    { en: 'Pilgrimage',    vi: 'Hành hương' },
   community:     { en: 'Community',     vi: 'Cộng đồng' },
@@ -36,7 +48,6 @@ const THEME_LABEL: Record<string, { en: string; vi: string }> = {
 interface Props { photos: Photo[] }
 
 export default function GalleryClient({ photos }: Props) {
-  const t = useTranslations('page.gallery')
   const locale = useLocale()
   const [filter, setFilter] = useState<Filter>('all')
   const [lightboxIndex, setLightboxIndex] = useState(0)
@@ -54,27 +65,31 @@ export default function GalleryClient({ photos }: Props) {
     description: locale === 'vi' ? (p.caption_vi || '') : (p.caption_en || ''),
   }))
 
-  const openAt = (index: number) => { setLightboxIndex(index); setLightboxOpen(true) }
+  const openAt = (i: number) => { setLightboxIndex(i); setLightboxOpen(true) }
   const photoIndex = (photo: Photo) => filtered.findIndex(p => p._id === photo._id)
-
   const col = (n: number, total: number) => filtered.filter((_, i) => i % total === n)
 
   return (
-    <div className="pt-16 min-h-screen">
-      {/* Header */}
-      <header className="section-padding pb-10">
+    <div className="pt-16 min-h-screen bg-gray-50">
+
+      {/* Header — light */}
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 md:px-12 lg:px-24 py-12">
         <div className="max-w-6xl mx-auto">
           <FadeIn>
-            <p className="section-label mb-4">{t('eyebrow')}</p>
-            <h1 className="section-heading mb-4">{t('heading')}</h1>
-            <p className="font-body text-ash max-w-2xl leading-relaxed">
+            <p className="font-ui text-label uppercase tracking-[0.14em] text-amber-600 mb-3">
+              {locale === 'vi' ? 'Hình ảnh lưu trữ' : 'Photo archive'}
+            </p>
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-4">
+              {locale === 'vi' ? 'Những Khoảnh Khắc Trên Con Đường' : 'Moments Along the Road'}
+            </h1>
+            <p className="font-body text-gray-600 max-w-2xl leading-relaxed">
               {locale === 'vi'
-                ? 'Bộ sưu tập hình ảnh từ các nguồn báo chí quốc tế — ghi lại hành trình bộ hành lịch sử của Thầy Minh Tuệ qua Việt Nam và nhiều quốc gia trên thế giới.'
-                : 'A curated collection of photographs from international press sources — documenting the historic pilgrimage of Minh Tuệ across Vietnam and the world.'}
+                ? 'Bộ sưu tập hình ảnh từ các nguồn báo chí quốc tế — ghi lại hành trình lịch sử của Thầy Minh Tuệ qua Việt Nam và nhiều quốc gia trên thế giới.'
+                : 'A curated collection from international press sources — documenting the historic pilgrimage of Minh Tuệ across Vietnam and the world.'}
             </p>
           </FadeIn>
 
-          {/* Filter bar */}
+          {/* Filters */}
           <FadeIn delay={0.1}>
             <div className="flex flex-wrap gap-2 mt-8" role="group" aria-label="Filter by theme">
               {FILTERS.map(f => (
@@ -82,10 +97,10 @@ export default function GalleryClient({ photos }: Props) {
                   key={f}
                   onClick={() => setFilter(f)}
                   aria-pressed={filter === f}
-                  className={`font-ui text-label uppercase tracking-[0.1em] px-4 py-2 border transition-all duration-200 ${
+                  className={`font-ui text-label uppercase tracking-[0.1em] px-4 py-2 rounded-full border transition-all duration-200 ${
                     filter === f
-                      ? 'border-saffron bg-saffron text-ink'
-                      : 'border-bark text-ash hover:border-saffron hover:text-saffron'
+                      ? 'bg-gray-900 border-gray-900 text-white'
+                      : 'bg-white border-gray-300 text-gray-600 hover:border-gray-900 hover:text-gray-900'
                   }`}
                 >
                   {FILTER_LABELS[f][locale as 'vi' | 'en']}
@@ -101,32 +116,44 @@ export default function GalleryClient({ photos }: Props) {
         </div>
       </header>
 
-      {/* Masonry */}
-      <section className="px-4 sm:px-6 md:px-12 lg:px-24 pb-24">
+      {/* Count bar */}
+      <div className="bg-gray-100 border-b border-gray-200 px-4 sm:px-6 md:px-12 lg:px-24 py-3">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-ui text-[0.65rem] uppercase tracking-[0.12em] text-gray-500">
+            {filtered.length} {locale === 'vi' ? 'hình ảnh' : 'photos'}
+            {filter !== 'all' && ` · ${FILTER_LABELS[filter][locale as 'vi' | 'en']}`}
+          </p>
+        </div>
+      </div>
+
+      {/* Masonry grid */}
+      <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-10">
         <div className="max-w-6xl mx-auto">
           {filtered.length === 0 ? (
-            <p className="text-center font-body text-ash py-24">
+            <p className="text-center font-body text-gray-500 py-24">
               {locale === 'vi' ? 'Không có ảnh.' : 'No photos found.'}
             </p>
           ) : (
             <>
-              {/* 2-col on mobile */}
-              <div className="grid grid-cols-2 gap-3 md:hidden">
+              {/* 2-col mobile */}
+              <div className="grid grid-cols-2 gap-4 md:hidden">
                 {[col(0, 2), col(1, 2)].map((column, ci) => (
-                  <div key={ci} className="flex flex-col gap-3">
+                  <div key={ci} className="flex flex-col gap-4">
                     {column.map(photo => (
-                      <GalleryCard key={photo._id} photo={photo} locale={locale} index={photoIndex(photo)} onOpen={openAt} />
+                      <GalleryCard key={photo._id} photo={photo} locale={locale}
+                        index={photoIndex(photo)} onOpen={openAt} />
                     ))}
                   </div>
                 ))}
               </div>
 
-              {/* 3-col on desktop */}
-              <div className="hidden md:grid grid-cols-3 gap-4">
+              {/* 3-col desktop */}
+              <div className="hidden md:grid grid-cols-3 gap-6">
                 {[col(0, 3), col(1, 3), col(2, 3)].map((column, ci) => (
-                  <div key={ci} className="flex flex-col gap-4">
+                  <div key={ci} className="flex flex-col gap-6">
                     {column.map(photo => (
-                      <GalleryCard key={photo._id} photo={photo} locale={locale} index={photoIndex(photo)} onOpen={openAt} />
+                      <GalleryCard key={photo._id} photo={photo} locale={locale}
+                        index={photoIndex(photo)} onOpen={openAt} />
                     ))}
                   </div>
                 ))}
@@ -135,15 +162,15 @@ export default function GalleryClient({ photos }: Props) {
           )}
 
           {/* Attribution */}
-          <FadeIn>
-            <p className="mt-12 font-ui text-[0.6rem] uppercase tracking-[0.12em] text-white/25 text-center leading-relaxed">
-              {locale === 'vi'
-                ? 'Ảnh từ: Buddhistdoor Global · Lion\'s Roar · Radio Free Asia · VnExpress · FULCRUM/ISEAS · The Star Malaysia · Tea House Buddhistdoor'
-                : 'Photos from: Buddhistdoor Global · Lion\'s Roar · Radio Free Asia · VnExpress · FULCRUM/ISEAS · The Star Malaysia · Tea House Buddhistdoor'}
-              <br />
+          <p className="mt-14 font-ui text-[0.6rem] uppercase tracking-[0.12em] text-gray-400 text-center leading-relaxed">
+            {locale === 'vi'
+              ? 'Ảnh từ: Buddhistdoor Global · Lion\'s Roar · Radio Free Asia · VnExpress · FULCRUM/ISEAS · The Star Malaysia · Tea House Buddhistdoor'
+              : 'Photos from: Buddhistdoor Global · Lion\'s Roar · Radio Free Asia · VnExpress · FULCRUM/ISEAS · The Star Malaysia · Tea House Buddhistdoor'}
+            <br />
+            <span className="text-gray-300">
               {locale === 'vi' ? 'Chỉ sử dụng cho mục đích phi thương mại và giáo dục.' : 'Used for non-commercial, educational purposes only.'}
-            </p>
-          </FadeIn>
+            </span>
+          </p>
         </div>
       </section>
 
@@ -173,12 +200,12 @@ function GalleryCard({ photo, locale, index, onOpen }: {
     <FadeIn>
       <button
         onClick={() => onOpen(index)}
-        className="group w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron rounded-lg"
+        className="group w-full text-left bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
         aria-label={`View: ${title}`}
       >
-        {/* Image container preserving natural aspect ratio */}
+        {/* Image */}
         <div
-          className="relative overflow-hidden rounded-lg bg-bark/20"
+          className="relative overflow-hidden bg-gray-100"
           style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
         >
           <Image
@@ -188,41 +215,52 @@ function GalleryCard({ photo, locale, index, onOpen }: {
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
           />
-
-          {/* Gradient overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-          {/* Expand icon */}
-          <div className="absolute top-2 right-2 bg-black/60 rounded-md p-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-            <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-            </svg>
-          </div>
-
-          {/* Theme badge */}
-          <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className={`font-ui text-[0.55rem] uppercase tracking-[0.12em] bg-black/60 px-2 py-0.5 rounded ${THEME_COLOR[theme] || 'text-saffron'}`}>
-              {THEME_LABEL[theme]?.[locale as 'vi' | 'en'] ?? theme}
-            </span>
-          </div>
-
-          {/* Info overlay */}
-          <div className="absolute bottom-0 inset-x-0 p-3 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-            <p className="font-display text-white text-sm leading-snug line-clamp-2 mb-1">{title}</p>
-            {photo.location && (
-              <p className="font-ui text-[0.58rem] text-white/50 uppercase tracking-wider">
-                {photo.location} · {photo.year}
-              </p>
-            )}
+          {/* Subtle expand indicator on hover */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+            <div className="bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow">
+              <svg className="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        {/* Caption snippet — visible on mobile without hover */}
-        {caption && (
-          <p className="mt-2 px-0.5 font-body text-ash/50 text-xs leading-relaxed line-clamp-2 sm:hidden">
-            {caption}
+        {/* Coloured theme bar */}
+        <div className={`h-0.5 w-full ${THEME_ACCENT[theme] || 'bg-amber-500'}`} />
+
+        {/* Text — always visible */}
+        <div className="p-3 sm:p-4">
+          {/* Theme + location row */}
+          <div className="flex items-center justify-between mb-1.5">
+            <span className={`font-ui text-[0.6rem] uppercase tracking-[0.12em] font-semibold ${THEME_TEXT[theme] || 'text-amber-700'}`}>
+              {THEME_LABEL[theme]?.[locale as 'vi' | 'en'] ?? theme}
+            </span>
+            {photo.year && (
+              <span className="font-ui text-[0.6rem] text-gray-400 uppercase tracking-wider">
+                {photo.year}
+              </span>
+            )}
+          </div>
+
+          {/* Title */}
+          <p className="font-display text-gray-900 text-sm sm:text-base leading-snug line-clamp-2 mb-1">
+            {title}
           </p>
-        )}
+
+          {/* Location */}
+          {photo.location && (
+            <p className="font-ui text-[0.6rem] text-gray-400 uppercase tracking-wider">
+              {photo.location}
+            </p>
+          )}
+
+          {/* Caption — on larger cards only */}
+          {caption && (
+            <p className="mt-2 font-body text-gray-500 text-xs leading-relaxed line-clamp-2 border-t border-gray-100 pt-2">
+              {caption}
+            </p>
+          )}
+        </div>
       </button>
     </FadeIn>
   )
