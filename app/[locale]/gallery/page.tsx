@@ -1,6 +1,9 @@
 import GalleryClient from './GalleryClient'
-import { mockPhotos } from '@/lib/mock/photos'
+import { fetchPhotos } from '@/lib/sanity'
 
-export default function GalleryPage() {
-  return <GalleryClient photos={mockPhotos} />
+export const revalidate = 60
+
+export default async function GalleryPage() {
+  const photos = await fetchPhotos()
+  return <GalleryClient photos={photos} />
 }
