@@ -6,6 +6,7 @@ import FeaturedQuote from '@/components/sections/FeaturedQuote'
 import InternationalPilgrimage from '@/components/sections/InternationalPilgrimage'
 import MediaArchive from '@/components/sections/MediaArchive'
 import MapTeaser from '@/components/sections/MapTeaser'
+import EconomicImpact from '@/components/sections/EconomicImpact'
 import { mockQuotes } from '@/lib/mock'
 
 interface HomeProps {
@@ -29,6 +30,7 @@ export default function HomePage() {
       <HeroSection />
       <BiographyTimeline />
       <FeaturedQuote quote={featuredQuote} />
+      <EconomicImpact />
       <InternationalPilgrimage />
       <MediaArchive />
       <MapTeaser />

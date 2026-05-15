@@ -134,6 +134,20 @@
       "by": "Bởi"
     }
   },
+  "impact": {
+    "eyebrow": "Nghiên cứu tác động kinh tế",
+    "heading1": "Một người. Một chiếc áo.",
+    "headingAccent": "$280 Triệu USD.",
+    "heading2": "Thu nhập cá nhân: $0.",
+    "description": "Một nghiên cứu đã được bình duyệt cho thấy hành trình của Thầy Minh Tuệ tạo ra khoảng $280 triệu USD lưu chuyển kinh tế mỗi năm tại hơn 10 quốc gia — trong khi không có $0 nào tích lũy tại trung tâm. Một hiện tượng hiếm có và có thể đo lường được.",
+    "stat1": "Lưu chuyển kinh tế hàng năm",
+    "stat2": "Tương đương PPP (10+ quốc gia)",
+    "stat3": "Người chứng kiến trực tuyến mỗi tháng",
+    "stat4": "Thu nhập cá nhân",
+    "ctaLabel": "Bài nghiên cứu trên SSRN",
+    "ctaBody": "\"Vị Tăng Tạo Ra $280 Triệu USD Từ Việc Không Sở Hữu Gì\" — mô hình kinh tế 9 tầng được công bố trên SSRN.",
+    "ctaButton": "Đọc toàn bộ phân tích"
+  },
   "contact": {
     "eyebrow": "Liên hệ",
     "heading": "Liên Hệ Với Chúng Tôi",

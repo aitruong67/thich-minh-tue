@@ -134,6 +134,20 @@
       "by": "By"
     }
   },
+  "impact": {
+    "eyebrow": "Economic impact study",
+    "heading1": "One Man. One Robe.",
+    "headingAccent": "$280 Million.",
+    "heading2": "Zero Personal Monetization.",
+    "description": "A peer-reviewed analysis shows Minh Tuệ's pilgrimage generated an estimated $280M in annual economic circulation across 10+ countries — with $0 accumulating at the centre. A rare, measurable phenomenon of value creation without capture.",
+    "stat1": "Annual economic circulation",
+    "stat2": "PPP equivalent (10+ countries)",
+    "stat3": "Monthly digital witnesses",
+    "stat4": "Personal monetization",
+    "ctaLabel": "SSRN Peer-reviewed paper",
+    "ctaBody": "\"The Monk Who Generated $280 Million by Owning Nothing\" — a nine-layer economic model published on SSRN and cited in Harvard Business Review.",
+    "ctaButton": "Read full analysis"
+  },
   "contact": {
     "eyebrow": "Get in touch",
     "heading": "Contact Us",
