@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { useTranslations, useLocale } from 'next-intl'
 import Image from 'next/image'
 import FadeIn from '@/components/ui/FadeIn'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 import { mockBiographyChapters } from '@/lib/mock'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ function BiographyPage() {
 
   return (
     <div className="pt-16">
+      <Breadcrumb locale={locale} crumbs={[{ label: locale === 'vi' ? 'Tiểu sử' : 'Biography' }]} />
       {/* Page header */}
       <header className="section-padding pb-0">
         <div className="max-w-6xl mx-auto">

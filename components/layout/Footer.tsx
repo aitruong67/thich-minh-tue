@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
+import NewsletterSignup from '@/components/ui/NewsletterSignup'
 
 export default function Footer() {
   const t = useTranslations()
@@ -62,6 +63,8 @@ export default function Footer() {
               </nav>
             </div>
           </div>
+
+          <NewsletterSignup />
 
           {/* Social + petition row */}
           <div className="border-t border-white/8 pt-8 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">

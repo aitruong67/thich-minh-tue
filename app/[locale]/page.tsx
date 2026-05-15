@@ -8,6 +8,7 @@ import MediaArchive from '@/components/sections/MediaArchive'
 import MapTeaser from '@/components/sections/MapTeaser'
 import EconomicImpact from '@/components/sections/EconomicImpact'
 import GlobalSupport from '@/components/sections/GlobalSupport'
+import PilgrimageTracker from '@/components/sections/PilgrimageTracker'
 import { mockQuotes } from '@/lib/mock'
 
 interface HomeProps {
@@ -33,6 +34,7 @@ export default function HomePage() {
       <FeaturedQuote quote={featuredQuote} />
       <EconomicImpact />
       <GlobalSupport />
+      <PilgrimageTracker />
       <InternationalPilgrimage />
       <MediaArchive />
       <MapTeaser />

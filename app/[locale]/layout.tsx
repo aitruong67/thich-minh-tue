@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import { Analytics } from '@vercel/analytics/react'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
 import BackToTop from '@/components/ui/BackToTop'
@@ -73,6 +74,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale} className={`${cormorant.variable} ${lora.variable} ${beVietnam.variable}`}>
       <head>
+        <link rel="alternate" type="application/rss+xml" title="Minh Tuệ Archive — News RSS" href="https://minhtuedhutanga.org/rss.xml" />
         <link rel="alternate" hrefLang="vi" href="https://minhtuedhutanga.org/vi" />
         <link rel="alternate" hrefLang="en" href="https://minhtuedhutanga.org/en" />
         <link rel="alternate" hrefLang="x-default" href="https://minhtuedhutanga.org/vi" />
@@ -127,6 +129,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <main id="main-content">{children}</main>
           <Footer />
           <BackToTop />
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>

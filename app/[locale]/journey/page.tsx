@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { useTranslations, useLocale } from 'next-intl'
 import FadeIn from '@/components/ui/FadeIn'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 import { mockWaypoints } from '@/lib/mock'
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ function JourneyPage() {
 
   return (
     <div className="pt-16">
+      <Breadcrumb locale={locale} crumbs={[{ label: locale === 'vi' ? 'Hành trình' : 'Journey' }]} />
       {/* Page header */}
       <header className="section-padding pb-12">
         <div className="max-w-6xl mx-auto">
