@@ -64,11 +64,11 @@ export default function Nav() {
         <Link
           href={`/${locale}`}
           className="flex items-center gap-2 group flex-shrink-0"
-          aria-label="Thích Minh Tuệ Archive — Trang chủ"
+          aria-label="Minh Tuệ Archive — Trang chủ"
         >
           <Lotus size={26} />
           <span className="font-display text-lg md:text-xl text-ember italic tracking-wide group-hover:text-white transition-colors">
-            Thích Minh Tuệ
+            Minh Tuệ
           </span>
         </Link>
 

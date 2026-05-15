@@ -28,7 +28,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 mb-4">
                 <Lotus size={32} />
                 <span className="font-display text-xl text-ember italic">
-                  Thích Minh Tuệ
+                  Minh Tuệ
                 </span>
               </div>
               <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs">

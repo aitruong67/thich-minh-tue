@@ -34,16 +34,16 @@ const beVietnam = Be_Vietnam_Pro({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://thichminhtue.archive.vn'),
   title: {
-    template: '%s · Thích Minh Tuệ Archive',
-    default: 'Thích Minh Tuệ — Lưu Trữ Hành Trình Tâm Linh',
+    template: '%s · Minh Tuệ Archive',
+    default: 'Minh Tuệ — Lưu Trữ Hành Trình Tâm Linh',
   },
   description:
-    'Tư liệu lưu trữ về hành trình của Thầy Thích Minh Tuệ — nhà sư Theravāda đã đi bộ suốt chiều dài Việt Nam, truyền cảm hứng cho hàng triệu người.',
+    'Tư liệu lưu trữ về hành trình của Thầy Minh Tuệ — nhà sư Theravāda đã đi bộ suốt chiều dài Việt Nam, truyền cảm hứng cho hàng triệu người.',
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
     alternateLocale: ['en_US'],
-    siteName: 'Thích Minh Tuệ Archive',
+    siteName: 'Minh Tuệ Archive',
     images: [{ url: '/og-default.jpg', width: 1200, height: 630 }],
   },
   twitter: {

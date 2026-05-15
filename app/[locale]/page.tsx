@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: HomeProps): Promise<Metadata>
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'hero' })
   return {
-    title: 'Thích Minh Tuệ — Lưu Trữ Hành Trình Tâm Linh',
+    title: 'Minh Tuệ — Lưu Trữ Hành Trình Tâm Linh',
     description: t('description'),
   }
 }

@@ -7,7 +7,7 @@ export default function MonkSilhouette({ className = '' }: MonkSilhouetteProps) 
     <svg
       viewBox="0 0 160 260"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Silhouette of Thầy Thích Minh Tuệ walking with his patchwork robe and rice-cooker bowl"
+      aria-label="Silhouette of Thầy Minh Tuệ walking with his patchwork robe and rice-cooker bowl"
       className={className}
     >
       {/* Shaved head */}

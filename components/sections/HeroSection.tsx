@@ -28,7 +28,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 lg:left-[45%]" aria-hidden="true">
         <Image
           src="https://cdn.sanity.io/images/2woffqfn/production/80963d152424ad61f25a759934f995e831ceb7db-872x1200.jpg"
-          alt="Thích Minh Tuệ"
+          alt="Minh Tuệ"
           fill
           className="object-cover object-top"
           sizes="(max-width: 1024px) 100vw, 55vw"

@@ -1,6 +1,6 @@
 export const pilgrimageRoute = {
   type: 'Feature' as const,
-  properties: { name: 'Hành trình Thích Minh Tuệ 2023' },
+  properties: { name: 'Hành trình Minh Tuệ 2023' },
   geometry: {
     type: 'LineString' as const,
     coordinates: [

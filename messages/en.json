@@ -13,7 +13,7 @@
   },
   "hero": {
     "eyebrow": "Spiritual journey archive",
-    "titleLine1": "Thích Minh Tuệ",
+    "titleLine1": "Minh Tuệ",
     "titleLine2": "Walking the Path of Truth",
     "description": "Born Lê Anh Tú in 1981 in Hà Tĩnh, he left a career as a land surveyor in 2015 to practice Theravāda Dhutanga asceticism. After three silent pilgrimages, his 2024 walk across Vietnam became an unprecedented phenomenon — followed by millions.",
     "ctaPrimary": "Read biography",
@@ -25,7 +25,7 @@
   "biography": {
     "eyebrow": "The person & the path",
     "heading": "From land surveyor to barefoot pilgrim",
-    "intro": "Lê Anh Tú was born in Hà Tĩnh in 1981, served in the military, and graduated from the Tây Nguyên College of Forestry. In 2015, he left his career and secular life to take the dharma name Thích Minh Tuệ and begin practicing the strictest form of Theravāda asceticism.",
+    "intro": "Lê Anh Tú was born in Hà Tĩnh in 1981, served in the military, and graduated from the Tây Nguyên College of Forestry. In 2015, he left his career and secular life to take the dharma name Minh Tuệ and begin practicing the strictest form of Theravāda asceticism.",
     "cta": "Read the full biography"
   },
   "bio": {
@@ -35,7 +35,7 @@
     },
     "t2": {
       "title": "Renunciation & dharma name",
-      "desc": "In 2015, he left secular life and took the dharma name Thích Minh Tuệ. He retreated to a mountain cave, begging daily for food and living by the strictest Dhutanga ascetic rules — no money, no possessions, no fixed abode."
+      "desc": "In 2015, he left secular life and took the dharma name Minh Tuệ. He retreated to a mountain cave, begging daily for food and living by the strictest Dhutanga ascetic rules — no money, no possessions, no fixed abode."
     },
     "t3": {
       "title": "Three silent pilgrimages",
@@ -61,14 +61,14 @@
   "international": {
     "eyebrow": "Beyond Vietnam — December 2024",
     "heading": "The International Pilgrimage",
-    "description": "On December 12, 2024, Thích Minh Tuệ began walking beyond Vietnam's borders, tracing a path through six countries toward the birthplace of Buddhism. Accompanied only by a retired police officer who volunteered as his companion, he continues the same practice — no money, no possessions, walking on.",
+    "description": "On December 12, 2024, Minh Tuệ began walking beyond Vietnam's borders, tracing a path through six countries toward the birthplace of Buddhism. Accompanied only by a retired police officer who volunteered as his companion, he continues the same practice — no money, no possessions, walking on.",
     "route": "The route",
     "cta": "Follow the journey"
   },
   "map": {
     "eyebrow": "The walk across Vietnam",
     "heading": "2,100 km on bare feet",
-    "description": "Starting from Kiên Giang in the southwest, Thích Minh Tuệ walked the length of Vietnam northward through more than 30 provinces to Hà Nội — a journey that captured the attention of millions.",
+    "description": "Starting from Kiên Giang in the southwest, Minh Tuệ walked the length of Vietnam northward through more than 30 provinces to Hà Nội — a journey that captured the attention of millions.",
     "distance": "Over 2,100 km · 30+ provinces",
     "cta": "Explore the journey",
     "routeLabel": "Key waypoints — south to north",
@@ -78,7 +78,7 @@
   "page": {
     "biography": {
       "eyebrow": "Full biography",
-      "heading": "The Life and Journey of Thầy Thích Minh Tuệ",
+      "heading": "The Life and Journey of Thầy Minh Tuệ",
       "pullQuote": "In his own words"
     },
     "gallery": {
@@ -134,9 +134,9 @@
     }
   },
   "footer": {
-    "description": "A non-profit documentary archive of Thầy Thích Minh Tuệ's spiritual journey — preserved to inspire generations to come.",
+    "description": "A non-profit documentary archive of Thầy Minh Tuệ's spiritual journey — preserved to inspire generations to come.",
     "navAriaLabel": "Footer navigation",
-    "copyright": "Thích Minh Tuệ Archive. All rights reserved.",
+    "copyright": "Minh Tuệ Archive. All rights reserved.",
     "location": "Vietnam"
   }
 }

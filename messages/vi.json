@@ -13,7 +13,7 @@
   },
   "hero": {
     "eyebrow": "Lưu trữ hành trình tâm linh",
-    "titleLine1": "Thích Minh Tuệ",
+    "titleLine1": "Minh Tuệ",
     "titleLine2": "Bước Đi Trên Con Đường Chân Thật",
     "description": "Sinh ra là Lê Anh Tú năm 1981 tại Hà Tĩnh, ông rời bỏ nghề đo đạc địa chính năm 2015 để thực hành hạnh đầu đà Theravāda. Sau ba cuộc bộ hành trong lặng lẽ, cuộc đi bộ xuyên Việt năm 2024 của ông trở thành hiện tượng chưa từng có — được hàng triệu người theo dõi.",
     "ctaPrimary": "Đọc tiểu sử",
@@ -25,7 +25,7 @@
   "biography": {
     "eyebrow": "Con người & Hành trình",
     "heading": "Từ nhân viên đo đạc đến hành giả chân trần",
-    "intro": "Lê Anh Tú sinh năm 1981 tại Hà Tĩnh, từng phục vụ quân ngũ và tốt nghiệp Trường Cao đẳng Lâm nghiệp Tây Nguyên. Năm 2015, ông rời bỏ sự nghiệp và cuộc sống thế tục, nhận pháp danh Thích Minh Tuệ và bắt đầu thực hành hạnh đầu đà Theravāda theo hình thức khổ hạnh nghiêm khắc nhất.",
+    "intro": "Lê Anh Tú sinh năm 1981 tại Hà Tĩnh, từng phục vụ quân ngũ và tốt nghiệp Trường Cao đẳng Lâm nghiệp Tây Nguyên. Năm 2015, ông rời bỏ sự nghiệp và cuộc sống thế tục, nhận pháp danh Minh Tuệ và bắt đầu thực hành hạnh đầu đà Theravāda theo hình thức khổ hạnh nghiêm khắc nhất.",
     "cta": "Đọc tiểu sử đầy đủ"
   },
   "bio": {
@@ -35,7 +35,7 @@
     },
     "t2": {
       "title": "Xuất gia & nhận pháp danh",
-      "desc": "Năm 2015, ông rời bỏ cuộc đời thế tục và nhận pháp danh Thích Minh Tuệ. Ông vào ở ẩn trong hang núi, hàng ngày đi khất thực và sống theo hạnh đầu đà nghiêm khắc nhất — không tiền, không tài sản, không chỗ ở cố định."
+      "desc": "Năm 2015, ông rời bỏ cuộc đời thế tục và nhận pháp danh Minh Tuệ. Ông vào ở ẩn trong hang núi, hàng ngày đi khất thực và sống theo hạnh đầu đà nghiêm khắc nhất — không tiền, không tài sản, không chỗ ở cố định."
     },
     "t3": {
       "title": "Ba cuộc bộ hành trong lặng lẽ",
@@ -61,14 +61,14 @@
   "international": {
     "eyebrow": "Vượt biên giới Việt Nam — Tháng 12/2024",
     "heading": "Hành Trình Quốc Tế",
-    "description": "Ngày 12/12/2024, Thích Minh Tuệ bắt đầu hành trình bộ hành ra ngoài biên giới Việt Nam, đi qua sáu quốc gia tiến về nơi Đức Phật đản sinh. Chỉ có một cựu sĩ quan cảnh sát tình nguyện đồng hành, ông tiếp tục cùng một hạnh tu — không tiền, không tài sản, tiếp bước đi.",
+    "description": "Ngày 12/12/2024, Minh Tuệ bắt đầu hành trình bộ hành ra ngoài biên giới Việt Nam, đi qua sáu quốc gia tiến về nơi Đức Phật đản sinh. Chỉ có một cựu sĩ quan cảnh sát tình nguyện đồng hành, ông tiếp tục cùng một hạnh tu — không tiền, không tài sản, tiếp bước đi.",
     "route": "Lộ trình",
     "cta": "Theo dõi hành trình"
   },
   "map": {
     "eyebrow": "Hành trình xuyên Việt",
     "heading": "2.100 km trên đôi chân trần",
-    "description": "Khởi hành từ Kiên Giang ở miền Tây Nam Bộ, Thích Minh Tuệ đi bộ dọc chiều dài Việt Nam qua hơn 30 tỉnh thành lên đến Hà Nội — một hành trình thu hút sự chú ý của hàng triệu người.",
+    "description": "Khởi hành từ Kiên Giang ở miền Tây Nam Bộ, Minh Tuệ đi bộ dọc chiều dài Việt Nam qua hơn 30 tỉnh thành lên đến Hà Nội — một hành trình thu hút sự chú ý của hàng triệu người.",
     "distance": "Hơn 2.100 km · 30+ tỉnh thành",
     "cta": "Khám phá hành trình",
     "routeLabel": "Các điểm chính — từ Nam ra Bắc",
@@ -78,7 +78,7 @@
   "page": {
     "biography": {
       "eyebrow": "Tiểu sử đầy đủ",
-      "heading": "Cuộc Đời Và Hành Trình Của Thầy Thích Minh Tuệ",
+      "heading": "Cuộc Đời Và Hành Trình Của Thầy Minh Tuệ",
       "pullQuote": "Lời tâm sự"
     },
     "gallery": {
@@ -134,9 +134,9 @@
     }
   },
   "footer": {
-    "description": "Tư liệu lưu trữ phi lợi nhuận về hành trình tâm linh của Thầy Thích Minh Tuệ — lưu giữ để truyền cảm hứng cho các thế hệ mai sau.",
+    "description": "Tư liệu lưu trữ phi lợi nhuận về hành trình tâm linh của Thầy Minh Tuệ — lưu giữ để truyền cảm hứng cho các thế hệ mai sau.",
     "navAriaLabel": "Điều hướng chân trang",
-    "copyright": "Thích Minh Tuệ Archive. Mọi quyền được bảo lưu.",
+    "copyright": "Minh Tuệ Archive. Mọi quyền được bảo lưu.",
     "location": "Việt Nam"
   }
 }
