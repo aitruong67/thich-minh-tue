@@ -33,7 +33,7 @@ const beVietnam = Be_Vietnam_Pro({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://thichminhtue.archive.vn'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://minhtuedhutanga.org'),
   title: {
     template: '%s · Minh Tuệ Archive',
     default: 'Minh Tuệ — Lưu Trữ Hành Trình Tâm Linh',
@@ -73,9 +73,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale} className={`${cormorant.variable} ${lora.variable} ${beVietnam.variable}`}>
       <head>
-        <link rel="alternate" hrefLang="vi" href="https://minhtuedhutanga.com/vi" />
-        <link rel="alternate" hrefLang="en" href="https://minhtuedhutanga.com/en" />
-        <link rel="alternate" hrefLang="x-default" href="https://minhtuedhutanga.com/vi" />
+        <link rel="alternate" hrefLang="vi" href="https://minhtuedhutanga.org/vi" />
+        <link rel="alternate" hrefLang="en" href="https://minhtuedhutanga.org/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://minhtuedhutanga.org/vi" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -84,20 +84,20 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
               '@graph': [
                 {
                   '@type': 'WebSite',
-                  '@id': 'https://minhtuedhutanga.com/#website',
-                  url: 'https://minhtuedhutanga.com',
+                  '@id': 'https://minhtuedhutanga.org/#website',
+                  url: 'https://minhtuedhutanga.org',
                   name: 'Minh Tuệ Archive',
                   description: 'Non-profit documentary archive of the spiritual journey of Minh Tuệ',
                   inLanguage: ['vi', 'en'],
                   potentialAction: {
                     '@type': 'SearchAction',
-                    target: { '@type': 'EntryPoint', urlTemplate: 'https://minhtuedhutanga.com/vi/search?q={search_term_string}' },
+                    target: { '@type': 'EntryPoint', urlTemplate: 'https://minhtuedhutanga.org/vi/search?q={search_term_string}' },
                     'query-input': 'required name=search_term_string',
                   },
                 },
                 {
                   '@type': 'Person',
-                  '@id': 'https://minhtuedhutanga.com/#minhtue',
+                  '@id': 'https://minhtuedhutanga.org/#minhtue',
                   name: 'Minh Tuệ',
                   alternateName: ['Lê Anh Tú', 'Thich Minh Tue'],
                   nationality: 'Vietnamese',
@@ -106,11 +106,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
                 },
                 {
                   '@type': 'Organization',
-                  '@id': 'https://minhtuedhutanga.com/#org',
+                  '@id': 'https://minhtuedhutanga.org/#org',
                   name: 'Minh Tuệ Archive',
-                  url: 'https://minhtuedhutanga.com',
-                  logo: 'https://minhtuedhutanga.com/logo.png',
-                  sameAs: ['https://minhtuedhutanga.org'],
+                  url: 'https://minhtuedhutanga.org',
+                  logo: 'https://minhtuedhutanga.org/logo.png',
+                  sameAs: ['https://minhtuedhutanga.com'],
                 },
               ],
             }),

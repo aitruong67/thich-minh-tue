@@ -63,7 +63,7 @@ export default function QuotesPage() {
             {filtered.map((quote, i) => {
               const text = locale === 'vi' ? quote.text_vi : quote.text_en
               const shareText = encodeURIComponent(`"${text}" — Minh Tuệ`)
-              const shareUrl = encodeURIComponent('https://minhtuedhutanga.com')
+              const shareUrl = encodeURIComponent('https://minhtuedhutanga.org')
               return (
                 <FadeIn key={quote._id} delay={i * 0.04} as="article">
                   <blockquote className="h-full border border-bark p-8 flex flex-col">
