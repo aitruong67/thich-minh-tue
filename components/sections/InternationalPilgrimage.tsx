@@ -20,8 +20,8 @@ export default function InternationalPilgrimage() {
   return (
     <section
       aria-labelledby="international-heading"
-      className="section-padding"
-      style={{ background: 'linear-gradient(170deg, #1a0808 0%, #2d1010 60%, #1a0808 100%)' }}
+      className="section-padding bg-pearl border-y border-bark"
+      style={{  }}
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -32,10 +32,10 @@ export default function InternationalPilgrimage() {
               <Lotus size={16} />
               {t('eyebrow')}
             </p>
-            <h2 id="international-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-6">
+            <h2 id="international-heading" className="font-display text-3xl sm:text-4xl lg:text-5xl text-parchment leading-tight mb-6">
               {t('heading')}
             </h2>
-            <p className="font-body text-white/60 leading-relaxed mb-8 text-base">
+            <p className="font-body text-ash leading-relaxed mb-8 text-base">
               {t('description')}
             </p>
             <Link href={`/${locale}/journey`} className="btn-primary">
@@ -45,7 +45,7 @@ export default function InternationalPilgrimage() {
 
           {/* Country route cards */}
           <FadeIn delay={0.15}>
-            <p className="font-ui text-label uppercase tracking-[0.14em] text-white/40 mb-5">
+            <p className="font-ui text-label uppercase tracking-[0.14em] text-ash/70 mb-5">
               {t('route')} · 12 Dec 2024
             </p>
             <ol className="space-y-2">
@@ -57,22 +57,22 @@ export default function InternationalPilgrimage() {
                       ? 'border-saffron/40 bg-saffron/10'
                       : i === countries.length - 1
                       ? 'border-ember/40 bg-ember/10'
-                      : 'border-white/8 bg-white/4'
+                      : 'border-bark bg-white/80'
                   }`}
                 >
                   <span className="text-xl flex-shrink-0 w-8 text-center">{country.flag}</span>
                   <div className="flex-1 min-w-0">
                     <span className={`font-ui text-label uppercase tracking-[0.1em] block ${
-                      i === 0 ? 'text-saffron' : i === countries.length - 1 ? 'text-ember' : 'text-white/80'
+                      i === 0 ? 'text-saffron' : i === countries.length - 1 ? 'text-ember' : 'text-parchment'
                     }`}>
                       {locale === 'vi' ? country.name_vi : country.name_en}
                     </span>
-                    <span className="font-ui text-[0.6rem] uppercase tracking-[0.08em] text-white/35 truncate block">
+                    <span className="font-ui text-[0.6rem] uppercase tracking-[0.08em] text-ash/60 truncate block">
                       {locale === 'vi' ? country.note_vi : country.note_en}
                     </span>
                   </div>
                   {i < countries.length - 1 && (
-                    <span className="text-white/20 text-xs flex-shrink-0">↓</span>
+                    <span className="text-bark text-xs flex-shrink-0">↓</span>
                   )}
                   {i === countries.length - 1 && (
                     <span className="font-ui text-[0.6rem] text-ember uppercase tracking-widest flex-shrink-0">Goal</span>

@@ -14,7 +14,7 @@ export default function FeaturedQuote({ quote }: FeaturedQuoteProps) {
     <section
       aria-label="Featured quote"
       className="section-padding"
-      style={{ background: 'linear-gradient(135deg, #5C0F0F 0%, #3D0808 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #FDF3E3 0%, #FEF8EE 100%)' }}
     >
       <FadeIn>
         <div className="max-w-4xl mx-auto text-center">
@@ -24,7 +24,7 @@ export default function FeaturedQuote({ quote }: FeaturedQuoteProps) {
           </div>
 
           <blockquote>
-            <p className="font-display text-2xl sm:text-3xl md:text-4xl text-white/90 italic leading-relaxed mb-8 text-balance">
+            <p className="font-display text-2xl sm:text-3xl md:text-4xl text-parchment italic leading-relaxed mb-8 text-balance">
               &ldquo;{locale === 'vi' ? quote.text_vi : quote.text_en}&rdquo;
             </p>
             {quote.source && (

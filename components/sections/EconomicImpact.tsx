@@ -37,7 +37,7 @@ export default function EconomicImpact() {
   const [index, setIndex] = useState(0)
 
   return (
-    <section className="relative bg-[#06060a] overflow-hidden">
+    <section className="relative bg-gray-50 overflow-hidden">
       {/* Top accent */}
       <div className="h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
 
@@ -57,16 +57,16 @@ export default function EconomicImpact() {
           {/* Header */}
           <FadeIn>
             <div className="text-center mb-14">
-              <p className="font-ui text-label uppercase tracking-[0.16em] text-amber-400 mb-4">
+              <p className="font-ui text-label uppercase tracking-[0.16em] text-amber-600 mb-4">
                 {t('eyebrow')}
               </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-5">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-parchment leading-tight mb-5">
                 {t('heading1')}{' '}
-                <span className="text-amber-400">{t('headingAccent')}</span>
+                <span className="text-amber-600">{t('headingAccent')}</span>
                 <br />
                 {t('heading2')}
               </h2>
-              <p className="font-body text-white/55 leading-relaxed max-w-2xl mx-auto">
+              <p className="font-body text-ash leading-relaxed max-w-2xl mx-auto">
                 {t('description')}
               </p>
             </div>
@@ -74,13 +74,13 @@ export default function EconomicImpact() {
 
           {/* Stats row */}
           <FadeIn delay={0.1}>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 rounded-xl overflow-hidden mb-14">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-px border-gray-200 rounded-xl overflow-hidden mb-14">
               {stats.map(({ value, labelKey }) => (
-                <div key={labelKey} className="bg-[#0d0d14] px-6 py-8 text-center">
-                  <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-amber-400 font-bold mb-2">
+                <div key={labelKey} className="bg-white px-6 py-8 text-center">
+                  <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-amber-600 font-bold mb-2">
                     {value}
                   </p>
-                  <p className="font-ui text-[0.65rem] uppercase tracking-[0.14em] text-white/45">
+                  <p className="font-ui text-[0.65rem] uppercase tracking-[0.14em] text-ash">
                     {t(labelKey)}
                   </p>
                 </div>
@@ -114,7 +114,7 @@ export default function EconomicImpact() {
                   </div>
                   {/* Expand icon */}
                   <div className="absolute top-3 right-3 bg-black/50 rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                     </svg>
                   </div>
@@ -125,12 +125,12 @@ export default function EconomicImpact() {
 
           {/* CTA */}
           <FadeIn delay={0.3}>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border border-white/10 rounded-xl p-6 bg-white/[0.02]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border border-bark rounded-xl p-6 bg-white">
               <div>
-                <p className="font-ui text-label uppercase tracking-[0.12em] text-amber-400 mb-1">
+                <p className="font-ui text-label uppercase tracking-[0.12em] text-amber-600 mb-1">
                   {t('ctaLabel')}
                 </p>
-                <p className="font-body text-white/60 text-sm max-w-lg">
+                <p className="font-body text-ash text-sm max-w-lg">
                   {t('ctaBody')}
                 </p>
               </div>

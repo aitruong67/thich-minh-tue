@@ -46,13 +46,13 @@ export default function Nav() {
   return (
     <header
       role="banner"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-crimson/95 backdrop-blur-md shadow-lg' : 'bg-crimson'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        scrolled ? 'shadow-sm border-b border-gray-200' : 'border-b border-gray-100'
       }`}
     >
       {/* Top accent bar — desktop only */}
-      <div className="hidden md:flex items-center justify-between bg-[#3D0808] border-b border-white/10 px-6 md:px-12 lg:px-24 py-1.5">
-        <p className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-white/40">
+      <div className="hidden md:flex items-center justify-between bg-gray-50 border-b border-gray-100 px-6 md:px-12 lg:px-24 py-1.5">
+        <p className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-gray-400">
           Tư liệu lưu trữ phi lợi nhuận · Non-profit archive
         </p>
         <LangToggle />
@@ -87,13 +87,13 @@ export default function Nav() {
                 href={`/${locale}${href === '/' ? '' : href}`}
                 className={`
                   relative px-3 py-5 block font-ui text-label uppercase tracking-[0.1em] transition-colors duration-200 whitespace-nowrap
-                  ${isActive(href) ? 'text-ember' : 'text-white/75 hover:text-white'}
+                  ${isActive(href) ? 'text-saffron' : 'text-gray-600 hover:text-gray-900'}
                 `}
                 aria-current={isActive(href) ? 'page' : undefined}
               >
                 {t(labelKey)}
                 {isActive(href) && (
-                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-ember rounded-full" />
+                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-saffron rounded-full" />
                 )}
               </Link>
             </li>
@@ -105,7 +105,7 @@ export default function Nav() {
           <button
             onClick={() => setSearchOpen(true)}
             aria-label="Search"
-            className="text-white/75 hover:text-white transition-colors p-2"
+            className="text-gray-500 hover:text-gray-900 transition-colors p-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -115,7 +115,7 @@ export default function Nav() {
             <LangToggle />
           </div>
           <button
-            className="lg:hidden text-white hover:text-ember transition-colors p-2 rounded"
+            className="lg:hidden text-gray-600 hover:text-saffron transition-colors p-2 rounded"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -139,19 +139,19 @@ export default function Nav() {
           menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-[#3D0808] border-t border-white/10 px-4 sm:px-6 pb-4">
-          <ul className="flex flex-col divide-y divide-white/10" role="list">
+        <div className="bg-white border-t border-gray-100 px-4 sm:px-6 pb-4">
+          <ul className="flex flex-col divide-y divide-gray-100" role="list">
             {navLinks.map(({ href, labelKey }) => (
               <li key={href}>
                 <Link
                   href={`/${locale}${href === '/' ? '' : href}`}
                   className={`
                     flex items-center gap-3 py-4 font-ui text-label uppercase tracking-[0.12em] transition-colors
-                    ${isActive(href) ? 'text-ember' : 'text-white/75 hover:text-white'}
+                    ${isActive(href) ? 'text-saffron' : 'text-gray-600 hover:text-gray-900'}
                   `}
                   aria-current={isActive(href) ? 'page' : undefined}
                 >
-                  {isActive(href) && <span className="w-1 h-4 bg-ember rounded-full flex-shrink-0" />}
+                  {isActive(href) && <span className="w-1 h-4 bg-saffron rounded-full flex-shrink-0" />}
                   {t(labelKey)}
                 </Link>
               </li>
