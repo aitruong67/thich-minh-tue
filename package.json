@@ -28,6 +28,7 @@
     "react-map-gl": "^7.1.7",
     "react-masonry-css": "^1.0.16",
     "sanity": "^3.99.0",
+    "styled-components": "^6.4.1",
     "tailwind-merge": "^2.4.0",
     "yet-another-react-lightbox": "^3.21.3"
   },
