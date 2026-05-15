@@ -51,6 +51,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+  verification: {
+    google: 'lbUwIeeijjLCEiZnfIldXTHk2mf4cGJsgSx9TPhMVB4',
+  },
 }
 
 interface LocaleLayoutProps {
