@@ -27,15 +27,14 @@ export default function Footer() {
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="mb-4">
-                <div className="inline-block bg-white rounded-lg px-3 py-2">
-                  <Image
-                    src="/logo.jpg"
-                    alt="Minh Tuệ Archive"
-                    width={160}
-                    height={64}
-                    className="h-14 w-auto object-contain"
-                  />
-                </div>
+                <Image
+                  src="/logo.jpg"
+                  alt="Minh Tuệ Archive"
+                  width={160}
+                  height={64}
+                  className="h-14 w-auto object-contain"
+                  style={{ mixBlendMode: 'multiply' }}
+                />
               </div>
               <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs">
                 {t('footer.description')}

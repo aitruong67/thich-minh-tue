@@ -67,16 +67,15 @@ export default function Nav() {
           className="flex-shrink-0 group"
           aria-label="Minh Tuệ Archive — Trang chủ"
         >
-          <div className="bg-white rounded-lg px-2 py-1 transition-opacity group-hover:opacity-90">
-            <Image
-              src="/logo.jpg"
-              alt="Minh Tuệ Archive"
-              width={120}
-              height={48}
-              className="h-10 w-auto object-contain"
-              priority
-            />
-          </div>
+          <Image
+            src="/logo.jpg"
+            alt="Minh Tuệ Archive"
+            width={120}
+            height={48}
+            className="h-10 w-auto object-contain transition-opacity group-hover:opacity-90"
+            style={{ mixBlendMode: 'multiply' }}
+            priority
+          />
         </Link>
 
         {/* Desktop links */}
