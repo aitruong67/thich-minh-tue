@@ -73,9 +73,49 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <html lang={locale} className={`${cormorant.variable} ${lora.variable} ${beVietnam.variable}`}>
       <head>
-        <link rel="alternate" hrefLang="vi" href={`https://thichminhtue.archive.vn/vi`} />
-        <link rel="alternate" hrefLang="en" href={`https://thichminhtue.archive.vn/en`} />
-        <link rel="alternate" hrefLang="x-default" href={`https://thichminhtue.archive.vn/vi`} />
+        <link rel="alternate" hrefLang="vi" href="https://minhtuedhutanga.com/vi" />
+        <link rel="alternate" hrefLang="en" href="https://minhtuedhutanga.com/en" />
+        <link rel="alternate" hrefLang="x-default" href="https://minhtuedhutanga.com/vi" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://minhtuedhutanga.com/#website',
+                  url: 'https://minhtuedhutanga.com',
+                  name: 'Minh Tuệ Archive',
+                  description: 'Non-profit documentary archive of the spiritual journey of Minh Tuệ',
+                  inLanguage: ['vi', 'en'],
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target: { '@type': 'EntryPoint', urlTemplate: 'https://minhtuedhutanga.com/vi/search?q={search_term_string}' },
+                    'query-input': 'required name=search_term_string',
+                  },
+                },
+                {
+                  '@type': 'Person',
+                  '@id': 'https://minhtuedhutanga.com/#minhtue',
+                  name: 'Minh Tuệ',
+                  alternateName: ['Lê Anh Tú', 'Thich Minh Tue'],
+                  nationality: 'Vietnamese',
+                  description: 'Vietnamese Theravāda Buddhist ascetic known for barefoot pilgrimage across Vietnam and internationally',
+                  sameAs: ['https://en.wikipedia.org/wiki/Thich_Minh_Tue'],
+                },
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://minhtuedhutanga.com/#org',
+                  name: 'Minh Tuệ Archive',
+                  url: 'https://minhtuedhutanga.com',
+                  logo: 'https://minhtuedhutanga.com/logo.png',
+                  sameAs: ['https://minhtuedhutanga.org'],
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body>
         <a href="#main-content" className="skip-to-content">

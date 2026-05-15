@@ -134,6 +134,16 @@
       "by": "Bởi"
     }
   },
+  "support": {
+    "eyebrow": "Sự ủng hộ toàn cầu",
+    "heading": "Một Phong Trào Vượt Biên Giới",
+    "description": "Từ một bước chân đơn độc trên đất Việt Nam đến một hiện tượng toàn cầu — hàng triệu người trên khắp các châu lục đã chứng kiến, ủng hộ và được chuyển hóa bởi hành trình này.",
+    "source": "Nguồn: Phân tích HBR, dữ liệu kiến nghị toàn cầu 2024–2025",
+    "stat1": "Chữ ký kiến nghị toàn cầu",
+    "stat2": "Quốc gia tham gia",
+    "stat3": "Người chứng kiến trực tuyến mỗi tháng",
+    "stat4": "Quốc gia đã bộ hành qua"
+  },
   "impact": {
     "eyebrow": "Nghiên cứu tác động kinh tế",
     "heading1": "Một người. Một chiếc áo.",

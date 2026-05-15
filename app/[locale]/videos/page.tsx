@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import FadeIn from '@/components/ui/FadeIn'
 import CategoryTag from '@/components/ui/CategoryTag'
@@ -55,7 +56,7 @@ export default function VideosPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((video, i) => (
               <FadeIn key={video._id} delay={i * 0.05} as="article">
-                <div className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
+                <Link href={`/${locale}/videos/${video.slug}`} className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-bark/30">
                     {video.thumbnailUrl ? (
@@ -106,18 +107,12 @@ export default function VideosPage() {
                           year: 'numeric', month: 'short', day: 'numeric',
                         })}
                       </span>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-ui text-label uppercase tracking-[0.12em] text-saffron hover:text-parchment transition-colors"
-                        aria-label={`${t('page.videos.watch')}: ${locale === 'vi' ? video.title_vi : video.title_en}`}
-                      >
+                      <span className="font-ui text-label uppercase tracking-[0.12em] text-saffron group-hover:text-parchment transition-colors">
                         {t('page.videos.watch')} →
-                      </a>
+                      </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               </FadeIn>
             ))}
           </div>

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations, useLocale } from 'next-intl'
 import LangToggle from '@/components/ui/LangToggle'
+import SearchModal from '@/components/ui/SearchModal'
 
 const navLinks = [
   { href: '/',          labelKey: 'nav.home' },
@@ -24,6 +25,7 @@ export default function Nav() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -100,6 +102,15 @@ export default function Nav() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search"
+            className="text-white/75 hover:text-white transition-colors p-2"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
           <div className="md:hidden">
             <LangToggle />
           </div>
@@ -118,6 +129,8 @@ export default function Nav() {
           </button>
         </div>
       </nav>
+
+      {searchOpen && <SearchModal onClose={() => setSearchOpen(false)} />}
 
       {/* Mobile menu */}
       <div
