@@ -109,11 +109,11 @@ export default function SearchModal({ onClose }: Props) {
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
-      {/* Panel */}
-      <div className="relative w-full max-w-2xl bg-[#1a0808] border border-bark rounded-xl shadow-2xl overflow-hidden">
+      {/* Panel — light theme */}
+      <div className="relative w-full max-w-2xl bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden">
         {/* Input */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-bark">
-          <svg className="w-5 h-5 text-ash flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100">
+          <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -121,21 +121,21 @@ export default function SearchModal({ onClose }: Props) {
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder={placeholder}
-            className="flex-1 bg-transparent font-body text-parchment placeholder:text-ash/50 focus:outline-none text-lg"
+            className="flex-1 bg-transparent font-body text-gray-800 placeholder:text-gray-400 focus:outline-none text-lg"
           />
-          <button onClick={onClose} className="text-ash hover:text-parchment transition-colors text-sm font-ui uppercase tracking-widest">
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors text-sm font-ui uppercase tracking-widest">
             ESC
           </button>
         </div>
 
         {/* Results */}
-        <div className="max-h-[60vh] overflow-y-auto">
+        <div className="max-h-[60vh] overflow-y-auto bg-gray-50">
           {query.trim() === '' ? (
-            <p className="font-body text-ash/50 text-sm text-center py-10">
+            <p className="font-body text-gray-400 text-sm text-center py-10">
               {locale === 'vi' ? 'Nhập để tìm kiếm…' : 'Start typing to search…'}
             </p>
           ) : results.length === 0 ? (
-            <p className="font-body text-ash/50 text-sm text-center py-10">
+            <p className="font-body text-gray-400 text-sm text-center py-10">
               {locale === 'vi' ? 'Không tìm thấy kết quả' : 'No results found'}
             </p>
           ) : (
@@ -145,7 +145,7 @@ export default function SearchModal({ onClose }: Props) {
                   <Link
                     href={r.href}
                     onClick={onClose}
-                    className="flex items-start gap-4 px-5 py-4 hover:bg-white/5 transition-colors border-b border-bark/40 last:border-b-0"
+                    className="flex items-start gap-4 px-5 py-4 hover:bg-white transition-colors border-b border-gray-100 last:border-b-0"
                   >
                     {r.image && (
                       <div className="relative w-14 h-10 flex-shrink-0 overflow-hidden rounded">
@@ -154,16 +154,16 @@ export default function SearchModal({ onClose }: Props) {
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-saffron">
+                        <span className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-crimson">
                           {locale === 'vi' ? TYPE_LABEL_VI[r.type] : TYPE_LABEL[r.type]}
                         </span>
                       </div>
-                      <p className="font-display text-parchment text-sm leading-snug line-clamp-2">{r.title}</p>
+                      <p className="font-display text-gray-800 text-sm leading-snug line-clamp-2">{r.title}</p>
                       {r.excerpt && (
-                        <p className="font-body text-ash/60 text-xs leading-snug mt-1 line-clamp-1">{r.excerpt}</p>
+                        <p className="font-body text-gray-500 text-xs leading-snug mt-1 line-clamp-1">{r.excerpt}</p>
                       )}
                     </div>
-                    <svg className="w-4 h-4 text-ash/40 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-gray-300 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
