@@ -1,9 +1,14 @@
 import createNextIntlPlugin from 'next-intl/plugin'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
   images: {
     loader: 'custom',
     loaderFile: './lib/cloudinaryLoader.ts',
