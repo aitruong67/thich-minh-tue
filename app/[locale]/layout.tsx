@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
+import BackToTop from '@/components/ui/BackToTop'
 import '../globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -85,6 +86,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <Nav />
           <main id="main-content">{children}</main>
           <Footer />
+          <BackToTop />
         </NextIntlClientProvider>
       </body>
     </html>

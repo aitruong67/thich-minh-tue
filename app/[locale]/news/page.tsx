@@ -6,7 +6,15 @@ import FadeIn from '@/components/ui/FadeIn'
 import { mockNews } from '@/lib/mock'
 import type { NewsArticle } from '@/lib/types'
 
-function ArticleWrapper({ article, children }: { article: NewsArticle; children: React.ReactNode }) {
+function ArticleWrapper({ article, locale, children }: { article: NewsArticle; locale: string; children: React.ReactNode }) {
+  const hasBody = !!(article.body_vi || article.body_en)
+  if (hasBody) {
+    return (
+      <Link href={`/${locale}/news/${article.slug}`} className="block">
+        {children}
+      </Link>
+    )
+  }
   if (article.sourceUrl) {
     return (
       <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className="block">
@@ -38,7 +46,7 @@ function NewsPage() {
         <div className="max-w-6xl mx-auto">
           {/* Featured article */}
           <FadeIn>
-            <ArticleWrapper article={mockNews[0]}>
+            <ArticleWrapper article={mockNews[0]} locale={locale}>
               <article className="grid lg:grid-cols-2 gap-0 border border-bark mb-8 group">
                 <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
                   <Image
@@ -89,7 +97,7 @@ function NewsPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {mockNews.slice(1).map((article, i) => (
               <FadeIn key={article._id} delay={i * 0.06} as="article">
-                <ArticleWrapper article={article}>
+                <ArticleWrapper article={article} locale={locale}>
                   <div className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
