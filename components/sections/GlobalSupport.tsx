@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { useLocale } from 'next-intl'
 import FadeIn from '@/components/ui/FadeIn'
 
@@ -177,6 +178,26 @@ export default function GlobalSupport() {
               ))}
             </div>
           </div>
+        </FadeIn>
+
+        {/* Petition banner image */}
+        <FadeIn delay={0.12}>
+          <a
+            href={PETITION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mb-8 rounded-2xl overflow-hidden hover:opacity-90 transition-opacity"
+            aria-label="Sign the petition — Let Minh Tuệ Walk in Peace"
+          >
+            <Image
+              src="/petition-banner.jpg"
+              alt="Let Minh Tuệ Walk in Peace — Sign the Petition on Change.org"
+              width={1024}
+              height={1024}
+              className="w-full h-auto object-contain"
+              sizes="(max-width: 768px) 100vw, 800px"
+            />
+          </a>
         </FadeIn>
 
         {/* CTA box */}
