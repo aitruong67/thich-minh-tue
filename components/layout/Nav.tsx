@@ -68,12 +68,11 @@ export default function Nav() {
           aria-label="Minh Tuệ Archive — Trang chủ"
         >
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt="Minh Tuệ Archive"
             width={120}
             height={48}
             className="h-10 w-auto object-contain transition-opacity group-hover:opacity-90"
-            style={{ mixBlendMode: 'multiply' }}
             priority
           />
         </Link>

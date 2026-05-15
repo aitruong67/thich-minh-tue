@@ -28,12 +28,11 @@ export default function Footer() {
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="mb-4">
                 <Image
-                  src="/logo.jpg"
+                  src="/logo.png"
                   alt="Minh Tuệ Archive"
                   width={160}
                   height={64}
                   className="h-14 w-auto object-contain"
-                  style={{ mixBlendMode: 'multiply' }}
                 />
               </div>
               <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs">
