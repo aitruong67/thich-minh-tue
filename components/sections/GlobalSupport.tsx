@@ -101,7 +101,7 @@ export default function GlobalSupport() {
     : 'Sign the petition to protect Minh Tuệ\'s right to walk in peace! #TMTWalk4Peace')
 
   return (
-    <section className="bg-gray-50 text-parchment overflow-hidden">
+    <section className="bg-[#0c0c10] text-white overflow-hidden">
 
       {/* Top accent */}
       <div className="h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent" />
@@ -109,7 +109,7 @@ export default function GlobalSupport() {
       {/* Urgent badge */}
       <div className="flex justify-center pt-10 pb-4">
         <FadeIn>
-          <span className="inline-flex items-center gap-2 font-ui text-[0.65rem] uppercase tracking-[0.16em] text-red-600 border border-red-300 px-4 py-2 rounded-full bg-red-50 animate-pulse">
+          <span className="inline-flex items-center gap-2 font-ui text-[0.65rem] uppercase tracking-[0.16em] text-red-400 border border-red-500/40 px-4 py-2 rounded-full bg-red-500/10 animate-pulse">
             {c.urgentBadge}
           </span>
         </FadeIn>
@@ -120,10 +120,10 @@ export default function GlobalSupport() {
         {/* Hero heading */}
         <FadeIn>
           <div className="text-center mb-14">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-parchment leading-tight mb-5 max-w-4xl mx-auto">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-5 max-w-4xl mx-auto">
               {c.heading}
             </h2>
-            <p className="font-body text-ash text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="font-body text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
               {c.subheading}
             </p>
           </div>
@@ -131,9 +131,9 @@ export default function GlobalSupport() {
 
         {/* Situation box */}
         <FadeIn delay={0.1}>
-          <div className="border border-red-200 bg-red-500/5 rounded-xl p-6 sm:p-8 mb-12">
-            <p className="font-ui text-[0.65rem] uppercase tracking-[0.16em] text-red-600 mb-3">{c.situation}</p>
-            <p className="font-body text-ash leading-relaxed">{c.situationText}</p>
+          <div className="border border-red-500/30 bg-red-500/5 rounded-xl p-6 sm:p-8 mb-12">
+            <p className="font-ui text-[0.65rem] uppercase tracking-[0.16em] text-red-400 mb-3">{c.situation}</p>
+            <p className="font-body text-white/75 leading-relaxed">{c.situationText}</p>
           </div>
         </FadeIn>
 
@@ -141,10 +141,10 @@ export default function GlobalSupport() {
         <div className="grid sm:grid-cols-3 gap-5 mb-14">
           {c.whyPoints.map((pt, i) => (
             <FadeIn key={i} delay={i * 0.08}>
-              <div className="border border-gray-200 rounded-xl p-6 bg-white h-full">
+              <div className="border border-white/10 rounded-xl p-6 bg-white/[0.03] h-full">
                 <span className="text-2xl mb-4 block">{pt.icon}</span>
-                <h3 className="font-display text-parchment text-base leading-snug mb-3">{pt.title}</h3>
-                <p className="font-body text-ash text-sm leading-relaxed">{pt.text}</p>
+                <h3 className="font-display text-white text-base leading-snug mb-3">{pt.title}</h3>
+                <p className="font-body text-white/55 text-sm leading-relaxed">{pt.text}</p>
               </div>
             </FadeIn>
           ))}
@@ -153,10 +153,10 @@ export default function GlobalSupport() {
         {/* Pull quote */}
         <FadeIn delay={0.2}>
           <blockquote className="text-center mb-14 px-4">
-            <p className="font-display text-xl sm:text-2xl lg:text-3xl text-parchment italic leading-relaxed mb-4 max-w-3xl mx-auto">
+            <p className="font-display text-xl sm:text-2xl lg:text-3xl text-white/90 italic leading-relaxed mb-4 max-w-3xl mx-auto">
               {c.quote}
             </p>
-            <cite className="font-ui text-[0.65rem] uppercase tracking-[0.14em] text-gray-400 not-italic">
+            <cite className="font-ui text-[0.65rem] uppercase tracking-[0.14em] text-white/35 not-italic">
               {c.quoteSource}
             </cite>
           </blockquote>
@@ -165,14 +165,14 @@ export default function GlobalSupport() {
         {/* Stats */}
         <FadeIn delay={0.1}>
           <div className="mb-14">
-            <p className="font-ui text-[0.65rem] uppercase tracking-[0.16em] text-gray-400 text-center mb-6">{c.statsTitle}</p>
+            <p className="font-ui text-[0.65rem] uppercase tracking-[0.16em] text-white/35 text-center mb-6">{c.statsTitle}</p>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-xl overflow-hidden">
               {c.stats.map(({ value, suffix, label }) => (
-                <div key={label} className="bg-gray-50 px-6 py-8 text-center">
-                  <p className="font-display text-3xl sm:text-4xl text-red-600 font-bold mb-2">
+                <div key={label} className="bg-[#0c0c10] px-6 py-8 text-center">
+                  <p className="font-display text-3xl sm:text-4xl text-red-400 font-bold mb-2">
                     <Counter target={value} suffix={suffix} />
                   </p>
-                  <p className="font-ui text-[0.6rem] uppercase tracking-[0.12em] text-gray-500">{label}</p>
+                  <p className="font-ui text-[0.6rem] uppercase tracking-[0.12em] text-white/40">{label}</p>
                 </div>
               ))}
             </div>
@@ -181,11 +181,11 @@ export default function GlobalSupport() {
 
         {/* CTA box */}
         <FadeIn delay={0.15}>
-          <div className="border border-gray-200 rounded-2xl overflow-hidden">
+          <div className="border border-white/15 rounded-2xl overflow-hidden">
             {/* Top section */}
-            <div className="bg-white p-8 sm:p-10 text-center border-b border-gray-200">
-              <h3 className="font-display text-2xl sm:text-3xl text-parchment mb-4">{c.ctaTitle}</h3>
-              <p className="font-body text-ash leading-relaxed max-w-2xl mx-auto mb-8">
+            <div className="bg-white/[0.04] p-8 sm:p-10 text-center border-b border-white/10">
+              <h3 className="font-display text-2xl sm:text-3xl text-white mb-4">{c.ctaTitle}</h3>
+              <p className="font-body text-white/60 leading-relaxed max-w-2xl mx-auto mb-8">
                 {c.ctaBody}
               </p>
 
@@ -194,7 +194,7 @@ export default function GlobalSupport() {
                 href={PETITION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-500 text-parchment font-ui text-sm uppercase tracking-[0.12em] rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-600/30 mb-4"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-ui text-sm uppercase tracking-[0.12em] rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-600/30 mb-4"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -204,11 +204,11 @@ export default function GlobalSupport() {
 
               {/* Share row */}
               <div className="flex items-center justify-center gap-3 mt-6">
-                <span className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-gray-400">{c.ctaShare}:</span>
+                <span className="font-ui text-[0.6rem] uppercase tracking-[0.14em] text-white/30">{c.ctaShare}:</span>
                 <a
                   href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
                   target="_blank" rel="noopener noreferrer"
-                  className="p-2 border border-gray-200 hover:border-gray-400 text-gray-500 hover:text-white transition-colors rounded-lg"
+                  className="p-2 border border-white/15 hover:border-white/40 text-white/40 hover:text-white transition-colors rounded-lg"
                   aria-label="Share on X"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -218,7 +218,7 @@ export default function GlobalSupport() {
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
                   target="_blank" rel="noopener noreferrer"
-                  className="p-2 border border-gray-200 hover:border-gray-400 text-gray-500 hover:text-white transition-colors rounded-lg"
+                  className="p-2 border border-white/15 hover:border-white/40 text-white/40 hover:text-white transition-colors rounded-lg"
                   aria-label="Share on Facebook"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -230,7 +230,7 @@ export default function GlobalSupport() {
 
             {/* Disclaimer */}
             <div className="px-8 py-4 text-center">
-              <p className="font-ui text-[0.58rem] uppercase tracking-[0.12em] text-gray-300">{c.disclaimer}</p>
+              <p className="font-ui text-[0.58rem] uppercase tracking-[0.12em] text-white/20">{c.disclaimer}</p>
             </div>
           </div>
         </FadeIn>

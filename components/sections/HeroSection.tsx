@@ -17,8 +17,12 @@ export default function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative min-h-screen flex items-start overflow-hidden"
     >
-      {/* Background — warm cream */}
-      <div className="absolute inset-0 bg-[#FEF8EE]" aria-hidden="true" />
+      {/* Background gradient */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(160deg, #3D0808 0%, #5C0F0F 45%, #420B0B 100%)' }}
+        aria-hidden="true"
+      />
 
       {/* Hero photo — full bleed on mobile, right half on desktop */}
       <div className="absolute inset-0 lg:left-[45%]" aria-hidden="true">
@@ -30,15 +34,19 @@ export default function HeroSection() {
           sizes="(max-width: 1024px) 100vw, 55vw"
           priority
         />
-        {/* Mobile: light overlay so text stays readable */}
+        {/* Mobile: heavier overlay over full photo */}
         <div
           className="absolute inset-0 lg:hidden"
-          style={{ background: 'linear-gradient(to top, rgba(254,248,238,0.92) 35%, rgba(254,248,238,0.6) 70%, rgba(254,248,238,0.3) 100%)' }}
+          style={{ background: 'linear-gradient(to top, #3D0808 30%, rgba(61,8,8,0.75) 70%, rgba(61,8,8,0.5) 100%)' }}
         />
         {/* Desktop: fade from left */}
         <div
           className="absolute inset-0 hidden lg:block"
-          style={{ background: 'linear-gradient(to right, #FEF8EE 0%, rgba(254,248,238,0.85) 45%, rgba(254,248,238,0.1) 100%)' }}
+          style={{ background: 'linear-gradient(to right, #3D0808 0%, rgba(61,8,8,0.6) 50%, rgba(61,8,8,0.1) 100%)' }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, #420B0B 0%, transparent 35%)' }}
         />
       </div>
 
@@ -83,7 +91,7 @@ export default function HeroSection() {
             initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: stagger * 1 }}
-            className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl text-parchment leading-[1.1] mb-6 tracking-tight"
+            className="font-display text-4xl sm:text-5xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6 tracking-tight"
           >
             {t('titleLine1')}
             <br />
@@ -95,7 +103,7 @@ export default function HeroSection() {
             initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: stagger * 2 }}
-            className="font-body text-ash text-base sm:text-lg leading-relaxed mb-10 max-w-xl"
+            className="font-body text-white/65 text-base sm:text-lg leading-relaxed mb-10 max-w-xl"
           >
             {t('description')}
           </motion.p>
@@ -112,7 +120,9 @@ export default function HeroSection() {
             </Link>
             <Link
               href={`/${locale}/journey`}
-              className="btn-ghost"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 border border-ember/70 text-ember
+                         font-ui text-label uppercase tracking-[0.12em] rounded transition-all duration-300
+                         hover:bg-ember hover:text-crimson hover:-translate-y-0.5"
             >
               {t('ctaSecondary')}
             </Link>
@@ -123,7 +133,7 @@ export default function HeroSection() {
             initial={prefersReduced ? {} : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: stagger * 4 }}
-            className="grid grid-cols-3 gap-3 sm:gap-6 border-t border-bark pt-10"
+            className="grid grid-cols-3 gap-3 sm:gap-6 border-t border-white/10 pt-10"
           >
             {[
               { value: '2,100+', label: t('stat1') },
@@ -132,7 +142,7 @@ export default function HeroSection() {
             ].map(({ value, label }) => (
               <div key={label} className="stat-chip">
                 <p className="font-display text-2xl sm:text-3xl lg:text-4xl text-ember leading-none">{value}</p>
-                <p className="font-ui text-[0.6rem] sm:text-label uppercase tracking-[0.1em] text-ash text-center leading-tight mt-1">{label}</p>
+                <p className="font-ui text-[0.6rem] sm:text-label uppercase tracking-[0.1em] text-white/45 text-center leading-tight mt-1">{label}</p>
               </div>
             ))}
           </motion.div>
@@ -147,8 +157,8 @@ export default function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
         aria-hidden="true"
       >
-        <span className="font-ui text-[0.6rem] uppercase tracking-[0.16em] text-ash/50">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-bark to-transparent" />
+        <span className="font-ui text-[0.6rem] uppercase tracking-[0.16em] text-white/30">Scroll</span>
+        <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent" />
       </motion.div>
     </section>
   )
