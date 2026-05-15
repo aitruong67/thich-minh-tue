@@ -10,6 +10,7 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 export default function ContactPage() {
   const t = useTranslations('contact')
   const [status, setStatus] = useState<Status>('idle')
+  const [errorDetail, setErrorDetail] = useState('')
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -25,13 +26,16 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(form),
       })
+      const data = await res.json().catch(() => ({}))
       if (res.ok) {
         setStatus('success')
         setForm({ name: '', email: '', subject: '', message: '' })
       } else {
+        setErrorDetail(data?.error || data?.errors?.map((e: {message:string}) => e.message).join(', ') || `HTTP ${res.status}`)
         setStatus('error')
       }
-    } catch {
+    } catch (err) {
+      setErrorDetail(err instanceof Error ? err.message : 'Network error')
       setStatus('error')
     }
   }
@@ -133,7 +137,9 @@ export default function ContactPage() {
                 </div>
 
                 {status === 'error' && (
-                  <p className="font-body text-sm text-ember">{t('error')}</p>
+                  <p className="font-body text-sm text-ember">
+                    {t('error')}{errorDetail ? ` (${errorDetail})` : ''}
+                  </p>
                 )}
 
                 <button
