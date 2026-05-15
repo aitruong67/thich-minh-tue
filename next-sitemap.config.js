@@ -1,17 +1,11 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://thichminhtue.archive.vn',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://minhtuedhutanga.com',
   generateRobotsTxt: true,
   generateIndexSitemap: true,
   alternateRefs: [
-    { href: 'https://thichminhtue.archive.vn/vi', hreflang: 'vi' },
-    { href: 'https://thichminhtue.archive.vn/en', hreflang: 'en' },
+    { href: 'https://minhtuedhutanga.com/vi', hreflang: 'vi' },
+    { href: 'https://minhtuedhutanga.com/en', hreflang: 'en' },
   ],
-  robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://thichminhdue.archive.vn/video-sitemap.xml',
-      'https://thichminhdue.archive.vn/image-sitemap.xml',
-    ],
-  },
   exclude: ['/api/*'],
 }

@@ -1,6 +1,13 @@
+import type { Metadata } from 'next'
 import { useTranslations, useLocale } from 'next-intl'
 import FadeIn from '@/components/ui/FadeIn'
 import { mockWaypoints } from '@/lib/mock'
+
+export const metadata: Metadata = {
+  title: 'The Journey — Minh Tuệ Archive',
+  description: 'Trace every step of Minh Tuệ\'s 2,100 km barefoot pilgrimage across Vietnam — 30+ provinces, 7 months walking, and a journey that captured the hearts of millions.',
+  openGraph: { title: '2,100 km on Bare Feet — The Journey of Minh Tuệ', description: 'Interactive waypoint timeline of the historic pilgrimage across Vietnam.' },
+}
 
 function JourneyPage() {
   const t = useTranslations()

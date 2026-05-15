@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import type { Metadata } from 'next'
 import { useTranslations, useLocale } from 'next-intl'
+
+export const metadata: Metadata = {
+  title: 'News & Articles — Minh Tuệ Archive',
+  description: 'International press coverage of Minh Tuệ — BBC, Radio Free Asia, Buddhistdoor Global, Lion\'s Roar, AsiaNews and more. Full archive of journalism documenting his pilgrimage.',
+  openGraph: { title: 'News & Articles — Minh Tuệ Archive', description: 'International press coverage from BBC, RFA, Buddhistdoor, Lion\'s Roar and more.' },
+}
 import Image from 'next/image'
 import Link from 'next/link'
 import FadeIn from '@/components/ui/FadeIn'
 import { mockNews } from '@/lib/mock'
 import type { NewsArticle } from '@/lib/types'
+
+const PAGE_SIZE = 6
 
 function ArticleWrapper({ article, locale, children }: { article: NewsArticle; locale: string; children: React.ReactNode }) {
   const hasBody = !!(article.body_vi || article.body_en)
@@ -28,6 +37,7 @@ function ArticleWrapper({ article, locale, children }: { article: NewsArticle; l
 function NewsPage() {
   const t = useTranslations()
   const locale = useLocale()
+  const [visible, setVisible] = useState(PAGE_SIZE)
 
   return (
     <div className="pt-16">
@@ -95,7 +105,7 @@ function NewsPage() {
 
           {/* Remaining articles */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mockNews.slice(1).map((article, i) => (
+            {mockNews.slice(1, visible).map((article, i) => (
               <FadeIn key={article._id} delay={i * 0.06} as="article">
                 <ArticleWrapper article={article} locale={locale}>
                   <div className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
@@ -143,6 +153,17 @@ function NewsPage() {
               </FadeIn>
             ))}
           </div>
+          {/* Load more */}
+          {visible < mockNews.length && (
+            <div className="col-span-full flex justify-center mt-4">
+              <button
+                onClick={() => setVisible(v => v + PAGE_SIZE)}
+                className="btn-ghost"
+              >
+                {locale === 'vi' ? `Xem thêm (${mockNews.length - visible} bài)` : `Load more (${mockNews.length - visible} articles)`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>

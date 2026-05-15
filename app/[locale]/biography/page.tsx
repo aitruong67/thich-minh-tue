@@ -1,7 +1,14 @@
+import type { Metadata } from 'next'
 import { useTranslations, useLocale } from 'next-intl'
 import Image from 'next/image'
 import FadeIn from '@/components/ui/FadeIn'
 import { mockBiographyChapters } from '@/lib/mock'
+
+export const metadata: Metadata = {
+  title: 'Biography — Minh Tuệ Archive',
+  description: 'The life and journey of Minh Tuệ (born Lê Anh Tú, 1981) — from land surveyor in Gia Lai to Theravāda Buddhist ascetic who walked the length of Vietnam barefoot and inspired millions.',
+  openGraph: { title: 'Biography of Minh Tuệ', description: 'From land surveyor to barefoot pilgrim — the full story of Minh Tuệ\'s spiritual journey across Vietnam and beyond.' },
+}
 
 function BiographyPage() {
   const t = useTranslations()
