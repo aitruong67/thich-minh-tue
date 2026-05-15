@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations, useLocale } from 'next-intl'
 import LangToggle from '@/components/ui/LangToggle'
-import Lotus from '@/components/ui/Lotus'
 
 const navLinks = [
   { href: '/',          labelKey: 'nav.home' },
@@ -64,13 +64,19 @@ export default function Nav() {
         {/* Logo */}
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 group flex-shrink-0"
+          className="flex-shrink-0 group"
           aria-label="Minh Tuệ Archive — Trang chủ"
         >
-          <Lotus size={26} />
-          <span className="font-display text-lg md:text-xl text-ember italic tracking-wide group-hover:text-white transition-colors">
-            Minh Tuệ
-          </span>
+          <div className="bg-white rounded-lg px-2 py-1 transition-opacity group-hover:opacity-90">
+            <Image
+              src="/logo.jpg"
+              alt="Minh Tuệ Archive"
+              width={120}
+              height={48}
+              className="h-10 w-auto object-contain"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop links */}

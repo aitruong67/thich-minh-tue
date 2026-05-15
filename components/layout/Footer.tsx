@@ -1,6 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
-import Lotus from '@/components/ui/Lotus'
 
 export default function Footer() {
   const t = useTranslations()
@@ -26,11 +26,16 @@ export default function Footer() {
 
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <Lotus size={32} />
-                <span className="font-display text-xl text-ember italic">
-                  Minh Tuệ
-                </span>
+              <div className="mb-4">
+                <div className="inline-block bg-white rounded-lg px-3 py-2">
+                  <Image
+                    src="/logo.jpg"
+                    alt="Minh Tuệ Archive"
+                    width={160}
+                    height={64}
+                    className="h-14 w-auto object-contain"
+                  />
+                </div>
               </div>
               <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs">
                 {t('footer.description')}
