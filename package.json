@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "node scripts/patch-ua-parser.js",
-    "postbuild": "next-sitemap"
+    "postinstall": "node scripts/patch-ua-parser.js"
   },
   "dependencies": {
     "@sanity/client": "^6.21.3",
