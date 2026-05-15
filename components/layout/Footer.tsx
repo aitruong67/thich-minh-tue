@@ -30,9 +30,9 @@ export default function Footer() {
                 <Image
                   src="/logo.png"
                   alt="Minh Tuệ Archive"
-                  width={160}
-                  height={64}
-                  className="h-14 w-auto object-contain"
+                  width={280}
+                  height={112}
+                  className="h-24 w-auto object-contain"
                 />
               </div>
               <p className="font-body text-white/45 text-sm leading-relaxed max-w-xs">

@@ -70,9 +70,9 @@ export default function Nav() {
           <Image
             src="/logo.png"
             alt="Minh Tuệ Archive"
-            width={120}
-            height={48}
-            className="h-10 w-auto object-contain transition-opacity group-hover:opacity-90"
+            width={200}
+            height={80}
+            className="h-12 md:h-14 w-auto object-contain transition-opacity group-hover:opacity-90"
             priority
           />
         </Link>
