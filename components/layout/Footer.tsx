@@ -13,6 +13,7 @@ export default function Footer() {
     { href: `/${locale}/quotes`,    label: t('nav.quotes') },
     { href: `/${locale}/journey`,   label: t('nav.journey') },
     { href: `/${locale}/news`,      label: t('nav.news') },
+    { href: `/${locale}/contact`,   label: t('nav.contact') },
   ]
 
   return (

@@ -9,7 +9,8 @@
     "journey": "Hành trình",
     "news": "Tin tức",
     "openMenu": "Mở menu",
-    "closeMenu": "Đóng menu"
+    "closeMenu": "Đóng menu",
+    "contact": "Liên hệ"
   },
   "hero": {
     "eyebrow": "Lưu trữ hành trình tâm linh",
@@ -132,6 +133,36 @@
       "minRead": "phút đọc",
       "by": "Bởi"
     }
+  },
+  "contact": {
+    "eyebrow": "Liên hệ",
+    "heading": "Liên Hệ Với Chúng Tôi",
+    "description": "Bạn có câu hỏi, câu chuyện muốn chia sẻ, hoặc muốn đóng góp cho kho lưu trữ? Chúng tôi rất mong được lắng nghe bạn.",
+    "info": {
+      "title": "Về kho lưu trữ này",
+      "body": "Đây là kho tư liệu lưu trữ phi lợi nhuận dành riêng cho việc gìn giữ hành trình tâm linh của Thầy Minh Tuệ. Chúng tôi chào đón mọi đóng góp, chỉnh sửa và câu chuyện từ cộng đồng.",
+      "responseTime": "Thời gian phản hồi",
+      "responseValue": "Trong vòng 2–3 ngày làm việc",
+      "language": "Ngôn ngữ",
+      "languageValue": "Tiếng Việt & Tiếng Anh"
+    },
+    "form": {
+      "name": "Họ tên",
+      "namePlaceholder": "Tên của bạn",
+      "email": "Email",
+      "emailPlaceholder": "email@cua-ban.com",
+      "subject": "Chủ đề",
+      "subjectPlaceholder": "Nội dung về vấn đề gì?",
+      "message": "Tin nhắn",
+      "messagePlaceholder": "Chia sẻ tin nhắn, câu chuyện hoặc câu hỏi của bạn…",
+      "send": "Gửi tin nhắn",
+      "sending": "Đang gửi…"
+    },
+    "success": {
+      "heading": "Đã nhận được tin nhắn",
+      "body": "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vài ngày tới."
+    },
+    "error": "Đã có lỗi xảy ra. Vui lòng thử lại."
   },
   "footer": {
     "description": "Tư liệu lưu trữ phi lợi nhuận về hành trình tâm linh của Thầy Minh Tuệ — lưu giữ để truyền cảm hứng cho các thế hệ mai sau.",
