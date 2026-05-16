@@ -1,26 +1,28 @@
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+const PATHS = [
+  '/vi/videos', '/en/videos',
+  '/vi/gallery', '/en/gallery',
+  '/vi/news', '/en/news',
+  '/vi/quotes', '/en/quotes',
+  '/vi', '/en',
+]
+
+function handle(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get('secret')
   if (secret !== process.env.REVALIDATE_SECRET) {
     return NextResponse.json({ message: 'Invalid secret' }, { status: 401 })
   }
 
   try {
-    // Revalidate all content-driven pages
-    revalidatePath('/vi/gallery')
-    revalidatePath('/en/gallery')
-    revalidatePath('/vi/videos')
-    revalidatePath('/en/videos')
-    revalidatePath('/vi/news')
-    revalidatePath('/en/news')
-    revalidatePath('/vi/quotes')
-    revalidatePath('/en/quotes')
-    revalidatePath('/vi')
-    revalidatePath('/en')
-    return NextResponse.json({ revalidated: true })
+    for (const path of PATHS) revalidatePath(path)
+    revalidateTag('sanity')
+    return NextResponse.json({ revalidated: true, paths: PATHS })
   } catch {
     return NextResponse.json({ message: 'Error revalidating' }, { status: 500 })
   }
 }
+
+export const GET = handle
+export const POST = handle
