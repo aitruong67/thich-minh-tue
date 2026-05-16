@@ -10,6 +10,7 @@ export default defineConfig({
   title: 'Minh Tuệ Archive',
   projectId: '6bzvjl52',
   dataset: 'production',
+  basePath: '/studio',
   plugins: [
     structureTool(),
     visionTool(),
