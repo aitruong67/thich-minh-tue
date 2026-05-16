@@ -1,7 +1,7 @@
 import GalleryClient from './GalleryClient'
 import { fetchPhotos } from '@/lib/sanity'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function GalleryPage() {
   const photos = await fetchPhotos()

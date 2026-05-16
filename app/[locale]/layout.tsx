@@ -12,7 +12,7 @@ import '../globals.css'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin', 'vietnamese'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '600'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
@@ -20,15 +20,15 @@ const cormorant = Cormorant_Garamond({
 
 const lora = Lora({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: ['400', '700'],
+  style: ['normal'],
   variable: '--font-lora',
   display: 'swap',
 })
 
 const beVietnam = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '600'],
   variable: '--font-be-vietnam',
   display: 'swap',
 })
