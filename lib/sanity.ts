@@ -53,8 +53,7 @@ export async function fetchPhotos(): Promise<Photo[]> {
       width: (doc.dimensions as { width: number } | undefined)?.width ?? 1200,
       height: (doc.dimensions as { height: number } | undefined)?.height ?? 800,
     }))
-    // Merge: Sanity photos first, then curated mock photos
-    return [...sanityPhotos, ...mockPhotos]
+    return sanityPhotos.length ? sanityPhotos : mockPhotos
   } catch {
     return mockPhotos
   }
@@ -95,8 +94,7 @@ export async function fetchVideos(): Promise<Video[]> {
       tags: (doc.tags as string[]) ?? [],
       hasTranscript: (doc.hasTranscript as boolean) ?? false,
     }))
-    // Merge: Sanity videos first, then original mock videos
-    return [...sanityVideos, ...mockVideos]
+    return sanityVideos.length ? sanityVideos : mockVideos
   } catch {
     return mockVideos
   }
