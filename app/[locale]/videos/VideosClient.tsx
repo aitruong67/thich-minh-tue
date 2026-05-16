@@ -59,13 +59,32 @@ export default function VideosClient({ videos }: { videos: Video[] }) {
                 <Link href={`/${locale}/videos/${video.slug}`} className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-bark/30">
-                    {(video.thumbnailUrl || video.youtubeId) ? (
+                    {video.thumbnailUrl ? (
+                      // Explicit thumbnail (custom image or YouTube auto-URL)
                       <Image
-                        src={video.thumbnailUrl ?? `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                        src={video.thumbnailUrl}
                         alt={locale === 'vi' ? video.title_vi : video.title_en}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : video.youtubeId ? (
+                      // YouTube: use auto-generated thumbnail
+                      <Image
+                        src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                        alt={locale === 'vi' ? video.title_vi : video.title_en}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : video.videoUrl ? (
+                      // Own video: browser renders first frame automatically
+                      <video
+                        src={video.videoUrl}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        preload="metadata"
+                        muted
+                        playsInline
                       />
                     ) : (
                       <div className="absolute inset-0 bg-bark/20 flex items-center justify-center">

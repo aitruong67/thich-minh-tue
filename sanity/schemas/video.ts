@@ -34,13 +34,18 @@ export default defineType({
     }),
     // ──────────────────────────────────────────────────────────────────────
 
-    defineField({ name: 'thumbnailUrl', title: 'Thumbnail URL', type: 'url', description: 'Leave blank to use YouTube default thumbnail' }),
+    defineField({
+      name: 'thumbnailUrl',
+      title: 'Thumbnail URL (optional)',
+      type: 'url',
+      description: 'Optional. YouTube thumbnails are auto-generated. Own videos use the first frame automatically.',
+    }),
     defineField({
       name: 'thumbnailImage',
-      title: 'Thumbnail image (upload)',
+      title: 'Thumbnail image (optional)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Upload a thumbnail image for own videos',
+      description: 'Optional custom thumbnail image. Leave blank to use the video\'s first frame.',
     }),
     defineField({ name: 'description_vi', title: 'Description (Vietnamese)', type: 'text', rows: 3 }),
     defineField({ name: 'description_en', title: 'Description (English)', type: 'text', rows: 3 }),
