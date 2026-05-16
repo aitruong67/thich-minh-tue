@@ -37,8 +37,7 @@ export async function fetchPhotos(): Promise<Photo[]> {
       {},
       { next: { revalidate: 60 } }
     )
-    if (!docs?.length) return mockPhotos
-    return docs.map((doc: Record<string, unknown>): Photo => ({
+    const sanityPhotos = (docs ?? []).map((doc: Record<string, unknown>): Photo => ({
       _id: doc._id as string,
       slug: (doc.slug as string) ?? (doc._id as string),
       title_vi: (doc.title_vi as string) ?? (doc.title_en as string),
@@ -54,6 +53,8 @@ export async function fetchPhotos(): Promise<Photo[]> {
       width: (doc.dimensions as { width: number } | undefined)?.width ?? 1200,
       height: (doc.dimensions as { height: number } | undefined)?.height ?? 800,
     }))
+    // Merge: Sanity photos first, then curated mock photos
+    return [...sanityPhotos, ...mockPhotos]
   } catch {
     return mockPhotos
   }
