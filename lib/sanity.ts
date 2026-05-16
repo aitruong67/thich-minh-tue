@@ -77,8 +77,7 @@ export async function fetchVideos(): Promise<Video[]> {
       {},
       { next: { revalidate: 60 } }
     )
-    if (!docs?.length) return mockVideos
-    return docs.map((doc: Record<string, unknown>): Video => ({
+    const sanityVideos = (docs ?? []).map((doc: Record<string, unknown>): Video => ({
       _id: doc._id as string,
       slug: (doc.slug as string) ?? (doc._id as string),
       title_vi: doc.title_vi as string,
@@ -96,6 +95,8 @@ export async function fetchVideos(): Promise<Video[]> {
       tags: (doc.tags as string[]) ?? [],
       hasTranscript: (doc.hasTranscript as boolean) ?? false,
     }))
+    // Merge: Sanity videos first, then original mock videos
+    return [...sanityVideos, ...mockVideos]
   } catch {
     return mockVideos
   }
