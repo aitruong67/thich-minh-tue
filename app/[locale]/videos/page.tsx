@@ -59,16 +59,18 @@ export default function VideosPage() {
                 <Link href={`/${locale}/videos/${video.slug}`} className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
                   {/* Thumbnail */}
                   <div className="relative aspect-video overflow-hidden bg-bark/30">
-                    {video.thumbnailUrl ? (
+                    {(video.thumbnailUrl || video.youtubeId) ? (
                       <Image
-                        src={video.thumbnailUrl}
+                        src={video.thumbnailUrl ?? `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                         alt={locale === 'vi' ? video.title_vi : video.title_en}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-bark/20" />
+                      <div className="absolute inset-0 bg-bark/20 flex items-center justify-center">
+                        <svg className="w-10 h-10 text-bark" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
                     )}
                     {/* Duration badge — only shown when available */}
                     {video.duration && (

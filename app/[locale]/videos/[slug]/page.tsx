@@ -60,7 +60,17 @@ export default function VideoDetailPage({ params }: Props) {
         <FadeIn>
           {/* Player */}
           <div className="relative aspect-video bg-gray-900 rounded-xl overflow-hidden mb-8 shadow-xl">
-            {playing ? (
+            {video.videoUrl ? (
+              /* Native video player */
+              <video
+                src={video.videoUrl}
+                controls
+                className="absolute inset-0 w-full h-full"
+                poster={video.thumbnailUrl}
+                preload="metadata"
+              />
+            ) : video.youtubeId && playing ? (
+              /* YouTube embed */
               <iframe
                 src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0`}
                 title={title}
@@ -69,19 +79,22 @@ export default function VideoDetailPage({ params }: Props) {
                 className="absolute inset-0 w-full h-full"
               />
             ) : (
+              /* Thumbnail click-to-play */
               <button
                 onClick={() => setPlaying(true)}
                 className="absolute inset-0 w-full h-full group"
                 aria-label={`${t('page.videos.watch')}: ${title}`}
               >
-                <Image
-                  src={video.thumbnailUrl || `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-                  alt={title}
-                  fill
-                  className="object-cover group-hover:opacity-90 transition-opacity"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 800px"
-                />
+                {video.thumbnailUrl && (
+                  <Image
+                    src={video.thumbnailUrl}
+                    alt={title}
+                    fill
+                    className="object-cover group-hover:opacity-90 transition-opacity"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 800px"
+                  />
+                )}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
                   <div className="bg-red-600 rounded-full p-5 group-hover:scale-110 transition-transform shadow-2xl">
                     <svg className="w-10 h-10 text-white translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -129,18 +142,20 @@ export default function VideoDetailPage({ params }: Props) {
             </div>
           )}
 
-          {/* YouTube CTA */}
-          <a
-            href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 text-white font-ui text-label uppercase tracking-[0.12em] rounded hover:bg-gray-700 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-            </svg>
-            {locale === 'vi' ? 'Xem trên YouTube' : 'Watch on YouTube'}
-          </a>
+          {/* YouTube link — only for YouTube videos */}
+          {video.youtubeId && (
+            <a
+              href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-gray-900 text-white font-ui text-label uppercase tracking-[0.12em] rounded hover:bg-gray-700 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              {locale === 'vi' ? 'Xem trên YouTube' : 'Watch on YouTube'}
+            </a>
+          )}
         </FadeIn>
       </div>
 

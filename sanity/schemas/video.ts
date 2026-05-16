@@ -17,8 +17,31 @@ export default defineType({
       options: { list: ['pilgrimage', 'teaching', 'interview', 'news'], layout: 'radio' },
       validation: r => r.required(),
     }),
-    defineField({ name: 'youtubeId', title: 'YouTube Video ID', type: 'string', description: 'The part after ?v= in the YouTube URL', validation: r => r.required() }),
+
+    // ── Source — either YouTube OR own video file ──────────────────────────
+    defineField({
+      name: 'youtubeId',
+      title: 'YouTube Video ID (optional)',
+      type: 'string',
+      description: 'The part after ?v= in the YouTube URL, e.g. dQw4w9WgXcQ',
+    }),
+    defineField({
+      name: 'videoFile',
+      title: 'Upload your own video (optional)',
+      type: 'file',
+      description: 'Upload an MP4/WebM file. Used when no YouTube ID is set.',
+      options: { accept: 'video/*' },
+    }),
+    // ──────────────────────────────────────────────────────────────────────
+
     defineField({ name: 'thumbnailUrl', title: 'Thumbnail URL', type: 'url', description: 'Leave blank to use YouTube default thumbnail' }),
+    defineField({
+      name: 'thumbnailImage',
+      title: 'Thumbnail image (upload)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Upload a thumbnail image for own videos',
+    }),
     defineField({ name: 'description_vi', title: 'Description (Vietnamese)', type: 'text', rows: 3 }),
     defineField({ name: 'description_en', title: 'Description (English)', type: 'text', rows: 3 }),
     defineField({ name: 'duration', title: 'Duration', type: 'string', description: 'e.g. 12:34' }),
@@ -28,6 +51,6 @@ export default defineType({
   ],
   orderings: [{ title: 'Date (newest)', name: 'dateDesc', by: [{ field: 'date', direction: 'desc' }] }],
   preview: {
-    select: { title: 'title_en', subtitle: 'category', media: 'thumbnailUrl' },
+    select: { title: 'title_en', subtitle: 'category' },
   },
 })

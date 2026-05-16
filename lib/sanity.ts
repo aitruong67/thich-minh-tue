@@ -68,7 +68,10 @@ export async function fetchVideos(): Promise<Video[]> {
         _id,
         "slug": slug.current,
         title_vi, title_en, category, youtubeId,
-        thumbnailUrl, description_vi, description_en,
+        "videoUrl": videoFile.asset->url,
+        thumbnailUrl,
+        "thumbnailImageUrl": thumbnailImage.asset->url,
+        description_vi, description_en,
         duration, date, tags, hasTranscript
       }`,
       {},
@@ -81,8 +84,11 @@ export async function fetchVideos(): Promise<Video[]> {
       title_vi: doc.title_vi as string,
       title_en: doc.title_en as string,
       category: (doc.category as Video['category']) ?? 'news',
-      youtubeId: doc.youtubeId as string,
-      thumbnailUrl: (doc.thumbnailUrl as string) ?? `https://img.youtube.com/vi/${doc.youtubeId}/hqdefault.jpg`,
+      youtubeId: doc.youtubeId as string | undefined,
+      videoUrl: doc.videoUrl as string | undefined,
+      thumbnailUrl: (doc.thumbnailUrl as string)
+        ?? (doc.thumbnailImageUrl as string)
+        ?? (doc.youtubeId ? `https://img.youtube.com/vi/${doc.youtubeId}/hqdefault.jpg` : undefined),
       description_vi: (doc.description_vi as string) ?? '',
       description_en: (doc.description_en as string) ?? '',
       duration: (doc.duration as string) ?? '',

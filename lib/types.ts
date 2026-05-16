@@ -5,7 +5,8 @@ export interface Video {
   title_en: string
   category: 'teaching' | 'interview' | 'pilgrimage' | 'news'
   duration: string
-  youtubeId: string
+  youtubeId?: string        // optional — use for YouTube videos
+  videoUrl?: string         // optional — use for self-hosted videos
   description_vi: string
   description_en: string
   tags: string[]
