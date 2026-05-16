@@ -163,6 +163,46 @@ export async function fetchQuotes(): Promise<Quote[]> {
   }
 }
 
+// ─── Single video by slug ───────────────────────────────────────────────────
+export async function fetchVideoBySlug(slug: string): Promise<Video | null> {
+  try {
+    const doc = await sanityClient.fetch<Record<string, unknown>>(
+      `*[_type == "video" && slug.current == $slug][0] {
+        _id,
+        "slug": slug.current,
+        title_vi, title_en, category, youtubeId,
+        "videoUrl": videoFile.asset->url,
+        thumbnailUrl,
+        "thumbnailImageUrl": thumbnailImage.asset->url,
+        description_vi, description_en,
+        duration, date, tags, hasTranscript
+      }`,
+      { slug }
+    )
+    if (!doc?._id) return null
+    return {
+      _id: doc._id as string,
+      slug: doc.slug as string,
+      title_vi: doc.title_vi as string,
+      title_en: doc.title_en as string,
+      category: (doc.category as Video['category']) ?? 'news',
+      youtubeId: doc.youtubeId as string | undefined,
+      videoUrl: doc.videoUrl as string | undefined,
+      thumbnailUrl: (doc.thumbnailUrl as string)
+        ?? (doc.thumbnailImageUrl as string)
+        ?? (doc.youtubeId ? `https://img.youtube.com/vi/${doc.youtubeId}/hqdefault.jpg` : undefined),
+      description_vi: (doc.description_vi as string) ?? '',
+      description_en: (doc.description_en as string) ?? '',
+      duration: (doc.duration as string) ?? '',
+      date: doc.date as string,
+      tags: (doc.tags as string[]) ?? [],
+      hasTranscript: (doc.hasTranscript as boolean) ?? false,
+    }
+  } catch {
+    return null
+  }
+}
+
 // ─── Biography & Waypoints (still mock — add schemas later) ─────────────────
 export async function fetchBiographyChapters() {
   return mockBiographyChapters
