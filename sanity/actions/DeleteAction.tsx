@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { TrashIcon } from '@sanity/icons'
-import { useDocumentOperation } from 'sanity'
+import { useDocumentOperation, useDocumentPairPermissions } from 'sanity'
 
 interface Props {
   id: string
@@ -10,26 +9,25 @@ interface Props {
 
 export function DeleteAction({ id, type, onComplete }: Props) {
   const { delete: deleteOp } = useDocumentOperation(id, type)
-  const [confirming, setConfirming] = useState(false)
+  const [permissions, isPermissionsLoading] = useDocumentPairPermissions({
+    id,
+    type,
+    permission: 'delete',
+  })
 
-  if (confirming) {
-    return {
-      label: 'Confirm delete?',
-      icon: TrashIcon,
-      tone: 'critical' as const,
-      onHandle: () => {
-        deleteOp.execute()
-        onComplete()
-        setConfirming(false)
-      },
-    }
-  }
+  const isDisabled = isPermissionsLoading || !permissions?.granted || !!deleteOp.disabled
 
   return {
     label: 'Delete',
     icon: TrashIcon,
     tone: 'critical' as const,
-    disabled: !!deleteOp.disabled,
-    onHandle: () => setConfirming(true),
+    disabled: isDisabled,
+    onHandle: () => {
+      // eslint-disable-next-line no-alert
+      if (typeof window !== 'undefined' && window.confirm('Delete this document permanently? This cannot be undone.')) {
+        deleteOp.execute()
+        onComplete()
+      }
+    },
   }
 }

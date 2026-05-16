@@ -24,8 +24,8 @@ export default defineConfig({
   document: {
     actions: (prev, { schemaType }) => {
       if (!DELETABLE_TYPES.includes(schemaType)) return prev
-      // Add our custom Delete button to the visible toolbar
-      return [...prev, DeleteAction]
+      // Put Delete first so it's always visible in the toolbar
+      return [DeleteAction, ...prev]
     },
   },
 })
