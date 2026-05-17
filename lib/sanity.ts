@@ -17,12 +17,12 @@ export const sanityClient = createClient({
   token: process.env.SANITY_API_TOKEN,
 })
 
-// Read-only client — no token, uses CDN for published public content
+// Read-only client — no token, hits API directly (never stale CDN cache)
 const readClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '6bzvjl52',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01',
-  useCdn: true,
+  useCdn: false,
 })
 
 const builder = imageUrlBuilder(sanityClient)
@@ -43,8 +43,7 @@ export async function fetchPhotos(): Promise<Photo[]> {
         alt_vi, alt_en, caption_vi, caption_en,
         year, location, theme, source
       }`,
-      {},
-      { next: { revalidate: 60 } }
+      {}
     )
     const sanityPhotos = (docs ?? []).map((doc: Record<string, unknown>): Photo => ({
       _id: doc._id as string,
@@ -85,8 +84,7 @@ export async function fetchVideos(): Promise<Video[]> {
         description_vi, description_en,
         duration, date, tags, hasTranscript
       }`,
-      {},
-      { next: { revalidate: 60 } }
+      {}
     )
     const sanityVideos = (docs ?? []).map((doc: Record<string, unknown>): Video => ({
       _id: doc._id as string,
@@ -126,8 +124,7 @@ export async function fetchNews(): Promise<NewsArticle[]> {
           coverImageUrl
         )
       }`,
-      {},
-      { next: { revalidate: 60 } }
+      {}
     )
     if (!docs?.length) return mockNews
     return docs.map((doc: Record<string, unknown>): NewsArticle => ({
@@ -156,8 +153,7 @@ export async function fetchQuotes(): Promise<Quote[]> {
       `*[_type == "quote"] | order(_createdAt desc) {
         _id, text_vi, text_en, theme, source, date
       }`,
-      {},
-      { next: { revalidate: 60 } }
+      {}
     )
     if (!docs?.length) return mockQuotes
     return docs.map((doc: Record<string, unknown>): Quote => ({
