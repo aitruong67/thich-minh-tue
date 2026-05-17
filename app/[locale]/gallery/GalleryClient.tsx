@@ -197,12 +197,11 @@ function GalleryCard({ photo, locale, index, onOpen }: {
   const aspectRatio = photo.width / photo.height
 
   return (
-    <FadeIn>
-      <button
-        onClick={() => onOpen(index)}
-        className="group w-full text-left bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
-        aria-label={`View: ${title}`}
-      >
+    <button
+      onClick={() => onOpen(index)}
+      className="group w-full text-left bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+      aria-label={`View: ${title}`}
+    >
         {/* Image */}
         <div
           className="relative overflow-hidden bg-gray-100"
@@ -262,6 +261,5 @@ function GalleryCard({ photo, locale, index, onOpen }: {
           )}
         </div>
       </button>
-    </FadeIn>
   )
 }
