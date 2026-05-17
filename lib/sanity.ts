@@ -8,12 +8,21 @@ import { mockQuotes } from '@/lib/mock/quotes'
 import { mockBiographyChapters } from '@/lib/mock/biography'
 import { mockWaypoints } from '@/lib/mock/waypoints'
 
+// Write client — used by Studio and webhook routes (needs token)
 export const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '6bzvjl52',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01',
   useCdn: false,
   token: process.env.SANITY_API_TOKEN,
+})
+
+// Read-only client — no token, fetches only published public content
+const readClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '6bzvjl52',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: '2024-01-01',
+  useCdn: false,
 })
 
 const builder = imageUrlBuilder(sanityClient)
@@ -24,7 +33,7 @@ export function urlFor(source: object) {
 // ─── Photos ────────────────────────────────────────────────────────────────
 export async function fetchPhotos(): Promise<Photo[]> {
   try {
-    const docs = await sanityClient.fetch<Record<string, unknown>[]>(
+    const docs = await readClient.fetch<Record<string, unknown>[]>(
       `*[_type == "photo"] | order(_createdAt desc) {
         _id,
         "slug": slug.current,
@@ -65,7 +74,7 @@ export async function fetchPhotos(): Promise<Photo[]> {
 // ─── Videos ────────────────────────────────────────────────────────────────
 export async function fetchVideos(): Promise<Video[]> {
   try {
-    const docs = await sanityClient.fetch<Record<string, unknown>[]>(
+    const docs = await readClient.fetch<Record<string, unknown>[]>(
       `*[_type == "video"] | order(date desc) {
         _id,
         "slug": slug.current,
@@ -106,7 +115,7 @@ export async function fetchVideos(): Promise<Video[]> {
 // ─── News ───────────────────────────────────────────────────────────────────
 export async function fetchNews(): Promise<NewsArticle[]> {
   try {
-    const docs = await sanityClient.fetch<Record<string, unknown>[]>(
+    const docs = await readClient.fetch<Record<string, unknown>[]>(
       `*[_type == "newsArticle"] | order(date desc) {
         _id,
         "slug": slug.current,
@@ -143,7 +152,7 @@ export async function fetchNews(): Promise<NewsArticle[]> {
 // ─── Quotes ─────────────────────────────────────────────────────────────────
 export async function fetchQuotes(): Promise<Quote[]> {
   try {
-    const docs = await sanityClient.fetch<Record<string, unknown>[]>(
+    const docs = await readClient.fetch<Record<string, unknown>[]>(
       `*[_type == "quote"] | order(_createdAt desc) {
         _id, text_vi, text_en, theme, source, date
       }`,
@@ -167,7 +176,7 @@ export async function fetchQuotes(): Promise<Quote[]> {
 // ─── Single video by slug ───────────────────────────────────────────────────
 export async function fetchVideoBySlug(slug: string): Promise<Video | null> {
   try {
-    const doc = await sanityClient.fetch<Record<string, unknown>>(
+    const doc = await readClient.fetch<Record<string, unknown>>(
       `*[_type == "video" && slug.current == $slug][0] {
         _id,
         "slug": slug.current,
