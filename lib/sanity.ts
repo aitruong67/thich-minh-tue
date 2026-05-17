@@ -42,7 +42,9 @@ export async function fetchPhotos(): Promise<Photo[]> {
       slug: (doc.slug as string) ?? (doc._id as string),
       title_vi: (doc.title_vi as string) ?? (doc.title_en as string),
       title_en: doc.title_en as string,
-      imageUrl: urlFor(doc.image as object).width(1200).url(),
+      imageUrl: doc.image
+        ? urlFor(doc.image as object).width(1200).url()
+        : (doc.source as string) ?? '',
       alt_vi: (doc.alt_vi as string) ?? (doc.title_vi as string) ?? (doc.title_en as string),
       alt_en: (doc.alt_en as string) ?? (doc.title_en as string),
       caption_vi: doc.caption_vi as string | undefined,
@@ -53,7 +55,8 @@ export async function fetchPhotos(): Promise<Photo[]> {
       width: (doc.dimensions as { width: number } | undefined)?.width ?? 1200,
       height: (doc.dimensions as { height: number } | undefined)?.height ?? 800,
     }))
-    return sanityPhotos.length ? sanityPhotos : mockPhotos
+    const validPhotos = sanityPhotos.filter(p => p.imageUrl)
+    return validPhotos.length ? validPhotos : mockPhotos
   } catch {
     return mockPhotos
   }
