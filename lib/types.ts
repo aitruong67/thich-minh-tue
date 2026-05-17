@@ -47,6 +47,7 @@ export interface Quote {
   theme: 'compassion' | 'simplicity' | 'impermanence' | 'walking' | 'freedom'
   source?: string
   date?: string
+  verified?: boolean   // true = confirmed direct quote from a named interview/source
 }
 
 export interface NewsArticle {

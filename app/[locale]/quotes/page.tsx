@@ -43,8 +43,8 @@ const MOODS = [
   { id: 'reflective', symbol: '◌',  label_en: 'Reflective',     label_vi: 'Suy ngẫm',         desc_en: 'Thinking about time', desc_vi: 'Nghĩ về thời gian',      theme: 'impermanence' as Quote['theme'] },
 ]
 
-type ThemeFilter = 'all' | Quote['theme']
-const FILTERS: ThemeFilter[] = ['all', 'compassion', 'simplicity', 'impermanence', 'walking', 'freedom']
+type ThemeFilter = 'all' | Quote['theme'] | 'verified'
+const FILTERS: ThemeFilter[] = ['all', 'verified', 'compassion', 'simplicity', 'impermanence', 'walking', 'freedom']
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function QuotesPage() {
@@ -112,7 +112,9 @@ export default function QuotesPage() {
     return next
   }), [])
 
-  const filtered    = filter === 'all' ? mockQuotes : mockQuotes.filter(q => q.theme === filter)
+  const filtered    = filter === 'all' ? mockQuotes
+    : filter === 'verified' ? mockQuotes.filter(q => q.verified)
+    : mockQuotes.filter(q => q.theme === filter)
   const savedQuotes = mockQuotes.filter(q => saved.has(q._id))
   const heroQuote   = mockQuotes[heroIdx]
 
@@ -279,9 +281,14 @@ export default function QuotesPage() {
                 </p>
 
                 {moodQuote.source && (
-                  <cite className={`block text-center font-ui text-label uppercase tracking-[0.14em] not-italic mb-8 ${THEME_COLOR[moodQuote.theme]}`}>
+                  <cite className={`block text-center font-ui text-label uppercase tracking-[0.14em] not-italic mb-4 ${THEME_COLOR[moodQuote.theme]}`}>
                     — {moodQuote.source}
                   </cite>
+                )}
+                {moodQuote.verified && (
+                  <p className="text-center font-ui text-[0.58rem] uppercase tracking-widest text-emerald-400 mb-6">
+                    ✓ {isVi ? 'Lời nói trực tiếp được xác minh' : 'Verified direct quote'}
+                  </p>
                 )}
 
                 <div className="flex items-center justify-center gap-6 flex-wrap">
@@ -331,11 +338,17 @@ export default function QuotesPage() {
                   onClick={() => setFilter(f)}
                   className={`font-ui text-label uppercase tracking-[0.1em] px-3 py-1.5 border text-xs transition-colors ${
                     filter === f
-                      ? 'border-saffron bg-saffron text-ink'
-                      : 'border-bark text-ash hover:border-ash/50 hover:text-parchment'
+                      ? f === 'verified'
+                        ? 'border-emerald-400 bg-emerald-400 text-ink'
+                        : 'border-saffron bg-saffron text-ink'
+                      : f === 'verified'
+                        ? 'border-emerald-600/50 text-emerald-400 hover:border-emerald-400'
+                        : 'border-bark text-ash hover:border-ash/50 hover:text-parchment'
                   }`}
                 >
-                  {f === 'all' ? (isVi ? 'Tất cả' : 'All') : (isVi ? THEME_LABEL_VI[f] : f)}
+                  {f === 'all' ? (isVi ? 'Tất cả' : 'All')
+                    : f === 'verified' ? (isVi ? '✓ Xác thực' : '✓ Verified')
+                    : (isVi ? THEME_LABEL_VI[f] : f)}
                 </button>
               ))}
             </div>
@@ -457,9 +470,16 @@ function FlipCard({
           style={{ backfaceVisibility: 'hidden' }}
         >
           <div className="flex items-center justify-between mb-3">
-            <span className={`font-ui text-[0.58rem] uppercase tracking-widest ${THEME_COLOR[quote.theme]}`}>
-              {isVi ? THEME_LABEL_VI[quote.theme] : quote.theme}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`font-ui text-[0.58rem] uppercase tracking-widest ${THEME_COLOR[quote.theme]}`}>
+                {isVi ? THEME_LABEL_VI[quote.theme] : quote.theme}
+              </span>
+              {quote.verified && (
+                <span className="font-ui text-[0.5rem] uppercase tracking-widest text-emerald-400 border border-emerald-600/50 px-1 py-0.5 rounded-sm">
+                  {isVi ? 'Xác thực' : 'Verified'}
+                </span>
+              )}
+            </div>
             <span className="font-ui text-[0.52rem] uppercase tracking-widest text-ash/30">
               {isVi ? 'Nhấn để dịch →' : 'Tap to flip →'}
             </span>
