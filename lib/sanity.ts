@@ -17,12 +17,12 @@ export const sanityClient = createClient({
   token: process.env.SANITY_API_TOKEN,
 })
 
-// Read-only client — no token, fetches only published public content
+// Read-only client — no token, uses CDN for published public content
 const readClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '6bzvjl52',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01',
-  useCdn: false,
+  useCdn: true,
 })
 
 const builder = imageUrlBuilder(sanityClient)
