@@ -142,28 +142,37 @@ export async function fetchNews(): Promise<NewsArticle[]> {
         "slug": slug.current,
         title, excerpt, body_vi, body_en, date, author,
         readingTime, tags, sourceUrl,
-        "coverImage": coalesce(
-          coverImage.asset->url,
-          coverImageUrl
-        )
+        coverImage,
+        coverImageUrl
       }`,
       {}
     )
     if (!docs?.length) return mockNews
-    const sanityNews = docs.map((doc: Record<string, unknown>): NewsArticle => ({
-      _id: doc._id as string,
-      slug: (doc.slug as string) ?? (doc._id as string),
-      title: doc.title as string,
-      excerpt: doc.excerpt as string,
-      body_vi: (doc.body_vi as string) ?? '',
-      body_en: (doc.body_en as string) ?? '',
-      date: doc.date as string,
-      coverImage: (doc.coverImage as string) ?? '',
-      author: doc.author as string,
-      readingTime: (doc.readingTime as number) ?? 5,
-      tags: (doc.tags as string[]) ?? [],
-      sourceUrl: doc.sourceUrl as string | undefined,
-    }))
+    const sanityNews = docs.map((doc: Record<string, unknown>): NewsArticle => {
+      // coverImage can be a Sanity image asset reference (Studio upload) or null.
+      // coverImageUrl is a plain string URL (form upload via /api/upload).
+      // Use urlFor() for asset references so Sanity's image pipeline resizes correctly.
+      let coverImage = ''
+      if (doc.coverImage && typeof doc.coverImage === 'object') {
+        coverImage = urlFor(doc.coverImage as object).width(1200).url()
+      } else if (doc.coverImageUrl && typeof doc.coverImageUrl === 'string') {
+        coverImage = doc.coverImageUrl
+      }
+      return {
+        _id: doc._id as string,
+        slug: (doc.slug as string) ?? (doc._id as string),
+        title: doc.title as string,
+        excerpt: doc.excerpt as string,
+        body_vi: (doc.body_vi as string) ?? '',
+        body_en: (doc.body_en as string) ?? '',
+        date: doc.date as string,
+        coverImage,
+        author: doc.author as string,
+        readingTime: (doc.readingTime as number) ?? 5,
+        tags: (doc.tags as string[]) ?? [],
+        sourceUrl: doc.sourceUrl as string | undefined,
+      }
+    })
     // Always merge with mock news so curated articles are never lost.
     // Sanity community articles appear first; mock articles fill the rest (deduped by slug).
     const sanitySlugSet = new Set(sanityNews.map(n => n.slug))
@@ -246,11 +255,17 @@ export async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null>
         "slug": slug.current,
         title, excerpt, body_vi, body_en, date, author,
         readingTime, tags, sourceUrl,
-        "coverImage": coalesce(coverImage.asset->url, coverImageUrl)
+        coverImage, coverImageUrl
       }`,
       { slug }
     )
     if (!doc?._id) return null
+    let coverImage = ''
+    if (doc.coverImage && typeof doc.coverImage === 'object') {
+      coverImage = urlFor(doc.coverImage as object).width(1200).url()
+    } else if (doc.coverImageUrl && typeof doc.coverImageUrl === 'string') {
+      coverImage = doc.coverImageUrl
+    }
     return {
       _id: doc._id as string,
       slug: (doc.slug as string) ?? slug,
@@ -259,7 +274,7 @@ export async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null>
       body_vi: (doc.body_vi as string) ?? '',
       body_en: (doc.body_en as string) ?? '',
       date: doc.date as string,
-      coverImage: (doc.coverImage as string) ?? '',
+      coverImage,
       author: (doc.author as string) ?? '',
       readingTime: (doc.readingTime as number) ?? 5,
       tags: (doc.tags as string[]) ?? [],

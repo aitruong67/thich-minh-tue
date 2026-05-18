@@ -203,12 +203,14 @@ export default function SubmitPage() {
     setError('')
     setLoading(true)
     try {
+      // For video YouTube tab: send youtubeUrl, clear mediaUrl.
+      // For video upload tab and all other types: send mediaUrl as-is.
+      const isVideoYouTube = type === 'video' && videoTab === 'youtube'
       const payload = {
         submissionType: type,
         ...form,
-        // For video: prefer uploaded URL if present, otherwise YouTube
-        youtubeUrl: videoTab === 'youtube' ? form.youtubeUrl : '',
-        mediaUrl: videoTab === 'upload' ? form.mediaUrl : (type === 'photo' ? form.mediaUrl : ''),
+        youtubeUrl: isVideoYouTube ? form.youtubeUrl : '',
+        mediaUrl:   isVideoYouTube ? '' : form.mediaUrl,
       }
       const res  = await fetch('/api/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
