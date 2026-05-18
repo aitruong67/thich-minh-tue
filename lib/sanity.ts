@@ -237,6 +237,39 @@ export async function fetchVideoBySlug(slug: string): Promise<Video | null> {
   }
 }
 
+// ─── Single news article by slug ────────────────────────────────────────────
+export async function fetchNewsBySlug(slug: string): Promise<NewsArticle | null> {
+  try {
+    const doc = await readClient.fetch<Record<string, unknown>>(
+      `*[_type == "newsArticle" && slug.current == $slug][0] {
+        _id,
+        "slug": slug.current,
+        title, excerpt, body_vi, body_en, date, author,
+        readingTime, tags, sourceUrl,
+        "coverImage": coalesce(coverImage.asset->url, coverImageUrl)
+      }`,
+      { slug }
+    )
+    if (!doc?._id) return null
+    return {
+      _id: doc._id as string,
+      slug: (doc.slug as string) ?? slug,
+      title: doc.title as string,
+      excerpt: (doc.excerpt as string) ?? '',
+      body_vi: (doc.body_vi as string) ?? '',
+      body_en: (doc.body_en as string) ?? '',
+      date: doc.date as string,
+      coverImage: (doc.coverImage as string) ?? '',
+      author: (doc.author as string) ?? '',
+      readingTime: (doc.readingTime as number) ?? 5,
+      tags: (doc.tags as string[]) ?? [],
+      sourceUrl: doc.sourceUrl as string | undefined,
+    }
+  } catch {
+    return null
+  }
+}
+
 // ─── Biography & Waypoints (still mock — add schemas later) ─────────────────
 export async function fetchBiographyChapters() {
   return mockBiographyChapters
