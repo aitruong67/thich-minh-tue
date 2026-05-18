@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 
+// ─── Types ────────────────────────────────────────────────────────────────────
 type SubmissionType = 'article' | 'photo' | 'video'
-type Status = 'pending' | 'approved' | 'rejected'
-type Filter = 'pending' | 'approved' | 'rejected' | 'all'
+type Status         = 'pending' | 'approved' | 'rejected'
+type StatusFilter   = Status | 'all'
+type TypeFilter     = SubmissionType | 'all'
 
 interface Submission {
   _id: string
@@ -21,6 +22,7 @@ interface Submission {
   mediaUrl: string
   youtubeUrl: string
   sourceUrl: string
+  language?: string
   submittedAt: string
   reviewedAt?: string
   reviewNote?: string
@@ -28,72 +30,88 @@ interface Submission {
 
 interface Counts { pending: number; approved: number; rejected: number; total: number }
 
-// ─── helpers ──────────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function timeAgo(iso: string) {
-  const diff = Date.now() - new Date(iso).getTime()
-  const m = Math.floor(diff / 60000)
+  const m = Math.floor((Date.now() - new Date(iso).getTime()) / 60000)
   if (m < 1)  return 'just now'
   if (m < 60) return `${m}m ago`
   const h = Math.floor(m / 60)
   if (h < 24) return `${h}h ago`
-  return `${Math.floor(h / 24)}d ago`
+  const d = Math.floor(h / 24)
+  if (d < 30) return `${d}d ago`
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
 }
 
-function ytId(url: string) {
+function ytThumb(url: string) {
   const m = url.match(/(?:v=|youtu\.be\/)([^&?/]{11})/)
-  return m ? m[1] : null
+  return m ? `https://img.youtube.com/vi/${m[1]}/mqdefault.jpg` : null
 }
 
-// ─── nav items ────────────────────────────────────────────────────────────────
-const NAV: { label: string; filter: Filter; icon: React.ReactNode }[] = [
-  { filter: 'pending',  label: 'Pending',  icon: <ClockIcon /> },
-  { filter: 'approved', label: 'Approved', icon: <CheckIcon /> },
-  { filter: 'rejected', label: 'Rejected', icon: <XIcon /> },
-  { filter: 'all',      label: 'All',      icon: <GridIcon /> },
-]
+// ─── Constants ────────────────────────────────────────────────────────────────
+const TYPE_META: Record<SubmissionType, { label: string; color: string; dot: string }> = {
+  article: { label: 'Article', color: 'text-blue-400 bg-blue-400/10',   dot: 'bg-blue-400' },
+  photo:   { label: 'Photo',   color: 'text-violet-400 bg-violet-400/10', dot: 'bg-violet-400' },
+  video:   { label: 'Video',   color: 'text-rose-400 bg-rose-400/10',   dot: 'bg-rose-400' },
+}
+const STATUS_META: Record<Status, { label: string; color: string }> = {
+  pending:  { label: 'Pending',  color: 'text-amber-400 bg-amber-400/10 border-amber-400/20' },
+  approved: { label: 'Approved', color: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20' },
+  rejected: { label: 'Rejected', color: 'text-red-400 bg-red-400/10 border-red-400/20' },
+}
 
-// ─── main ─────────────────────────────────────────────────────────────────────
+// ─── Main ─────────────────────────────────────────────────────────────────────
 export default function AdminDashboard() {
   const router = useRouter()
-  const [submissions, setSubmissions] = useState<Submission[]>([])
-  const [counts, setCounts]           = useState<Counts>({ pending: 0, approved: 0, rejected: 0, total: 0 })
-  const [filter, setFilter]           = useState<Filter>('pending')
-  const [loading, setLoading]         = useState(true)
-  const [actionId, setActionId]       = useState<string | null>(null)
-  const [rejectModal, setRejectModal] = useState<{ id: string; title: string } | null>(null)
-  const [rejectNote, setRejectNote]   = useState('')
-  const [expanded, setExpanded]       = useState<string | null>(null)
+
+  const [all,         setAll]         = useState<Submission[]>([])
+  const [counts,      setCounts]      = useState<Counts>({ pending: 0, approved: 0, rejected: 0, total: 0 })
+  const [statusFilter,setStatusFilter]= useState<StatusFilter>('pending')
+  const [typeFilter,  setTypeFilter]  = useState<TypeFilter>('all')
+  const [search,      setSearch]      = useState('')
+  const [loading,     setLoading]     = useState(true)
+  const [selected,    setSelected]    = useState<Submission | null>(null)
+  const [actionId,    setActionId]    = useState<string | null>(null)
+  const [rejectNote,  setRejectNote]  = useState('')
+  const [showReject,  setShowReject]  = useState<Submission | null>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const load = useCallback(async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/admin/submissions?status=${filter}`, { credentials: 'include' })
+      const res = await fetch('/api/admin/submissions?status=all', { credentials: 'include' })
       if (res.status === 401) { router.push('/admin/login'); return }
       const data = await res.json()
-      setSubmissions(data.submissions || [])
+      setAll(data.submissions || [])
       setCounts(data.counts || { pending: 0, approved: 0, rejected: 0, total: 0 })
-    } finally {
-      setLoading(false)
-    }
-  }, [filter, router])
+    } finally { setLoading(false) }
+  }, [router])
 
   useEffect(() => { load() }, [load])
+
+  // Keyboard: / to focus search, Escape to close panel
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault(); searchRef.current?.focus()
+      }
+      if (e.key === 'Escape') { setSelected(null); setShowReject(null) }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [])
 
   async function review(id: string, action: 'approve' | 'reject', note = '') {
     setActionId(id)
     try {
       await fetch(`/api/admin/review/${id}`, {
-        method: 'POST',
+        method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify({ action, note }),
       })
-      setRejectModal(null)
-      setRejectNote('')
+      setShowReject(null); setRejectNote('')
+      if (selected?._id === id) setSelected(null)
       await load()
-    } finally {
-      setActionId(null)
-    }
+    } finally { setActionId(null) }
   }
 
   async function logout() {
@@ -101,179 +119,412 @@ export default function AdminDashboard() {
     router.push('/admin/login')
   }
 
-  const pendingCount = counts.pending
+  // Filtering
+  const filtered = all.filter(s => {
+    if (statusFilter !== 'all' && s.status !== statusFilter) return false
+    if (typeFilter !== 'all' && s.submissionType !== typeFilter) return false
+    if (search) {
+      const q = search.toLowerCase()
+      if (!s.title.toLowerCase().includes(q) && !s.name.toLowerCase().includes(q) && !s.email.toLowerCase().includes(q)) return false
+    }
+    return true
+  })
 
   return (
-    <div className="flex h-screen bg-[#0f0f13] overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
 
-      {/* ── SIDEBAR ──────────────────────────────────────────────────────────── */}
-      <aside className="w-60 flex-shrink-0 flex flex-col border-r border-white/[0.06] bg-[#141418]">
-
+      {/* ── TOP BAR ──────────────────────────────────────────────────────────── */}
+      <header className="h-14 flex-shrink-0 flex items-center gap-4 px-5 border-b border-white/[0.06] bg-[#0f0f17]">
         {/* Brand */}
-        <div className="px-5 py-5 border-b border-white/[0.06]">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 text-base">
-              🪷
-            </div>
-            <div>
-              <p className="text-white text-sm font-semibold leading-tight">Minh Tuệ</p>
-              <p className="text-white/40 text-[10px] uppercase tracking-widest">Admin</p>
-            </div>
-          </div>
+        <div className="flex items-center gap-2.5 mr-2">
+          <span className="text-lg">🪷</span>
+          <span className="font-semibold text-sm text-white/80 hidden sm:block">Minh Tuệ</span>
+          <span className="text-white/20 hidden sm:block">·</span>
+          <span className="text-xs text-white/30 hidden sm:block uppercase tracking-widest">Admin</span>
         </div>
 
-        {/* Nav */}
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
-          <p className="text-white/25 text-[10px] uppercase tracking-widest px-2 mb-3">Submissions</p>
-          {NAV.map(({ filter: f, label, icon }) => {
+        {/* Search */}
+        <div className="flex-1 max-w-xs relative">
+          <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/25 w-3.5 h-3.5" />
+          <input
+            ref={searchRef}
+            value={search} onChange={e => setSearch(e.target.value)}
+            placeholder="Search title, name, email…"
+            className="w-full bg-white/5 border border-white/8 rounded-lg pl-9 pr-8 py-1.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-amber-500/50 focus:bg-white/8 transition-all"
+          />
+          {search && (
+            <button onClick={() => setSearch('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50">
+              <XSmallIcon className="w-3 h-3" />
+            </button>
+          )}
+          <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/15 text-[10px] font-mono hidden sm:block" style={{ display: search ? 'none' : '' }}>/</span>
+        </div>
+
+        {/* Stat chips */}
+        <div className="flex items-center gap-2 ml-auto">
+          {counts.pending > 0 && (
+            <button onClick={() => setStatusFilter('pending')}
+              className="hidden sm:flex items-center gap-1.5 bg-amber-500/15 border border-amber-500/25 rounded-full px-3 py-1 text-xs font-semibold text-amber-400 hover:bg-amber-500/20 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              {counts.pending} pending
+            </button>
+          )}
+        </div>
+
+        {/* Actions */}
+        <button onClick={load} title="Refresh"
+          className="p-2 text-white/30 hover:text-white/60 transition-colors rounded-lg hover:bg-white/5">
+          <RefreshIcon className="w-4 h-4" />
+        </button>
+        <Link href="/en" target="_blank"
+          className="hidden sm:flex p-2 text-white/30 hover:text-white/60 transition-colors rounded-lg hover:bg-white/5" title="View site">
+          <ExternalIcon className="w-4 h-4" />
+        </Link>
+        <button onClick={logout}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-white/40 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+          <LogoutIcon className="w-3.5 h-3.5" />
+          <span className="hidden sm:block">Out</span>
+        </button>
+      </header>
+
+      {/* ── FILTER BAR ───────────────────────────────────────────────────────── */}
+      <div className="flex-shrink-0 flex items-center justify-between gap-4 px-5 py-2.5 border-b border-white/[0.05] bg-[#0d0d15]">
+        {/* Status tabs */}
+        <div className="flex items-center gap-0.5">
+          {(['pending','all','approved','rejected'] as StatusFilter[]).map(f => {
             const count = f === 'all' ? counts.total : counts[f as Status] ?? 0
-            const active = filter === f
             return (
-              <button key={f} onClick={() => setFilter(f)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150 group ${
-                  active
-                    ? 'bg-amber-500/15 text-amber-400'
-                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
+              <button key={f} onClick={() => setStatusFilter(f)}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all capitalize ${
+                  statusFilter === f
+                    ? 'bg-white/10 text-white'
+                    : 'text-white/35 hover:text-white/60 hover:bg-white/5'
                 }`}>
-                <span className={`w-4 h-4 flex-shrink-0 ${active ? 'text-amber-400' : 'text-white/30 group-hover:text-white/50'}`}>
-                  {icon}
-                </span>
-                <span className="text-sm font-medium flex-1">{label}</span>
+                {f === 'all' ? 'All' : f}
                 {count > 0 && (
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                    f === 'pending' && count > 0
-                      ? 'bg-amber-500 text-black'
-                      : active ? 'bg-amber-500/20 text-amber-400' : 'bg-white/10 text-white/40'
-                  }`}>
-                    {count}
-                  </span>
+                  <span className={`ml-1.5 tabular-nums ${
+                    f === 'pending' && count > 0 ? 'text-amber-400 font-bold' : 'text-white/30'
+                  }`}>{count}</span>
                 )}
               </button>
             )
           })}
-        </nav>
-
-        {/* Footer */}
-        <div className="px-3 py-4 border-t border-white/[0.06] space-y-0.5">
-          <Link href="/en" target="_blank"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/40 hover:text-white/70 hover:bg-white/5 transition-all text-sm">
-            <ExternalIcon />
-            View site
-          </Link>
-          <button onClick={logout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/40 hover:text-red-400 hover:bg-red-500/10 transition-all text-sm">
-            <LogoutIcon />
-            Sign out
-          </button>
         </div>
-      </aside>
 
-      {/* ── MAIN ─────────────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-
-        {/* Top bar */}
-        <header className="flex-shrink-0 h-14 flex items-center justify-between px-6 border-b border-white/[0.06] bg-[#141418]">
-          <div className="flex items-center gap-3">
-            <h1 className="text-white font-semibold capitalize">
-              {filter === 'all' ? 'All Submissions' : `${filter} Submissions`}
-            </h1>
-            {pendingCount > 0 && filter !== 'pending' && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500 text-black">
-                {pendingCount} pending
-              </span>
-            )}
-          </div>
-          <button onClick={load}
-            className="flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors">
-            <RefreshIcon />
-            Refresh
-          </button>
-        </header>
-
-        {/* Stats row */}
-        <div className="flex-shrink-0 grid grid-cols-4 gap-px border-b border-white/[0.06] bg-white/[0.04]">
-          {[
-            { label: 'Pending',  value: counts.pending,  color: 'text-amber-400',  dot: 'bg-amber-400' },
-            { label: 'Approved', value: counts.approved, color: 'text-emerald-400', dot: 'bg-emerald-400' },
-            { label: 'Rejected', value: counts.rejected, color: 'text-red-400',    dot: 'bg-red-400' },
-            { label: 'Total',    value: counts.total,    color: 'text-white/70',   dot: 'bg-white/30' },
-          ].map(s => (
-            <div key={s.label} className="bg-[#141418] px-6 py-4">
-              <div className="flex items-center gap-2 mb-1">
-                <div className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
-                <span className="text-white/40 text-xs uppercase tracking-widest">{s.label}</span>
-              </div>
-              <p className={`text-2xl font-bold ${s.color} tabular-nums`}>{s.value}</p>
-            </div>
+        {/* Type pills */}
+        <div className="flex items-center gap-1.5">
+          {(['all','article','photo','video'] as TypeFilter[]).map(t => (
+            <button key={t} onClick={() => setTypeFilter(t)}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all ${
+                typeFilter === t
+                  ? t === 'all'
+                    ? 'bg-white/15 text-white'
+                    : `${TYPE_META[t as SubmissionType].color} border border-current/20`
+                  : 'text-white/30 hover:text-white/50 hover:bg-white/5'
+              }`}>
+              {t === 'all' ? 'All types' : TYPE_META[t as SubmissionType].label}
+            </button>
           ))}
-        </div>
-
-        {/* Submission list */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {loading ? (
-            <div className="space-y-3">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="bg-white/5 rounded-xl h-24 animate-pulse" />
-              ))}
-            </div>
-          ) : submissions.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center">
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-4">
-                {filter === 'pending' ? '⏳' : filter === 'approved' ? '✓' : filter === 'rejected' ? '✗' : '📋'}
-              </div>
-              <p className="text-white/50 text-base">No {filter === 'all' ? '' : filter} submissions yet</p>
-              <p className="text-white/25 text-sm mt-1">They&apos;ll appear here when submitted</p>
-            </div>
-          ) : (
-            <div className="space-y-3 max-w-4xl">
-              {submissions.map(sub => (
-                <SubmissionCard
-                  key={sub._id}
-                  sub={sub}
-                  actionId={actionId}
-                  expanded={expanded === sub._id}
-                  onToggle={() => setExpanded(expanded === sub._id ? null : sub._id)}
-                  onApprove={() => review(sub._id, 'approve')}
-                  onReject={() => setRejectModal({ id: sub._id, title: sub.title })}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
 
-      {/* ── REJECT MODAL ──────────────────────────────────────────────────────── */}
-      {rejectModal && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-          <div className="bg-[#1c1c22] border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
-                <XIcon className="w-4 h-4 text-red-400" />
+      {/* ── MAIN AREA ────────────────────────────────────────────────────────── */}
+      <div className="flex flex-1 overflow-hidden">
+
+        {/* Table */}
+        <div className={`flex-1 overflow-y-auto transition-all duration-300 ${selected ? 'lg:mr-[420px]' : ''}`}>
+
+          {/* Column headers */}
+          {!loading && filtered.length > 0 && (
+            <div className="sticky top-0 z-10 grid grid-cols-[auto_1fr_auto_auto_auto] gap-0 px-5 py-2 bg-[#0d0d15] border-b border-white/[0.04]">
+              <div className="w-20 font-ui text-[10px] uppercase tracking-widest text-white/20">Type</div>
+              <div className="font-ui text-[10px] uppercase tracking-widest text-white/20">Submission</div>
+              <div className="w-28 font-ui text-[10px] uppercase tracking-widest text-white/20 hidden md:block">Submitted</div>
+              <div className="w-24 font-ui text-[10px] uppercase tracking-widest text-white/20 hidden sm:block">Status</div>
+              <div className="w-28 font-ui text-[10px] uppercase tracking-widest text-white/20 text-right">Actions</div>
+            </div>
+          )}
+
+          {loading ? (
+            <div className="p-8 space-y-2">
+              {[1,2,3,4,5].map(i => (
+                <div key={i} className="h-14 rounded-lg bg-white/[0.03] animate-pulse" style={{ opacity: 1 - i * 0.15 }} />
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-64 gap-3">
+              <span className="text-5xl opacity-20">
+                {search ? '🔍' : statusFilter === 'pending' ? '⏳' : statusFilter === 'approved' ? '✓' : '○'}
+              </span>
+              <p className="text-white/30 text-sm">
+                {search ? `No results for "${search}"` : `No ${statusFilter === 'all' ? '' : statusFilter} submissions`}
+              </p>
+              {search && (
+                <button onClick={() => setSearch('')} className="text-xs text-amber-400 hover:text-amber-300">
+                  Clear search
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="divide-y divide-white/[0.04]">
+              {filtered.map(sub => {
+                const tm = TYPE_META[sub.submissionType]
+                const sm = STATUS_META[sub.status]
+                const thumb = sub.youtubeUrl ? ytThumb(sub.youtubeUrl) : sub.mediaUrl || null
+                const busy  = actionId === sub._id
+                const isSelected = selected?._id === sub._id
+
+                return (
+                  <div key={sub._id}
+                    onClick={() => setSelected(isSelected ? null : sub)}
+                    className={`grid grid-cols-[auto_1fr_auto_auto_auto] gap-0 items-center px-5 py-3 cursor-pointer transition-all duration-100 group ${
+                      isSelected ? 'bg-amber-500/8 border-l-2 border-amber-500' : 'hover:bg-white/[0.025] border-l-2 border-transparent'
+                    }`}>
+
+                    {/* Type */}
+                    <div className="w-20 flex items-center gap-2">
+                      <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${tm.dot}`} />
+                      <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${tm.color}`}>
+                        {tm.label}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="min-w-0 flex items-center gap-3 pr-4">
+                      {/* Thumbnail */}
+                      {thumb ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={thumb} alt="" className="w-9 h-9 object-cover rounded flex-shrink-0 opacity-70 group-hover:opacity-90 transition-opacity" />
+                      ) : (
+                        <div className="w-9 h-9 rounded bg-white/5 flex items-center justify-center text-base flex-shrink-0">
+                          {sub.submissionType === 'article' ? '📝' : sub.submissionType === 'photo' ? '🖼️' : '🎥'}
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-white/85 truncate leading-tight">{sub.title}</p>
+                        <p className="text-[11px] text-white/35 truncate mt-0.5">
+                          {sub.name}
+                          <span className="text-white/20 mx-1">·</span>
+                          {sub.email}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Time */}
+                    <div className="w-28 hidden md:block">
+                      <span className="text-xs text-white/30">{timeAgo(sub.submittedAt)}</span>
+                    </div>
+
+                    {/* Status */}
+                    <div className="w-24 hidden sm:block">
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${sm.color}`}>
+                        {sm.label}
+                      </span>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="w-28 flex items-center justify-end gap-1.5" onClick={e => e.stopPropagation()}>
+                      {sub.status === 'pending' ? (
+                        <>
+                          <button onClick={() => review(sub._id, 'approve')} disabled={busy}
+                            className="px-2.5 py-1 bg-emerald-500/15 hover:bg-emerald-500 border border-emerald-500/30 hover:border-emerald-500 text-emerald-400 hover:text-white text-[11px] font-semibold rounded-md transition-all disabled:opacity-40">
+                            {busy ? '…' : 'Approve'}
+                          </button>
+                          <button onClick={() => { setShowReject(sub) }} disabled={busy}
+                            className="p-1.5 text-white/20 hover:text-red-400 hover:bg-red-500/10 rounded-md transition-all disabled:opacity-40">
+                            <XSmallIcon className="w-3.5 h-3.5" />
+                          </button>
+                        </>
+                      ) : (
+                        <span className="text-[10px] text-white/15 italic pr-1">
+                          {sub.reviewedAt ? timeAgo(sub.reviewedAt) : '—'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Footer count */}
+          {filtered.length > 0 && (
+            <div className="px-5 py-3 border-t border-white/[0.04]">
+              <p className="text-[11px] text-white/20">
+                Showing {filtered.length} {filtered.length === 1 ? 'submission' : 'submissions'}
+                {search && ` matching "${search}"`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* ── DETAIL PANEL ──────────────────────────────────────────────────── */}
+        {selected && (
+          <div className="fixed right-0 top-0 bottom-0 w-full lg:w-[420px] bg-[#0f0f18] border-l border-white/[0.07] flex flex-col z-40 shadow-2xl">
+            {/* Panel header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.07] flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-full ${TYPE_META[selected.submissionType].color}`}>
+                  {TYPE_META[selected.submissionType].label}
+                </span>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${STATUS_META[selected.status].color}`}>
+                  {STATUS_META[selected.status].label}
+                </span>
               </div>
+              <button onClick={() => setSelected(null)} className="p-1.5 text-white/30 hover:text-white/70 hover:bg-white/5 rounded-lg transition-all">
+                <XSmallIcon className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Panel body */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+
+              {/* Thumbnail */}
+              {(selected.youtubeUrl || selected.mediaUrl) && (
+                <div className="rounded-lg overflow-hidden bg-white/5 aspect-video relative">
+                  {selected.youtubeUrl && ytThumb(selected.youtubeUrl) ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={ytThumb(selected.youtubeUrl)!} alt="" className="w-full h-full object-cover" />
+                  ) : selected.mediaUrl ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={selected.mediaUrl} alt="" className="w-full h-full object-cover" />
+                  ) : null}
+                  {selected.youtubeUrl && (
+                    <a href={selected.youtubeUrl} target="_blank" rel="noopener noreferrer"
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/10 transition-colors">
+                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
+                        <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-transparent border-l-gray-900 ml-0.5" />
+                      </div>
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Title */}
               <div>
-                <h2 className="text-white font-semibold">Reject Submission</h2>
-                <p className="text-white/40 text-xs truncate max-w-xs">{rejectModal.title}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-white/25 mb-1.5">Title</p>
+                <h2 className="text-base font-semibold text-white leading-snug">{selected.title}</h2>
+              </div>
+
+              {/* Meta */}
+              <div className="flex flex-col gap-2 bg-white/[0.03] rounded-lg px-4 py-3 text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-white/35 text-xs">Submitter</span>
+                  <span className="text-white/70 font-medium">{selected.name}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/35 text-xs">Email</span>
+                  <a href={`mailto:${selected.email}`} className="text-amber-400 text-xs hover:underline">{selected.email}</a>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/35 text-xs">Submitted</span>
+                  <span className="text-white/50 text-xs">{new Date(selected.submittedAt).toLocaleString('en-GB', { day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit' })}</span>
+                </div>
+                {selected.language && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/35 text-xs">Language</span>
+                    <span className="text-white/50 text-xs uppercase">{selected.language}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Description */}
+              {selected.description && (
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white/25 mb-1.5">Description</p>
+                  <p className="text-sm text-white/55 leading-relaxed">{selected.description}</p>
+                </div>
+              )}
+
+              {/* Content preview */}
+              {selected.content && (
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white/25 mb-1.5">Content</p>
+                  <div className="bg-white/[0.03] rounded-lg px-4 py-3 max-h-48 overflow-y-auto">
+                    <p className="text-sm text-white/50 leading-relaxed whitespace-pre-wrap">{selected.content}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Links */}
+              {(selected.youtubeUrl || selected.mediaUrl || selected.sourceUrl) && (
+                <div className="space-y-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-white/25">Links</p>
+                  {selected.youtubeUrl && (
+                    <a href={selected.youtubeUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs text-amber-400 hover:text-amber-300 transition-colors">
+                      <span className="opacity-60">▶</span>
+                      <span className="truncate">{selected.youtubeUrl}</span>
+                    </a>
+                  )}
+                  {selected.mediaUrl && (
+                    <a href={selected.mediaUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs text-amber-400 hover:text-amber-300 transition-colors">
+                      <span className="opacity-60">🔗</span>
+                      <span className="truncate">{selected.mediaUrl}</span>
+                    </a>
+                  )}
+                  {selected.sourceUrl && (
+                    <a href={selected.sourceUrl} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs text-white/30 hover:text-white/50 transition-colors">
+                      <span className="opacity-60">↗</span>
+                      <span className="truncate">{selected.sourceUrl}</span>
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Review note */}
+              {selected.reviewNote && (
+                <div className="bg-red-500/8 border border-red-500/15 rounded-lg px-4 py-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-red-400 mb-1.5">Reject note</p>
+                  <p className="text-sm text-white/40">{selected.reviewNote}</p>
+                </div>
+              )}
+
+              <p className="text-[10px] text-white/15 font-mono">{selected._id}</p>
+            </div>
+
+            {/* Panel actions */}
+            {selected.status === 'pending' && (
+              <div className="flex-shrink-0 flex gap-3 px-5 py-4 border-t border-white/[0.07]">
+                <button onClick={() => review(selected._id, 'approve')} disabled={!!actionId}
+                  className="flex-1 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-black font-semibold text-sm py-2.5 rounded-xl transition-colors">
+                  {actionId === selected._id ? 'Publishing…' : '✓ Approve & Publish'}
+                </button>
+                <button onClick={() => setShowReject(selected)} disabled={!!actionId}
+                  className="flex-1 bg-white/5 hover:bg-red-500/15 hover:text-red-400 disabled:opacity-40 text-white/50 font-semibold text-sm py-2.5 rounded-xl transition-all">
+                  Reject
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* ── REJECT MODAL ──────────────────────────────────────────────────────── */}
+      {showReject && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4"
+          onClick={e => e.target === e.currentTarget && setShowReject(null)}>
+          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-8 h-8 rounded-lg bg-red-500/15 border border-red-500/20 flex items-center justify-center text-red-400 text-sm">✕</div>
+              <div>
+                <h3 className="text-white font-semibold text-sm">Reject submission</h3>
+                <p className="text-white/35 text-xs truncate max-w-[200px]">{showReject.title}</p>
               </div>
             </div>
-            <textarea
-              value={rejectNote}
-              onChange={e => setRejectNote(e.target.value)}
-              placeholder="Optional note for your records…"
-              rows={3}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/20 focus:outline-none focus:border-white/20 mb-4 resize-none"
-              autoFocus
+            <textarea value={rejectNote} onChange={e => setRejectNote(e.target.value)} autoFocus
+              placeholder="Optional note for your records…" rows={3}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white/70 placeholder:text-white/20 focus:outline-none focus:border-white/20 mb-4 resize-none"
             />
             <div className="flex gap-3">
-              <button
-                onClick={() => review(rejectModal.id, 'reject', rejectNote)}
-                className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors"
-              >
+              <button onClick={() => review(showReject._id, 'reject', rejectNote)}
+                className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold text-sm py-2.5 rounded-xl transition-colors">
                 Confirm Reject
               </button>
-              <button
-                onClick={() => { setRejectModal(null); setRejectNote('') }}
-                className="flex-1 bg-white/5 hover:bg-white/10 text-white/60 py-2.5 rounded-xl text-sm transition-colors"
-              >
+              <button onClick={() => { setShowReject(null); setRejectNote('') }}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-white/50 font-semibold text-sm py-2.5 rounded-xl transition-colors">
                 Cancel
               </button>
             </div>
@@ -284,169 +535,19 @@ export default function AdminDashboard() {
   )
 }
 
-// ─── Submission card ──────────────────────────────────────────────────────────
-function SubmissionCard({
-  sub, actionId, expanded, onToggle, onApprove, onReject,
-}: {
-  sub: Submission
-  actionId: string | null
-  expanded: boolean
-  onToggle: () => void
-  onApprove: () => void
-  onReject: () => void
-}) {
-  const busy    = actionId === sub._id
-  const yt      = sub.youtubeUrl ? ytId(sub.youtubeUrl) : null
-  const isPhoto = sub.submissionType === 'photo' && sub.mediaUrl
-
-  const TYPE_COLOR: Record<SubmissionType, string> = {
-    article: 'bg-blue-500/15 text-blue-400',
-    photo:   'bg-purple-500/15 text-purple-400',
-    video:   'bg-rose-500/15 text-rose-400',
-  }
-  const STATUS_COLOR: Record<string, string> = {
-    pending:  'bg-amber-500/15 text-amber-400',
-    approved: 'bg-emerald-500/15 text-emerald-400',
-    rejected: 'bg-red-500/15 text-red-400',
-  }
-  const TYPE_ICON: Record<SubmissionType, string> = { article: '📝', photo: '🖼️', video: '🎥' }
-
-  return (
-    <div className={`bg-[#1a1a20] border rounded-xl overflow-hidden transition-all duration-200 ${
-      expanded ? 'border-amber-500/30' : 'border-white/[0.07] hover:border-white/[0.12]'
-    }`}>
-      {/* Card header */}
-      <div className="flex items-start gap-4 p-4 cursor-pointer" onClick={onToggle}>
-
-        {/* Thumbnail */}
-        <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-white/5 flex items-center justify-center">
-          {yt ? (
-            <Image
-              src={`https://img.youtube.com/vi/${yt}/mqdefault.jpg`}
-              alt="" width={64} height={64} className="object-cover w-full h-full"
-              unoptimized
-            />
-          ) : isPhoto ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={sub.mediaUrl} alt="" className="object-cover w-full h-full" />
-          ) : (
-            <span className="text-2xl">{TYPE_ICON[sub.submissionType]}</span>
-          )}
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md ${TYPE_COLOR[sub.submissionType]}`}>
-              {sub.submissionType}
-            </span>
-            <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded-md ${STATUS_COLOR[sub.status]}`}>
-              {sub.status}
-            </span>
-          </div>
-          <h3 className="text-white font-medium text-sm leading-snug truncate mb-1">
-            {sub.title}
-          </h3>
-          <p className="text-white/40 text-xs">
-            <span className="text-white/60">{sub.name}</span>
-            {' · '}{sub.email}
-            {' · '}{timeAgo(sub.submittedAt)}
-          </p>
-        </div>
-
-        {/* Actions */}
-        <div className="flex-shrink-0 flex items-center gap-2">
-          {sub.status === 'pending' && (
-            <>
-              <button
-                onClick={e => { e.stopPropagation(); onApprove() }}
-                disabled={busy}
-                className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white text-xs font-semibold rounded-lg transition-colors"
-              >
-                {busy ? '…' : 'Approve'}
-              </button>
-              <button
-                onClick={e => { e.stopPropagation(); onReject() }}
-                disabled={busy}
-                className="px-3 py-1.5 bg-white/10 hover:bg-red-500/20 hover:text-red-400 disabled:opacity-50 text-white/60 text-xs font-semibold rounded-lg transition-colors"
-              >
-                Reject
-              </button>
-            </>
-          )}
-          <button
-            onClick={e => { e.stopPropagation(); onToggle() }}
-            className={`w-6 h-6 flex items-center justify-center text-white/30 hover:text-white/60 transition-all ${expanded ? 'rotate-180' : ''}`}
-          >
-            <ChevronIcon />
-          </button>
-        </div>
-      </div>
-
-      {/* Expanded detail */}
-      {expanded && (
-        <div className="px-4 pb-4 pt-0 border-t border-white/[0.06] mt-0">
-          <div className="pt-4 space-y-3">
-            {sub.description && (
-              <div>
-                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-1">Description</p>
-                <p className="text-white/60 text-sm leading-relaxed">{sub.description}</p>
-              </div>
-            )}
-            {sub.content && sub.submissionType === 'article' && (
-              <div>
-                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-1">Content preview</p>
-                <p className="text-white/60 text-sm leading-relaxed line-clamp-4">{sub.content}</p>
-              </div>
-            )}
-            {(sub.youtubeUrl || sub.mediaUrl) && (
-              <div>
-                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-1">Media</p>
-                {sub.youtubeUrl && (
-                  <a href={sub.youtubeUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm transition-colors">
-                    <span>▶</span>
-                    <span className="truncate">{sub.youtubeUrl}</span>
-                  </a>
-                )}
-                {sub.mediaUrl && (
-                  <a href={sub.mediaUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-amber-400 hover:text-amber-300 text-sm transition-colors">
-                    <span>🔗</span>
-                    <span className="truncate">{sub.mediaUrl}</span>
-                  </a>
-                )}
-              </div>
-            )}
-            {sub.reviewNote && (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
-                <p className="text-red-400 text-xs font-medium mb-0.5">Reject note</p>
-                <p className="text-white/50 text-sm">{sub.reviewNote}</p>
-              </div>
-            )}
-            <div className="flex items-center justify-between pt-1">
-              <p className="text-white/20 text-xs">
-                ID: <span className="font-mono">{sub._id}</span>
-              </p>
-              {sub.reviewedAt && (
-                <p className="text-white/20 text-xs">
-                  Reviewed {timeAgo(sub.reviewedAt)}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
 // ─── Icons ────────────────────────────────────────────────────────────────────
-function ClockIcon()    { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> }
-function CheckIcon()    { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><polyline points="20 6 9 17 4 12"/></svg> }
-function XIcon({ className = 'w-4 h-4' }: { className?: string }) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> }
-function GridIcon()     { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> }
-function ExternalIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> }
-function LogoutIcon()   { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> }
-function RefreshIcon()  { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg> }
-function ChevronIcon()  { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4"><polyline points="6 9 12 15 18 9"/></svg> }
+function SearchIcon({ className = '' }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+}
+function XSmallIcon({ className = '' }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className={className}><path d="M18 6 6 18M6 6l12 12"/></svg>
+}
+function RefreshIcon({ className = '' }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+}
+function ExternalIcon({ className = '' }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+}
+function LogoutIcon({ className = '' }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+}
