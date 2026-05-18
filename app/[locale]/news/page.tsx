@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
+import { fetchNews } from '@/lib/sanity'
 import NewsClient from './NewsClient'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'News & Articles — Minh Tuệ Archive',
@@ -7,6 +10,7 @@ export const metadata: Metadata = {
   openGraph: { title: 'News & Articles — Minh Tuệ Archive', description: 'International press coverage from BBC, RFA, Buddhistdoor, Lion\'s Roar and more.' },
 }
 
-export default function Page() {
-  return <NewsClient />
+export default async function NewsPage() {
+  const articles = await fetchNews()
+  return <NewsClient articles={articles} />
 }

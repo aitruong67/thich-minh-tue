@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
 import FadeIn from '@/components/ui/FadeIn'
-import { mockNews } from '@/lib/mock'
 import type { NewsArticle } from '@/lib/types'
 
 const PAGE_SIZE = 6
@@ -17,7 +16,7 @@ function ArticleWrapper({ article, locale, children }: { article: NewsArticle; l
   return <>{children}</>
 }
 
-export default function NewsClient() {
+export default function NewsClient({ articles }: { articles: NewsArticle[] }) {
   const t = useTranslations()
   const locale = useLocale()
   const [visible, setVisible] = useState(PAGE_SIZE)
@@ -37,26 +36,26 @@ export default function NewsClient() {
         <div className="max-w-6xl mx-auto">
           {/* Featured */}
           <FadeIn>
-            <ArticleWrapper article={mockNews[0]} locale={locale}>
+            <ArticleWrapper article={articles[0]} locale={locale}>
               <article className="grid lg:grid-cols-2 gap-0 border border-bark mb-8 group">
                 <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
-                  <Image src={mockNews[0].coverImage} alt={mockNews[0].title} fill
+                  <Image src={articles[0].coverImage} alt={articles[0].title} fill
                     className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw" priority />
                 </div>
                 <div className="p-8 lg:p-12 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-4 mb-4">
-                      <time dateTime={mockNews[0].date} className="font-ui text-label uppercase tracking-[0.12em] text-ash">
-                        {new Date(mockNews[0].date).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      <time dateTime={articles[0].date} className="font-ui text-label uppercase tracking-[0.12em] text-ash">
+                        {new Date(articles[0].date).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </time>
-                      <span className="font-ui text-label uppercase tracking-[0.12em] text-ash">{mockNews[0].readingTime} {t('page.news.minRead')}</span>
+                      <span className="font-ui text-label uppercase tracking-[0.12em] text-ash">{articles[0].readingTime} {t('page.news.minRead')}</span>
                     </div>
-                    <h2 className="font-display text-3xl text-parchment leading-tight mb-4">{mockNews[0].title}</h2>
-                    <p className="font-body text-ash leading-relaxed mb-6">{mockNews[0].excerpt}</p>
+                    <h2 className="font-display text-3xl text-parchment leading-tight mb-4">{articles[0].title}</h2>
+                    <p className="font-body text-ash leading-relaxed mb-6">{articles[0].excerpt}</p>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="font-ui text-label uppercase tracking-[0.12em] text-ash">{t('page.news.by')} {mockNews[0].author}</span>
+                    <span className="font-ui text-label uppercase tracking-[0.12em] text-ash">{t('page.news.by')} {articles[0].author}</span>
                     <span className="font-ui text-label uppercase tracking-[0.12em] text-saffron group-hover:text-parchment transition-colors">{t('page.news.readMore')} →</span>
                   </div>
                 </div>
@@ -66,7 +65,7 @@ export default function NewsClient() {
 
           {/* Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mockNews.slice(1, visible).map((article, i) => (
+            {articles.slice(1, visible).map((article, i) => (
               <FadeIn key={article._id} delay={i * 0.06} as="article">
                 <ArticleWrapper article={article} locale={locale}>
                   <div className="flex flex-col h-full border border-bark hover:border-saffron/40 transition-colors group">
@@ -97,10 +96,10 @@ export default function NewsClient() {
           </div>
 
           {/* Load more */}
-          {visible < mockNews.length && (
+          {visible < articles.length && (
             <div className="flex justify-center mt-10">
               <button onClick={() => setVisible(v => v + PAGE_SIZE)} className="btn-ghost">
-                {locale === 'vi' ? `Xem thêm (${mockNews.length - visible} bài)` : `Load more (${mockNews.length - visible} articles)`}
+                {locale === 'vi' ? `Xem thêm (${articles.length - visible} bài)` : `Load more (${articles.length - visible} articles)`}
               </button>
             </div>
           )}
