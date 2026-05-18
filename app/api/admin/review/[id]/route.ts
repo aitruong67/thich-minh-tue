@@ -100,7 +100,8 @@ async function publishContent(sub: Record<string, unknown>) {
 
     if (draft) {
       const publishedId = draft._id.replace(/^drafts\./, '')
-      await sanityClient.action({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (sanityClient as any).action({
         type: 'sanity.action.document.publish',
         draftId: draft._id,
         publishedId,
