@@ -150,7 +150,7 @@ export async function fetchNews(): Promise<NewsArticle[]> {
       {}
     )
     if (!docs?.length) return mockNews
-    return docs.map((doc: Record<string, unknown>): NewsArticle => ({
+    const sanityNews = docs.map((doc: Record<string, unknown>): NewsArticle => ({
       _id: doc._id as string,
       slug: (doc.slug as string) ?? (doc._id as string),
       title: doc.title as string,
@@ -164,6 +164,11 @@ export async function fetchNews(): Promise<NewsArticle[]> {
       tags: (doc.tags as string[]) ?? [],
       sourceUrl: doc.sourceUrl as string | undefined,
     }))
+    // Always merge with mock news so curated articles are never lost.
+    // Sanity community articles appear first; mock articles fill the rest (deduped by slug).
+    const sanitySlugSet = new Set(sanityNews.map(n => n.slug))
+    const dedupedMock   = mockNews.filter(m => !sanitySlugSet.has(m.slug))
+    return [...sanityNews, ...dedupedMock]
   } catch {
     return mockNews
   }
