@@ -84,52 +84,80 @@ const PINNED_VIDEO_IDS = [
   '74f36d39-9a65-4a14-9b3e-0c14b6df8616', // Trailer
 ]
 
-// ─── Videos ────────────────────────────────────────────────────────────────
-export async function fetchVideos(): Promise<Video[]> {
-  try {
-    const docs = await readClient.fetch<Record<string, unknown>[]>(
-      `*[_type == "video"] | order(date desc) {
-        _id,
-        "slug": slug.current,
-        title_vi, title_en, category, youtubeId,
-        "videoUrl": videoFile.asset->url,
-        thumbnailUrl,
-        "thumbnailImageUrl": thumbnailImage.asset->url,
-        description_vi, description_en,
-        duration, date, tags, hasTranscript
-      }`,
-      {}
-    )
-    const sanityVideos = (docs ?? []).map((doc: Record<string, unknown>): Video => ({
-      _id: doc._id as string,
-      slug: (doc.slug as string) ?? (doc._id as string),
-      title_vi: doc.title_vi as string,
-      title_en: doc.title_en as string,
-      category: (doc.category as Video['category']) ?? 'news',
-      youtubeId: doc.youtubeId as string | undefined,
-      videoUrl: doc.videoUrl as string | undefined,
-      thumbnailUrl: (doc.thumbnailUrl as string)
-        ?? (doc.thumbnailImageUrl as string)
-        ?? (doc.youtubeId ? `https://img.youtube.com/vi/${doc.youtubeId}/hqdefault.jpg` : undefined),
-      description_vi: (doc.description_vi as string) ?? '',
-      description_en: (doc.description_en as string) ?? '',
-      duration: (doc.duration as string) ?? '',
-      date: doc.date as string,
-      tags: (doc.tags as string[]) ?? [],
-      hasTranscript: (doc.hasTranscript as boolean) ?? false,
-    }))
-    if (!sanityVideos.length) return mockVideos
+// ─── Shared video projection & mapper ────────────────────────────────────────
+const VIDEO_PROJECTION = `{
+  _id, "slug": slug.current,
+  title_vi, title_en, category, youtubeId,
+  "videoUrl": videoFile.asset->url,
+  thumbnailUrl, "thumbnailImageUrl": thumbnailImage.asset->url,
+  description_vi, description_en, duration, date, tags, hasTranscript
+}`
 
-    // Mark pinned and sort: pinned first (in defined order), rest by date desc
-    const pinnedSet = new Set(PINNED_VIDEO_IDS)
-    const withPinned = sanityVideos.map(v => ({ ...v, pinned: pinnedSet.has(v._id) }))
+function mapVideo(doc: Record<string, unknown>): Video {
+  return {
+    _id: doc._id as string,
+    slug: (doc.slug as string) ?? (doc._id as string),
+    title_vi: doc.title_vi as string,
+    title_en: doc.title_en as string,
+    category: (doc.category as Video['category']) ?? 'news',
+    youtubeId: doc.youtubeId as string | undefined,
+    videoUrl: doc.videoUrl as string | undefined,
+    thumbnailUrl: (doc.thumbnailUrl as string)
+      ?? (doc.thumbnailImageUrl as string)
+      ?? (doc.youtubeId ? `https://img.youtube.com/vi/${doc.youtubeId}/hqdefault.jpg` : undefined),
+    description_vi: (doc.description_vi as string) ?? '',
+    description_en: (doc.description_en as string) ?? '',
+    duration: (doc.duration as string) ?? '',
+    date: doc.date as string,
+    tags: (doc.tags as string[]) ?? [],
+    hasTranscript: (doc.hasTranscript as boolean) ?? false,
+  }
+}
+
+// ─── Initial page load: pinned + first N non-pinned ───────────────────────────
+export async function fetchVideos(limit = 24): Promise<{ videos: Video[]; total: number }> {
+  try {
+    const [pinnedDocs, nonPinnedDocs, total] = await Promise.all([
+      readClient.fetch<Record<string, unknown>[]>(
+        `*[_type == "video" && _id in $ids] ${VIDEO_PROJECTION}`,
+        { ids: PINNED_VIDEO_IDS }
+      ),
+      readClient.fetch<Record<string, unknown>[]>(
+        `*[_type == "video" && !(_id in $ids)] | order(date desc) [0...${limit}] ${VIDEO_PROJECTION}`,
+        { ids: PINNED_VIDEO_IDS }
+      ),
+      readClient.fetch<number>(`count(*[_type == "video" && !(_id in $ids)])`, { ids: PINNED_VIDEO_IDS }),
+    ])
+
+    if (!pinnedDocs.length && !nonPinnedDocs.length) {
+      return { videos: mockVideos, total: mockVideos.length }
+    }
+
     const pinned = PINNED_VIDEO_IDS
-      .map(id => withPinned.find(v => v._id === id))
-      .filter((v): v is Video & { pinned: boolean } => !!v)
-    const rest = withPinned.filter(v => !pinnedSet.has(v._id))
-    return [...pinned, ...rest]
+      .map(id => pinnedDocs.find(d => d._id === id))
+      .filter(Boolean)
+      .map(d => ({ ...mapVideo(d!), pinned: true as const }))
+
+    const rest = nonPinnedDocs.map(mapVideo)
+    return { videos: [...pinned, ...rest], total: (total ?? 0) + pinned.length }
   } catch {
-    return mockVideos
+    return { videos: mockVideos, total: mockVideos.length }
+  }
+}
+
+// ─── Load more non-pinned videos (for client pagination) ─────────────────────
+export async function fetchMoreVideos(offset: number, limit = 24): Promise<{ videos: Video[]; hasMore: boolean }> {
+  try {
+    const [docs, total] = await Promise.all([
+      readClient.fetch<Record<string, unknown>[]>(
+        `*[_type == "video" && !(_id in $ids)] | order(date desc) [${offset}...${offset + limit}] ${VIDEO_PROJECTION}`,
+        { ids: PINNED_VIDEO_IDS }
+      ),
+      readClient.fetch<number>(`count(*[_type == "video" && !(_id in $ids)])`, { ids: PINNED_VIDEO_IDS }),
+    ])
+    return { videos: docs.map(mapVideo), hasMore: (total ?? 0) > offset + limit }
+  } catch {
+    return { videos: [], hasMore: false }
   }
 }
 
