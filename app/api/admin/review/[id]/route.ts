@@ -98,7 +98,7 @@ async function publishContent(sub: Record<string, unknown>) {
         readingTime: Math.max(1, Math.ceil(wordCount / 200)),
         tags: ['cộng đồng'],
         sourceUrl: sub.sourceUrl || undefined,
-        coverImage: sub.mediaUrl || undefined,
+        coverImageUrl: sub.mediaUrl || undefined,
       })
     }
 
