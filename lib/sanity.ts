@@ -70,6 +70,20 @@ export async function fetchPhotos(): Promise<Photo[]> {
   }
 }
 
+// Videos pinned to the top of the page in this exact order
+const PINNED_VIDEO_IDS = [
+  'c1702785-8f12-4851-a82e-b19cea3eddba', // Vô Sở Hữu Tập 9
+  '4a5bd4b0-2649-416d-b415-7b0cf2bc6f9e', // Tập 8
+  'de12ced5-c756-4072-a4aa-f329d59d829f', // Tập 7
+  'e3026c31-89ec-49aa-adc7-69a837c9627c', // Tập 6
+  '84e8708d-0af6-492b-a708-fb85f372a577', // Tập 5
+  'dcc0a1de-3258-4f6d-a18d-90360b34b80b', // Tập 4
+  'd880047a-4552-4292-a29d-0f9de77551b8', // Tập 3
+  '0af25685-79bd-4acf-b148-d4638060c392', // Tập 2
+  'a49a26fc-2d06-4b96-bbe0-a3fb0ebc59b9', // Tập 1
+  '74f36d39-9a65-4a14-9b3e-0c14b6df8616', // Trailer
+]
+
 // ─── Videos ────────────────────────────────────────────────────────────────
 export async function fetchVideos(): Promise<Video[]> {
   try {
@@ -104,7 +118,16 @@ export async function fetchVideos(): Promise<Video[]> {
       tags: (doc.tags as string[]) ?? [],
       hasTranscript: (doc.hasTranscript as boolean) ?? false,
     }))
-    return sanityVideos.length ? sanityVideos : mockVideos
+    if (!sanityVideos.length) return mockVideos
+
+    // Mark pinned and sort: pinned first (in defined order), rest by date desc
+    const pinnedSet = new Set(PINNED_VIDEO_IDS)
+    const withPinned = sanityVideos.map(v => ({ ...v, pinned: pinnedSet.has(v._id) }))
+    const pinned = PINNED_VIDEO_IDS
+      .map(id => withPinned.find(v => v._id === id))
+      .filter((v): v is Video & { pinned: boolean } => !!v)
+    const rest = withPinned.filter(v => !pinnedSet.has(v._id))
+    return [...pinned, ...rest]
   } catch {
     return mockVideos
   }

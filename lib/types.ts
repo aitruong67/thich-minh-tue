@@ -13,6 +13,7 @@ export interface Video {
   date: string
   hasTranscript: boolean
   transcript?: TranscriptEntry[]
+  pinned?: boolean
   mapLocation?: { lat: number; lng: number; name: string }
   thumbnailUrl?: string
 }

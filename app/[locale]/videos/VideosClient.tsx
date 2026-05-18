@@ -108,6 +108,11 @@ export default function VideosClient({ videos }: { videos: Video[] }) {
                   <div className="flex flex-col flex-1 p-5">
                     <div className="flex items-center gap-2 mb-3">
                       <CategoryTag label={t(`page.videos.${video.category}`)} variant={video.category} />
+                      {video.pinned && (
+                        <span className="font-ui text-[0.55rem] uppercase tracking-[0.12em] text-saffron border border-saffron/40 px-1.5 py-0.5">
+                          {locale === 'vi' ? 'Nổi bật' : 'Featured'}
+                        </span>
+                      )}
                       {video.hasTranscript && (
                         <span className="font-ui text-label text-ash tracking-wide">
                           {t('page.videos.transcript')}
