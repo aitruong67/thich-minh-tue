@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { verifyAdminToken, extractYoutubeId } from '@/lib/adminAuth'
 import { sanityClient } from '@/lib/sanity'
 
@@ -30,9 +31,12 @@ export async function POST(
     reviewNote: note?.trim() || '',
   }).commit()
 
-  // On approve: publish as real content
+  // On approve: publish as real content + purge ISR cache immediately
   if (action === 'approve') {
     await publishContent(sub)
+    // Revalidate all content pages so the new item appears instantly
+    const pages = ['/vi/videos', '/en/videos', '/vi/gallery', '/en/gallery', '/vi/news', '/en/news', '/vi', '/en']
+    pages.forEach(p => revalidatePath(p))
   }
 
   return NextResponse.json({ success: true })
