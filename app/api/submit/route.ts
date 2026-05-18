@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
     const {
       submissionType, name, email, title,
       description, content, mediaUrl, youtubeUrl, sourceUrl,
+      language,
     } = body
 
     if (!submissionType || !name?.trim() || !email?.trim() || !title?.trim()) {
@@ -29,6 +30,7 @@ export async function POST(req: NextRequest) {
       mediaUrl: mediaUrl?.trim() || '',
       youtubeUrl: youtubeUrl?.trim() || '',
       sourceUrl: sourceUrl?.trim() || '',
+      language: language || 'en',
       submittedAt: new Date().toISOString(),
     })
 

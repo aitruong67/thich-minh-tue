@@ -87,7 +87,13 @@ function ReadingProgress() {
 
 export default function ArticleDetail({ article, related, locale }: Props) {
   const t = useTranslations('page.news')
-  const body = locale === 'vi' ? (article.body_vi || article.body_en) : (article.body_en || article.body_vi)
+
+  const preferredBody = locale === 'vi' ? article.body_vi : article.body_en
+  const fallbackBody  = locale === 'vi' ? article.body_en : article.body_vi
+  const body          = preferredBody || fallbackBody || ''
+  const isTranslationMissing = !preferredBody && !!fallbackBody
+  const fallbackLang  = locale === 'vi' ? 'English' : 'Tiếng Việt'
+
   const paragraphs = body.split('\n\n').filter(Boolean)
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
   const dateStr = new Date(article.date).toLocaleDateString(
@@ -114,18 +120,20 @@ export default function ArticleDetail({ article, related, locale }: Props) {
           </Link>
         </div>
 
-        {/* Hero image */}
-        <div className="relative aspect-[21/9] overflow-hidden">
-          <Image
-            src={article.coverImage}
-            alt={article.title}
-            fill
-            className="object-cover object-top"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
+        {/* Hero image (only shown when available) */}
+        {article.coverImage && (
+          <div className="relative aspect-[21/9] overflow-hidden">
+            <Image
+              src={article.coverImage}
+              alt={article.title}
+              fill
+              className="object-cover object-top"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </div>
+        )}
 
         {/* Article content */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 py-12">
@@ -162,6 +170,18 @@ export default function ArticleDetail({ article, related, locale }: Props) {
 
             {/* Divider */}
             <div className="h-px bg-gray-200 mb-10" />
+
+            {/* Translation notice */}
+            {isTranslationMissing && (
+              <div className="mb-6 flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+                <span className="text-amber-500 mt-0.5 flex-shrink-0">ℹ</span>
+                <p className="font-body text-sm text-amber-800">
+                  {locale === 'vi'
+                    ? `Bài viết này chỉ có bằng ${fallbackLang}. Bản dịch tiếng Việt chưa có.`
+                    : `This article is only available in ${fallbackLang}. An English translation is not yet available.`}
+                </p>
+              </div>
+            )}
 
             {/* Body */}
             <div>

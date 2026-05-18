@@ -191,6 +191,7 @@ export default function SubmitPage() {
   const [form, setForm] = useState({
     name: '', email: '', title: '', description: '',
     content: '', mediaUrl: '', youtubeUrl: '', sourceUrl: '',
+    language: 'en',   // article language: 'en' or 'vi'
   })
 
   const set = (field: keyof typeof form) =>
@@ -334,6 +335,30 @@ export default function SubmitPage() {
                 {/* ── ARTICLE ── */}
                 {type === 'article' && (
                   <>
+                    {/* Language selector */}
+                    <Field label={isVi ? 'Ngôn ngữ bài viết *' : 'Article language *'}>
+                      <div className="flex rounded-lg overflow-hidden border border-bark">
+                        {[
+                          { val: 'en', label: 'English' },
+                          { val: 'vi', label: 'Tiếng Việt' },
+                        ].map(opt => (
+                          <button key={opt.val} type="button"
+                            onClick={() => setForm(p => ({ ...p, language: opt.val }))}
+                            className={`flex-1 py-2.5 font-ui text-label uppercase tracking-[0.1em] transition-colors ${
+                              form.language === opt.val
+                                ? 'bg-saffron text-ink'
+                                : 'text-ash hover:text-parchment'
+                            } ${opt.val === 'vi' ? 'border-l border-bark' : ''}`}>
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                      <p className="font-ui text-[0.58rem] uppercase tracking-widest text-ash/40 mt-1.5">
+                        {isVi
+                          ? 'Chọn ngôn ngữ bạn viết bài để hiển thị đúng trên website'
+                          : 'Select the language you are writing in so it displays correctly'}
+                      </p>
+                    </Field>
                     <Field label={isVi ? 'Nội dung bài viết *' : 'Article content *'}>
                       <textarea value={form.content} onChange={set('content')} required rows={8}
                         className="input-field resize-y"
@@ -491,7 +516,7 @@ export default function SubmitPage() {
                 <button
                   onClick={() => {
                     setStep(1); setType(null); setVideoTab('youtube')
-                    setForm({ name:'', email:'', title:'', description:'', content:'', mediaUrl:'', youtubeUrl:'', sourceUrl:'' })
+                    setForm({ name:'', email:'', title:'', description:'', content:'', mediaUrl:'', youtubeUrl:'', sourceUrl:'', language:'en' })
                   }}
                   className="btn-primary"
                 >
