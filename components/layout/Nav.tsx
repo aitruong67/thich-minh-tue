@@ -16,6 +16,7 @@ const navLinks = [
   { href: '/quotes',    labelKey: 'nav.quotes' },
   { href: '/journey',   labelKey: 'nav.journey' },
   { href: '/news',      labelKey: 'nav.news' },
+  { href: '/submit',    labelKey: 'nav.submit' },
   { href: '/contact',   labelKey: 'nav.contact' },
 ]
 

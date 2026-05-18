@@ -134,6 +134,12 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
 
+  /* Form input used on submit page */
+  .input-field {
+    @apply w-full bg-bark/10 border border-bark text-parchment px-4 py-3 font-body
+           placeholder:text-ash/40 focus:outline-none focus:border-saffron transition-colors;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
