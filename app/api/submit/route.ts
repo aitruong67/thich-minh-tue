@@ -70,7 +70,7 @@ async function notifyAdmin({
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Minh Tuệ Archive <notifications@minhtuedhutanga.org>',
+      from: 'Minh Tuệ Archive <onboarding@resend.dev>',
       to: [adminEmail],
       subject: `${typeEmoji} New ${submissionType} pending: "${title}"`,
       html: `
