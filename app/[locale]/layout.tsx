@@ -8,6 +8,7 @@ import { Analytics } from '@vercel/analytics/react'
 import Nav from '@/components/layout/Nav'
 import Footer from '@/components/layout/Footer'
 import BackToTop from '@/components/ui/BackToTop'
+import SubmitPrompt from '@/components/ui/SubmitPrompt'
 import '../globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -132,6 +133,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <main id="main-content">{children}</main>
           <Footer />
           <BackToTop />
+          <SubmitPrompt />
           <Analytics />
         </NextIntlClientProvider>
       </body>

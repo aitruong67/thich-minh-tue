@@ -337,9 +337,25 @@ export default function SubmitPage() {
                         className="input-field resize-y"
                         placeholder={isVi ? 'Viết nội dung bài viết ở đây…' : 'Write your article here…'} />
                     </Field>
-                    <Field label={isVi ? 'Hình ảnh bìa (URL)' : 'Cover image URL (optional)'}>
-                      <input value={form.mediaUrl} onChange={set('mediaUrl')}
-                        className="input-field" placeholder="https://…" type="url" />
+                    <Field label={isVi ? 'Hình ảnh bìa' : 'Cover image (optional)'}>
+                      <FileUploadZone
+                        accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                        maxLabel="20 MB"
+                        icon="🖼️"
+                        hint_en="Drop a cover image here"
+                        hint_vi="Kéo ảnh bìa vào đây"
+                        isVi={isVi}
+                        onUploaded={url => setForm(p => ({ ...p, mediaUrl: url }))}
+                      />
+                      <details className="mt-3">
+                        <summary className="font-ui text-[0.6rem] uppercase tracking-widest text-ash/50 cursor-pointer hover:text-ash transition-colors">
+                          {isVi ? 'Hoặc dùng đường dẫn URL' : 'Or use an image URL instead'}
+                        </summary>
+                        <div className="mt-2">
+                          <input value={form.mediaUrl} onChange={set('mediaUrl')}
+                            className="input-field" placeholder="https://…" type="url" />
+                        </div>
+                      </details>
                     </Field>
                     <Field label={isVi ? 'Nguồn tham khảo' : 'Source URL (optional)'}>
                       <input value={form.sourceUrl} onChange={set('sourceUrl')}
