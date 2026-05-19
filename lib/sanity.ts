@@ -82,6 +82,7 @@ const PINNED_VIDEO_IDS = [
   '0af25685-79bd-4acf-b148-d4638060c392', // Tập 2
   'a49a26fc-2d06-4b96-bbe0-a3fb0ebc59b9', // Tập 1
   '74f36d39-9a65-4a14-9b3e-0c14b6df8616', // Trailer
+  '00c27772-6b68-4a8d-80bf-97b924d0b500', // TheoDauChanTran special film
 ]
 
 // ─── Shared video projection & mapper ────────────────────────────────────────
